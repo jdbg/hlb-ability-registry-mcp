@@ -5,10 +5,11 @@
 	"license": "GPL-2.0-or-later",
 	"authors": [
 		{
-			"name": "Hlebarov.com",
-			"homepage": "https://hlebarov.com/"
+			"name": "Jordan Hlebarov",
+			"homepage": "https://jdbg.com/"
 		}
 	],
+	"homepage": "https://github.com/jdbg/hlb-mcp-abilities",
 	"require": {
 		"php": ">=7.4"
 	},

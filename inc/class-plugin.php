@@ -63,12 +63,7 @@ final class Plugin {
 	 * @return void
 	 */
 	public function boot() {
-		load_plugin_textdomain( 'hlb-mcp-abilities', false, dirname( HLB_MCP_BASENAME ) . '/languages' );
-
-		// Self-update checks against GitHub Releases (this plugin isn't on wordpress.org).
-		( new Updater() )->hooks();
-
-		// Admin settings UI + dependency management (install/activate the MCP Adapter).
+		// Admin settings UI + dependency detection (the MCP Adapter is not auto-installed).
 		if ( is_admin() ) {
 			( new Admin( $this->registry, $this->settings ) )->hooks();
 			( new Dependency() )->hooks();

@@ -1,14 +1,21 @@
 # HLB MCP Abilities
 
-[![Lint](https://github.com/hlebarovcom/hlb-mcp-abilities/actions/workflows/lint.yml/badge.svg)](https://github.com/hlebarovcom/hlb-mcp-abilities/actions/workflows/lint.yml)
+[![Lint](https://github.com/jdbg/hlb-mcp-abilities/actions/workflows/lint.yml/badge.svg)](https://github.com/jdbg/hlb-mcp-abilities/actions/workflows/lint.yml)
 
 A WordPress plugin that exposes a curated, admin-controlled set of WordPress **Abilities** to
 the [WordPress MCP Adapter](https://github.com/WordPress/mcp-adapter), so third-party tools and
 AI agents can interact with your site over the Model Context Protocol (MCP). Multisite-ready and
 network-activatable, with network-wide defaults each subsite can inherit or override.
 
-- **Author:** [Hlebarov.com](https://hlebarov.com/)
+- **Author:** [Jordan Hlebarov](https://jdbg.com/)
+- **Source:** [github.com/jdbg/hlb-mcp-abilities](https://github.com/jdbg/hlb-mcp-abilities)
 - **License:** GPL-2.0-or-later
+
+### Try it without installing anything
+
+[Open in WordPress Playground](https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/jdbg/hlb-mcp-abilities/main/blueprints/demo.json) —
+a disposable in-browser WordPress instance with this plugin and the MCP Adapter pre-installed and
+activated.
 
 ## How it works
 
@@ -28,10 +35,13 @@ Every ability maps to a real WordPress capability, checked per request.
 - PHP **7.4+**
 - The **MCP Adapter** plugin, active (network-wide if this plugin is network-activated)
 
-The MCP Adapter is **not** in the wordpress.org directory. If it is missing or inactive, this
-plugin shows an admin notice with a one-click button to install it from its official GitHub
-release and activate it (network-wide when appropriate). Until the adapter is available the
-plugin still registers its abilities — only the MCP endpoint is skipped, never a fatal error.
+The MCP Adapter is **not** in the wordpress.org directory, so this plugin never downloads or
+installs it automatically — that would mean fetching and running executable code from a
+third-party source, which this plugin (and the wordpress.org guidelines) avoid. If the adapter is
+missing, an admin notice links to its GitHub releases page for a manual upload-install; if it's
+already installed but inactive, the notice offers a one-click **Activate** button (a local
+operation — no code is downloaded). Until the adapter is active, the plugin still registers its
+abilities against core's Abilities API — only the MCP endpoint is skipped, never a fatal error.
 
 ## Installation
 
@@ -39,7 +49,9 @@ plugin still registers its abilities — only the MCP endpoint is skipped, never
    `hlb-mcp-abilities.php`, `uninstall.php`, and `inc/` — no Composer dependencies are needed at
    runtime).
 2. Activate it (single site or **Network Activate** on multisite).
-3. If prompted, use the admin notice to install & activate the MCP Adapter.
+3. (Optional) Download the [MCP Adapter](https://github.com/WordPress/mcp-adapter/releases/latest)
+   and install it via **Plugins → Add New → Upload Plugin**, then activate it — or use the
+   one-click **Activate** button in the admin notice if it's already installed but inactive.
 4. Configure which abilities are exposed under the settings page (see below).
 
 ## MCP endpoint & authentication

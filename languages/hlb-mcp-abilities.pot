@@ -1,0 +1,875 @@
+# Copyright (C) 2026 Hlebarov.com
+# This file is distributed under the GPL-2.0-or-later.
+msgid ""
+msgstr ""
+"Project-Id-Version: HLB MCP Abilities 1.5.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/hlb-mcp-abilities\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-07-30T10:56:45+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: hlb-mcp-abilities\n"
+
+#. Plugin Name of the plugin
+#: hlb-mcp-abilities.php
+#: inc/class-admin.php:88
+#: inc/class-admin.php:89
+#: inc/class-admin.php:104
+#: inc/class-admin.php:105
+#: inc/class-admin.php:256
+#: inc/class-dependency.php:140
+#: inc/class-dependency.php:160
+msgid "HLB MCP Abilities"
+msgstr ""
+
+#. Plugin URI of the plugin
+#. Author URI of the plugin
+#: hlb-mcp-abilities.php
+msgid "https://hlebarov.com/"
+msgstr ""
+
+#. Description of the plugin
+#: hlb-mcp-abilities.php
+msgid "Exposes a curated, admin-controlled set of WordPress Abilities to the MCP Adapter so third-party tools and AI agents can interact with the site over MCP. Multisite-ready with network defaults and per-subsite overrides."
+msgstr ""
+
+#. Author of the plugin
+#: hlb-mcp-abilities.php
+msgid "Hlebarov.com"
+msgstr ""
+
+#. translators: %s: category label.
+#: inc/class-abilities.php:72
+#, php-format
+msgid "%s abilities exposed to MCP clients by HLB MCP Abilities."
+msgstr ""
+
+#: inc/class-abilities.php:119
+msgid "Unknown target site."
+msgstr ""
+
+#: inc/class-abilities.php:174
+msgid "Target subsite: blog ID, path slug, or domain. Omit to act on the main site."
+msgstr ""
+
+#: inc/class-admin.php:143
+msgid "Network defaults"
+msgstr ""
+
+#. translators: 1: number of matching abilities, 2: total number of abilities, 3: search term.
+#: inc/class-admin.php:169
+#, php-format
+msgid "%1$d of %2$d abilities match \"%3$s\"."
+msgstr ""
+
+#: inc/class-admin.php:170
+msgid "Showing all abilities."
+msgstr ""
+
+#: inc/class-admin.php:183
+msgid "Settings"
+msgstr ""
+
+#: inc/class-admin.php:196
+msgid "You do not have permission to manage this network."
+msgstr ""
+
+#: inc/class-admin.php:203
+msgid "HLB MCP Abilities — Network Defaults"
+msgstr ""
+
+#: inc/class-admin.php:204
+msgid "These defaults apply to every subsite that does not override them."
+msgstr ""
+
+#: inc/class-admin.php:213
+msgid "Network mode"
+msgstr ""
+
+#: inc/class-admin.php:217
+msgid "Let the main site's MCP server target any subsite via a \"site\" argument"
+msgstr ""
+
+#: inc/class-admin.php:220
+msgid "When enabled, connect only the main site's endpoint to your MCP client. Every enabled ability gains an optional \"site\" argument (blog ID, path slug, or domain), and a \"List network sites\" ability lets agents discover subsites. Capabilities are still checked on the target subsite, so use a Super Admin credential."
+msgstr ""
+
+#: inc/class-admin.php:227
+msgid "Save network defaults"
+msgstr ""
+
+#: inc/class-admin.php:240
+msgid "You do not have permission to manage this site."
+msgstr ""
+
+#: inc/class-admin.php:271
+msgid "Save changes"
+msgstr ""
+
+#: inc/class-admin.php:289
+msgid "Override network defaults for this site"
+msgstr ""
+
+#: inc/class-admin.php:292
+msgid "When unchecked, this site inherits the network defaults shown below (read-only)."
+msgstr ""
+
+#: inc/class-admin.php:334
+msgid "Search abilities"
+msgstr ""
+
+#: inc/class-admin.php:340
+msgid "Search by name, id, or description…"
+msgstr ""
+
+#: inc/class-admin.php:345
+msgid "Ability categories"
+msgstr ""
+
+#: inc/class-admin.php:415
+msgid "destructive"
+msgstr ""
+
+#: inc/class-admin.php:418
+msgid "read-only"
+msgstr ""
+
+#: inc/class-admin.php:420
+msgid "writes"
+msgstr ""
+
+#: inc/class-admin.php:449
+msgid "MCP connection"
+msgstr ""
+
+#: inc/class-admin.php:452
+msgid "Server name"
+msgstr ""
+
+#: inc/class-admin.php:456
+msgid "Endpoint"
+msgstr ""
+
+#: inc/class-admin.php:461
+msgid "The MCP Adapter plugin is not active, so this endpoint is not live yet."
+msgstr ""
+
+#: inc/class-admin.php:467
+msgid "Authentication"
+msgstr ""
+
+#. translators: %s: link to the Application Passwords profile section.
+#: inc/class-admin.php:473
+#, php-format
+msgid "Third-party agents authenticate as a WordPress user. Create an %s and use it with HTTP Basic auth. Each ability is additionally gated by that user's capabilities."
+msgstr ""
+
+#: inc/class-admin.php:474
+msgid "Application Password"
+msgstr ""
+
+#: inc/class-admin.php:482
+msgid "Frontend Gatekeeper"
+msgstr ""
+
+#: inc/class-admin.php:485
+msgid "Detected. If its gate is enabled, permalinks and site URLs returned by abilities are automatically tagged with its access parameter so agents can follow them without hitting its 404 gate."
+msgstr ""
+
+#: inc/class-admin.php:507
+msgid "Settings saved."
+msgstr ""
+
+#: inc/class-admin.php:521
+msgid "Permission denied."
+msgstr ""
+
+#: inc/class-dependency.php:121
+msgid "requires the WordPress MCP Adapter plugin, which is not installed."
+msgstr ""
+
+#: inc/class-dependency.php:123
+msgid "Install &amp; activate MCP Adapter"
+msgstr ""
+
+#: inc/class-dependency.php:130
+msgid "requires the WordPress MCP Adapter plugin, which is installed but not active."
+msgstr ""
+
+#: inc/class-dependency.php:132
+msgid "Activate MCP Adapter"
+msgstr ""
+
+#: inc/class-dependency.php:141
+msgid "requires the WordPress MCP Adapter plugin. Ask a site administrator to install and activate it."
+msgstr ""
+
+#: inc/class-dependency.php:169
+msgid "View plugin"
+msgstr ""
+
+#: inc/class-dependency.php:188
+msgid "MCP Adapter installed and activated. Your MCP endpoint is now live."
+msgstr ""
+
+#: inc/class-dependency.php:190
+msgid "MCP Adapter activated. Your MCP endpoint is now live."
+msgstr ""
+
+#: inc/class-dependency.php:193
+msgid "Could not install or activate the MCP Adapter."
+msgstr ""
+
+#: inc/class-dependency.php:208
+msgid "HLB MCP Abilities:"
+msgstr ""
+
+#: inc/class-dependency.php:222
+msgid "You do not have permission to install plugins."
+msgstr ""
+
+#: inc/class-dependency.php:245
+msgid "Installation did not complete."
+msgstr ""
+
+#: inc/class-dependency.php:270
+msgid "You do not have permission to activate plugins."
+msgstr ""
+
+#: inc/class-dependency.php:278
+msgid "The MCP Adapter is no longer installed."
+msgstr ""
+
+#: inc/class-registry.php:44
+msgid "Content — read"
+msgstr ""
+
+#: inc/class-registry.php:45
+msgid "Content — write"
+msgstr ""
+
+#: inc/class-registry.php:46
+msgid "Media"
+msgstr ""
+
+#: inc/class-registry.php:47
+msgid "Comments"
+msgstr ""
+
+#: inc/class-registry.php:48
+msgid "Users"
+msgstr ""
+
+#: inc/class-registry.php:49
+msgid "Site Editor"
+msgstr ""
+
+#: inc/class-registry.php:50
+msgid "Site & diagnostics"
+msgstr ""
+
+#: inc/class-registry.php:51
+msgid "WooCommerce"
+msgstr ""
+
+#: inc/class-registry.php:52
+msgid "SEOPress"
+msgstr ""
+
+#: inc/class-registry.php:75
+msgid "Get post"
+msgstr ""
+
+#: inc/class-registry.php:76
+msgid "Retrieve a single post or page by ID or slug."
+msgstr ""
+
+#: inc/class-registry.php:89
+#: inc/class-registry.php:928
+#: inc/class-registry.php:949
+msgid "Post ID."
+msgstr ""
+
+#: inc/class-registry.php:90
+msgid "Post slug (used if ID omitted)."
+msgstr ""
+
+#: inc/class-registry.php:97
+msgid "List posts"
+msgstr ""
+
+#: inc/class-registry.php:98
+msgid "Query posts by type, status, author, and date with pagination."
+msgstr ""
+
+#: inc/class-registry.php:129
+msgid "Search content"
+msgstr ""
+
+#: inc/class-registry.php:130
+msgid "Full-text search across public post types."
+msgstr ""
+
+#: inc/class-registry.php:144
+msgid "Search terms."
+msgstr ""
+
+#: inc/class-registry.php:159
+msgid "Get taxonomies & terms"
+msgstr ""
+
+#: inc/class-registry.php:160
+msgid "List categories, tags, and custom taxonomy terms."
+msgstr ""
+
+#: inc/class-registry.php:173
+msgid "Limit to a taxonomy (e.g. category, post_tag)."
+msgstr ""
+
+#: inc/class-registry.php:181
+msgid "Create post"
+msgstr ""
+
+#: inc/class-registry.php:182
+msgid "Create a new post or page (draft by default)."
+msgstr ""
+
+#: inc/class-registry.php:209
+msgid "Update post"
+msgstr ""
+
+#: inc/class-registry.php:210
+msgid "Update the title, content, excerpt, or status of an existing post."
+msgstr ""
+
+#: inc/class-registry.php:234
+msgid "Set post status"
+msgstr ""
+
+#: inc/class-registry.php:235
+msgid "Transition a post between draft, pending, publish, private, or trash."
+msgstr ""
+
+#: inc/class-registry.php:256
+msgid "Delete post"
+msgstr ""
+
+#: inc/class-registry.php:257
+msgid "Trash a post, or permanently delete it when force is true."
+msgstr ""
+
+#: inc/class-registry.php:274
+#: inc/class-registry.php:756
+msgid "Permanently delete instead of trashing."
+msgstr ""
+
+#: inc/class-registry.php:281
+msgid "Assign terms"
+msgstr ""
+
+#: inc/class-registry.php:282
+msgid "Set categories, tags, or custom terms on a post."
+msgstr ""
+
+#: inc/class-registry.php:301
+msgid "Term slugs, names, or IDs."
+msgstr ""
+
+#: inc/class-registry.php:309
+msgid "Create term"
+msgstr ""
+
+#: inc/class-registry.php:310
+msgid "Create a category, tag, or custom taxonomy term."
+msgstr ""
+
+#: inc/class-registry.php:336
+msgid "List media"
+msgstr ""
+
+#: inc/class-registry.php:337
+msgid "Query the media library with pagination."
+msgstr ""
+
+#: inc/class-registry.php:350
+msgid "Filter by MIME type, e.g. image."
+msgstr ""
+
+#: inc/class-registry.php:365
+msgid "Upload media"
+msgstr ""
+
+#: inc/class-registry.php:366
+msgid "Upload an image or file to the media library from a URL."
+msgstr ""
+
+#: inc/class-registry.php:382
+msgid "Source URL to sideload."
+msgstr ""
+
+#: inc/class-registry.php:386
+msgid "Attach to this post."
+msgstr ""
+
+#: inc/class-registry.php:394
+msgid "List comments"
+msgstr ""
+
+#: inc/class-registry.php:395
+msgid "List comments, optionally filtered by post or status."
+msgstr ""
+
+#: inc/class-registry.php:427
+msgid "Moderate comment"
+msgstr ""
+
+#: inc/class-registry.php:428
+msgid "Approve, unapprove, spam, or trash a comment."
+msgstr ""
+
+#: inc/class-registry.php:451
+msgid "Get current user"
+msgstr ""
+
+#: inc/class-registry.php:452
+msgid "Identity and capabilities of the authenticated MCP caller."
+msgstr ""
+
+#: inc/class-registry.php:469
+msgid "List users"
+msgstr ""
+
+#: inc/class-registry.php:470
+msgid "List site users (contains personal data — off by default)."
+msgstr ""
+
+#: inc/class-registry.php:501
+msgid "List templates"
+msgstr ""
+
+#: inc/class-registry.php:502
+msgid "List block templates or template parts for the active theme."
+msgstr ""
+
+#: inc/class-registry.php:520
+msgid "Filter template parts by area, e.g. header, footer."
+msgstr ""
+
+#: inc/class-registry.php:526
+msgid "Get template"
+msgstr ""
+
+#: inc/class-registry.php:527
+msgid "Retrieve a single template or template part, including its block markup."
+msgstr ""
+
+#: inc/class-registry.php:542
+#: inc/class-registry.php:598
+#: inc/class-registry.php:627
+msgid "Template id, e.g. themeslug//slug."
+msgstr ""
+
+#: inc/class-registry.php:552
+msgid "Create template"
+msgstr ""
+
+#: inc/class-registry.php:553
+msgid "Create a new custom template or template part."
+msgstr ""
+
+#: inc/class-registry.php:570
+#: inc/class-registry.php:604
+#: inc/class-registry.php:702
+#: inc/class-registry.php:730
+msgid "Block markup."
+msgstr ""
+
+#: inc/class-registry.php:576
+msgid "Template-part area, e.g. header, footer."
+msgstr ""
+
+#: inc/class-registry.php:582
+msgid "Update template"
+msgstr ""
+
+#: inc/class-registry.php:583
+msgid "Update the title, content, or description of a template or template part."
+msgstr ""
+
+#: inc/class-registry.php:611
+msgid "Delete template"
+msgstr ""
+
+#: inc/class-registry.php:612
+msgid "Delete a custom template, or revert a customized theme template back to its theme file."
+msgstr ""
+
+#: inc/class-registry.php:637
+msgid "List patterns"
+msgstr ""
+
+#: inc/class-registry.php:638
+msgid "List user-created patterns (reusable blocks)."
+msgstr ""
+
+#: inc/class-registry.php:652
+#: inc/class-registry.php:777
+msgid "Filter by pattern category slug."
+msgstr ""
+
+#: inc/class-registry.php:667
+msgid "Get pattern"
+msgstr ""
+
+#: inc/class-registry.php:668
+msgid "Retrieve a single user-created pattern, including its block markup."
+msgstr ""
+
+#: inc/class-registry.php:686
+msgid "Create pattern"
+msgstr ""
+
+#: inc/class-registry.php:687
+msgid "Create a new user pattern (reusable block)."
+msgstr ""
+
+#: inc/class-registry.php:703
+#: inc/class-registry.php:731
+msgid "Pattern category name or slug."
+msgstr ""
+
+#: inc/class-registry.php:706
+msgid "False creates an unsynced pattern (edits in one place do not propagate)."
+msgstr ""
+
+#: inc/class-registry.php:713
+msgid "Update pattern"
+msgstr ""
+
+#: inc/class-registry.php:714
+msgid "Update the title, content, category, or sync status of a user pattern."
+msgstr ""
+
+#: inc/class-registry.php:738
+msgid "Delete pattern"
+msgstr ""
+
+#: inc/class-registry.php:739
+msgid "Trash a user pattern, or permanently delete it when force is true."
+msgstr ""
+
+#: inc/class-registry.php:763
+msgid "List registered patterns"
+msgstr ""
+
+#: inc/class-registry.php:764
+msgid "List code-registered theme/plugin block patterns (read-only; not user-editable posts)."
+msgstr ""
+
+#: inc/class-registry.php:785
+msgid "Get site info"
+msgstr ""
+
+#: inc/class-registry.php:786
+msgid "Site name, URL, WordPress version, language, and timezone."
+msgstr ""
+
+#: inc/class-registry.php:803
+msgid "Get active theme"
+msgstr ""
+
+#: inc/class-registry.php:804
+msgid "The active theme, its version, and whether it is a block theme."
+msgstr ""
+
+#: inc/class-registry.php:821
+msgid "List active plugins"
+msgstr ""
+
+#: inc/class-registry.php:822
+msgid "Active plugins with name and version (admin diagnostics)."
+msgstr ""
+
+#: inc/class-registry.php:839
+msgid "List network sites"
+msgstr ""
+
+#: inc/class-registry.php:840
+msgid "List the subsites in the multisite network so a `site` argument can target them (network mode)."
+msgstr ""
+
+#: inc/class-registry.php:860
+msgid "List products (WooCommerce)"
+msgstr ""
+
+#: inc/class-registry.php:861
+msgid "Query WooCommerce products with pagination."
+msgstr ""
+
+#: inc/class-registry.php:891
+msgid "Get order (WooCommerce)"
+msgstr ""
+
+#: inc/class-registry.php:892
+msgid "Fetch a WooCommerce order by ID (contains personal data — off by default)."
+msgstr ""
+
+#: inc/class-registry.php:913
+msgid "Get SEO meta (SEOPress)"
+msgstr ""
+
+#: inc/class-registry.php:914
+msgid "Retrieve a post's SEOPress title, description, robots, and social preview meta."
+msgstr ""
+
+#: inc/class-registry.php:933
+msgid "Update SEO meta (SEOPress)"
+msgstr ""
+
+#: inc/class-registry.php:934
+msgid "Update a post's SEOPress title, description, robots, and social preview meta."
+msgstr ""
+
+#: inc/class-registry.php:950
+msgid "SEO title (Titles & Metas tab)."
+msgstr ""
+
+#: inc/class-registry.php:951
+msgid "Meta description (Titles & Metas tab)."
+msgstr ""
+
+#: inc/class-registry.php:954
+msgid "Custom canonical URL."
+msgstr ""
+
+#: inc/class-registry.php:956
+msgid "Exclude this post from search engine indexing."
+msgstr ""
+
+#: inc/class-registry.php:957
+msgid "Tell search engines not to follow links on this post."
+msgstr ""
+
+#: inc/class-registry.php:958
+msgid "Primary target keyword for content analysis."
+msgstr ""
+
+#: inc/class-registry.php:959
+msgid "Facebook/Open Graph title."
+msgstr ""
+
+#: inc/class-registry.php:960
+msgid "Facebook/Open Graph description."
+msgstr ""
+
+#: inc/class-registry.php:963
+msgid "Facebook/Open Graph image URL."
+msgstr ""
+
+#: inc/class-registry.php:965
+msgid "Twitter card title."
+msgstr ""
+
+#: inc/class-registry.php:966
+msgid "Twitter card description."
+msgstr ""
+
+#: inc/class-registry.php:969
+msgid "Twitter card image URL."
+msgstr ""
+
+#: inc/class-server.php:79
+msgid "HLB MCP Abilities — curated WordPress abilities for third-party agents."
+msgstr ""
+
+#. translators: %s: site host.
+#: inc/class-settings.php:282
+#, php-format
+msgid "HLB MCP — %s"
+msgstr ""
+
+#: inc/handlers/class-comments.php:70
+msgid "Comment not found."
+msgstr ""
+
+#: inc/handlers/class-comments.php:73
+msgid "You cannot moderate this comment."
+msgstr ""
+
+#: inc/handlers/class-comments.php:90
+msgid "Unknown action."
+msgstr ""
+
+#: inc/handlers/class-comments.php:94
+msgid "Moderation action failed."
+msgstr ""
+
+#: inc/handlers/class-content.php:67
+msgid "Provide an id or slug."
+msgstr ""
+
+#: inc/handlers/class-content.php:71
+#: inc/handlers/class-content.php:77
+#: inc/handlers/class-content.php:242
+#: inc/handlers/class-content.php:287
+#: inc/handlers/class-content.php:329
+#: inc/handlers/class-content.php:359
+#: inc/handlers/class-seopress.php:60
+#: inc/handlers/class-seopress.php:66
+#: inc/handlers/class-seopress.php:86
+msgid "Post not found."
+msgstr ""
+
+#: inc/handlers/class-content.php:206
+msgid "Unknown post type."
+msgstr ""
+
+#: inc/handlers/class-content.php:209
+msgid "You cannot create this type of content."
+msgstr ""
+
+#: inc/handlers/class-content.php:214
+msgid "You cannot publish this type of content."
+msgstr ""
+
+#: inc/handlers/class-content.php:245
+#: inc/handlers/class-content.php:290
+#: inc/handlers/class-content.php:365
+#: inc/handlers/class-seopress.php:89
+msgid "You cannot edit this post."
+msgstr ""
+
+#: inc/handlers/class-content.php:263
+#: inc/handlers/class-content.php:295
+msgid "You cannot publish this post."
+msgstr ""
+
+#: inc/handlers/class-content.php:299
+msgid "You cannot trash this post."
+msgstr ""
+
+#: inc/handlers/class-content.php:305
+msgid "Could not trash the post."
+msgstr ""
+
+#: inc/handlers/class-content.php:332
+msgid "You cannot delete this post."
+msgstr ""
+
+#: inc/handlers/class-content.php:337
+msgid "Could not delete the post."
+msgstr ""
+
+#: inc/handlers/class-content.php:362
+#: inc/handlers/class-content.php:393
+msgid "Unknown taxonomy."
+msgstr ""
+
+#: inc/handlers/class-content.php:369
+msgid "You cannot assign terms in this taxonomy."
+msgstr ""
+
+#: inc/handlers/class-content.php:397
+msgid "You cannot manage terms in this taxonomy."
+msgstr ""
+
+#: inc/handlers/class-media.php:71
+msgid "A valid URL is required."
+msgstr ""
+
+#: inc/handlers/class-media.php:74
+msgid "This host is not allowed for media uploads."
+msgstr ""
+
+#: inc/handlers/class-media.php:79
+msgid "You cannot attach media to this post."
+msgstr ""
+
+#: inc/handlers/class-patterns.php:61
+msgid "Pattern categories are unavailable."
+msgstr ""
+
+#: inc/handlers/class-patterns.php:64
+msgid "You cannot assign pattern categories."
+msgstr ""
+
+#: inc/handlers/class-patterns.php:76
+msgid "You cannot create pattern categories."
+msgstr ""
+
+#: inc/handlers/class-patterns.php:132
+#: inc/handlers/class-patterns.php:135
+#: inc/handlers/class-patterns.php:190
+#: inc/handlers/class-patterns.php:238
+msgid "Pattern not found."
+msgstr ""
+
+#: inc/handlers/class-patterns.php:152
+msgid "You cannot create patterns."
+msgstr ""
+
+#: inc/handlers/class-patterns.php:193
+msgid "You cannot edit this pattern."
+msgstr ""
+
+#: inc/handlers/class-patterns.php:241
+msgid "You cannot delete this pattern."
+msgstr ""
+
+#: inc/handlers/class-patterns.php:246
+msgid "Could not delete the pattern."
+msgstr ""
+
+#: inc/handlers/class-seopress.php:54
+#: inc/handlers/class-seopress.php:80
+msgid "SEOPress is not active."
+msgstr ""
+
+#: inc/handlers/class-site.php:44
+msgid "This is not a multisite network."
+msgstr ""
+
+#: inc/handlers/class-templates.php:92
+msgid "Provide a template id."
+msgstr ""
+
+#: inc/handlers/class-templates.php:97
+#: inc/handlers/class-templates.php:171
+#: inc/handlers/class-templates.php:224
+msgid "Template not found."
+msgstr ""
+
+#: inc/handlers/class-templates.php:113
+#: inc/handlers/class-templates.php:164
+#: inc/handlers/class-templates.php:217
+msgid "You cannot edit templates."
+msgstr ""
+
+#: inc/handlers/class-templates.php:119
+msgid "Provide a slug."
+msgstr ""
+
+#: inc/handlers/class-templates.php:125
+msgid "A template with this slug already exists."
+msgstr ""
+
+#: inc/handlers/class-templates.php:227
+msgid "This template is not customized; there is nothing to delete."
+msgstr ""
+
+#: inc/handlers/class-templates.php:232
+msgid "Could not delete the template."
+msgstr ""
+
+#: inc/handlers/class-woocommerce.php:37
+#: inc/handlers/class-woocommerce.php:84
+msgid "WooCommerce is not active."
+msgstr ""
+
+#: inc/handlers/class-woocommerce.php:90
+msgid "Order not found."
+msgstr ""

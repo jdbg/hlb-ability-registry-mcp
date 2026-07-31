@@ -1,0 +1,20 @@
+{
+	"$schema": "https://playground.wordpress.net/blueprint-schema.json",
+	"preferredVersions": {
+		"php": "8.2",
+		"wp": "latest"
+	},
+	"phpExtensionBundles": [ "kitchen-sink" ],
+	"landingPage": "/wp-admin/options-general.php?page=hlb-mcp-abilities",
+	"steps": [
+		{
+			"step": "login",
+			"username": "admin",
+			"password": "password"
+		},
+		{
+			"step": "activatePlugin",
+			"pluginPath": "hlb-mcp-abilities/hlb-mcp-abilities.php"
+		}
+	]
+}

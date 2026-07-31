@@ -1,0 +1,876 @@
+# Copyright (C) 2026 Hlebarov.com
+# This file is distributed under the GPL-2.0-or-later.
+msgid ""
+msgstr ""
+"Project-Id-Version: HLB MCP Abilities 1.5.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/hlb-mcp-abilities\n"
+"Last-Translator: \n"
+"Language-Team: Bulgarian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-07-30T10:56:45+00:00\n"
+"PO-Revision-Date: 2026-07-30 12:00+0000\n"
+"Language: bg_BG\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Domain: hlb-mcp-abilities\n"
+
+#. Plugin Name of the plugin
+#: hlb-mcp-abilities.php
+#: inc/class-admin.php:88
+#: inc/class-admin.php:89
+#: inc/class-admin.php:104
+#: inc/class-admin.php:105
+#: inc/class-admin.php:256
+#: inc/class-dependency.php:140
+#: inc/class-dependency.php:160
+msgid "HLB MCP Abilities"
+msgstr "HLB MCP Abilities"
+
+#. Plugin URI of the plugin
+#. Author URI of the plugin
+#: hlb-mcp-abilities.php
+msgid "https://hlebarov.com/"
+msgstr "https://hlebarov.com/"
+
+#. Description of the plugin
+#: hlb-mcp-abilities.php
+msgid "Exposes a curated, admin-controlled set of WordPress Abilities to the MCP Adapter so third-party tools and AI agents can interact with the site over MCP. Multisite-ready with network defaults and per-subsite overrides."
+msgstr "Предоставя подбран набор от WordPress Abilities, контролирани от администратора, на MCP Adapter, за да могат инструменти на трети страни и AI агенти да взаимодействат със сайта чрез MCP. Готово за мрежи от сайтове (multisite) с мрежови настройки по подразбиране и изключения за отделни сайтове."
+
+#. Author of the plugin
+#: hlb-mcp-abilities.php
+msgid "Hlebarov.com"
+msgstr "Hlebarov.com"
+
+#. translators: %s: category label.
+#: inc/class-abilities.php:72
+#, php-format
+msgid "%s abilities exposed to MCP clients by HLB MCP Abilities."
+msgstr "%s възможности, предоставени на MCP клиенти от HLB MCP Abilities."
+
+#: inc/class-abilities.php:119
+msgid "Unknown target site."
+msgstr "Неизвестен целеви сайт."
+
+#: inc/class-abilities.php:174
+msgid "Target subsite: blog ID, path slug, or domain. Omit to act on the main site."
+msgstr "Целеви подсайт: ID на блога, слъг на пътя или домейн. Пропуснете, за да действате върху основния сайт."
+
+#: inc/class-admin.php:143
+msgid "Network defaults"
+msgstr "Мрежови настройки по подразбиране"
+
+#. translators: 1: number of matching abilities, 2: total number of abilities, 3: search term.
+#: inc/class-admin.php:169
+#, php-format
+msgid "%1$d of %2$d abilities match \"%3$s\"."
+msgstr "%1$d от %2$d възможности съвпадат с „%3$s“."
+
+#: inc/class-admin.php:170
+msgid "Showing all abilities."
+msgstr "Показване на всички възможности."
+
+#: inc/class-admin.php:183
+msgid "Settings"
+msgstr "Настройки"
+
+#: inc/class-admin.php:196
+msgid "You do not have permission to manage this network."
+msgstr "Нямате права за управление на тази мрежа."
+
+#: inc/class-admin.php:203
+msgid "HLB MCP Abilities — Network Defaults"
+msgstr "HLB MCP Abilities — мрежови настройки по подразбиране"
+
+#: inc/class-admin.php:204
+msgid "These defaults apply to every subsite that does not override them."
+msgstr "Тези настройки по подразбиране важат за всеки подсайт, който не ги заменя."
+
+#: inc/class-admin.php:213
+msgid "Network mode"
+msgstr "Режим на мрежата"
+
+#: inc/class-admin.php:217
+msgid "Let the main site's MCP server target any subsite via a \"site\" argument"
+msgstr "Позволете на MCP сървъра на основния сайт да насочва към всеки подсайт чрез аргумент „site“"
+
+#: inc/class-admin.php:220
+msgid "When enabled, connect only the main site's endpoint to your MCP client. Every enabled ability gains an optional \"site\" argument (blog ID, path slug, or domain), and a \"List network sites\" ability lets agents discover subsites. Capabilities are still checked on the target subsite, so use a Super Admin credential."
+msgstr "Когато е включено, свързвайте само крайната точка на основния сайт с вашия MCP клиент. Всяка включена възможност получава незадължителен аргумент „site“ (ID на блога, слъг на пътя или домейн), а възможността „List network sites“ позволява на агентите да откриват подсайтове. Правата все още се проверяват на целевия подсайт, затова използвайте данни за вход на супер администратор."
+
+#: inc/class-admin.php:227
+msgid "Save network defaults"
+msgstr "Запазване на мрежовите настройки по подразбиране"
+
+#: inc/class-admin.php:240
+msgid "You do not have permission to manage this site."
+msgstr "Нямате права за управление на този сайт."
+
+#: inc/class-admin.php:271
+msgid "Save changes"
+msgstr "Запазване на промените"
+
+#: inc/class-admin.php:289
+msgid "Override network defaults for this site"
+msgstr "Замяна на мрежовите настройки по подразбиране за този сайт"
+
+#: inc/class-admin.php:292
+msgid "When unchecked, this site inherits the network defaults shown below (read-only)."
+msgstr "Когато не е отметнато, този сайт наследява мрежовите настройки по подразбиране, показани по-долу (само за четене)."
+
+#: inc/class-admin.php:334
+msgid "Search abilities"
+msgstr "Търсене на възможности"
+
+#: inc/class-admin.php:340
+msgid "Search by name, id, or description…"
+msgstr "Търсене по име, ID или описание…"
+
+#: inc/class-admin.php:345
+msgid "Ability categories"
+msgstr "Категории възможности"
+
+#: inc/class-admin.php:415
+msgid "destructive"
+msgstr "разрушителна"
+
+#: inc/class-admin.php:418
+msgid "read-only"
+msgstr "само за четене"
+
+#: inc/class-admin.php:420
+msgid "writes"
+msgstr "запис"
+
+#: inc/class-admin.php:449
+msgid "MCP connection"
+msgstr "MCP връзка"
+
+#: inc/class-admin.php:452
+msgid "Server name"
+msgstr "Име на сървъра"
+
+#: inc/class-admin.php:456
+msgid "Endpoint"
+msgstr "Крайна точка"
+
+#: inc/class-admin.php:461
+msgid "The MCP Adapter plugin is not active, so this endpoint is not live yet."
+msgstr "Приставката MCP Adapter не е активна, затова тази крайна точка все още не е активна."
+
+#: inc/class-admin.php:467
+msgid "Authentication"
+msgstr "Удостоверяване"
+
+#. translators: %s: link to the Application Passwords profile section.
+#: inc/class-admin.php:473
+#, php-format
+msgid "Third-party agents authenticate as a WordPress user. Create an %s and use it with HTTP Basic auth. Each ability is additionally gated by that user's capabilities."
+msgstr "Агентите на трети страни се удостоверяват като потребител на WordPress. Създайте %s и я използвайте с HTTP Basic удостоверяване. Всяка възможност допълнително се ограничава от правата на този потребител."
+
+#: inc/class-admin.php:474
+msgid "Application Password"
+msgstr "Парола за приложение"
+
+#: inc/class-admin.php:482
+msgid "Frontend Gatekeeper"
+msgstr "Frontend Gatekeeper"
+
+#: inc/class-admin.php:485
+msgid "Detected. If its gate is enabled, permalinks and site URLs returned by abilities are automatically tagged with its access parameter so agents can follow them without hitting its 404 gate."
+msgstr "Открита. Ако нейната бариера е активна, постоянните връзки и URL адресите на сайта, връщани от възможностите, автоматично се маркират с нейния параметър за достъп, така че агентите да могат да ги следват, без да срещат нейната 404 бариера."
+
+#: inc/class-admin.php:507
+msgid "Settings saved."
+msgstr "Настройките са запазени."
+
+#: inc/class-admin.php:521
+msgid "Permission denied."
+msgstr "Отказан достъп."
+
+#: inc/class-dependency.php:121
+msgid "requires the WordPress MCP Adapter plugin, which is not installed."
+msgstr "изисква приставката WordPress MCP Adapter, която не е инсталирана."
+
+#: inc/class-dependency.php:123
+msgid "Install &amp; activate MCP Adapter"
+msgstr "Инсталиране и активиране на MCP Adapter"
+
+#: inc/class-dependency.php:130
+msgid "requires the WordPress MCP Adapter plugin, which is installed but not active."
+msgstr "изисква приставката WordPress MCP Adapter, която е инсталирана, но не е активна."
+
+#: inc/class-dependency.php:132
+msgid "Activate MCP Adapter"
+msgstr "Активиране на MCP Adapter"
+
+#: inc/class-dependency.php:141
+msgid "requires the WordPress MCP Adapter plugin. Ask a site administrator to install and activate it."
+msgstr "изисква приставката WordPress MCP Adapter. Помолете администратор на сайта да я инсталира и активира."
+
+#: inc/class-dependency.php:169
+msgid "View plugin"
+msgstr "Преглед на приставката"
+
+#: inc/class-dependency.php:188
+msgid "MCP Adapter installed and activated. Your MCP endpoint is now live."
+msgstr "MCP Adapter е инсталирана и активирана. Вашата MCP крайна точка вече е активна."
+
+#: inc/class-dependency.php:190
+msgid "MCP Adapter activated. Your MCP endpoint is now live."
+msgstr "MCP Adapter е активирана. Вашата MCP крайна точка вече е активна."
+
+#: inc/class-dependency.php:193
+msgid "Could not install or activate the MCP Adapter."
+msgstr "MCP Adapter не можа да бъде инсталирана или активирана."
+
+#: inc/class-dependency.php:208
+msgid "HLB MCP Abilities:"
+msgstr "HLB MCP Abilities:"
+
+#: inc/class-dependency.php:222
+msgid "You do not have permission to install plugins."
+msgstr "Нямате права за инсталиране на приставки."
+
+#: inc/class-dependency.php:245
+msgid "Installation did not complete."
+msgstr "Инсталацията не завърши."
+
+#: inc/class-dependency.php:270
+msgid "You do not have permission to activate plugins."
+msgstr "Нямате права за активиране на приставки."
+
+#: inc/class-dependency.php:278
+msgid "The MCP Adapter is no longer installed."
+msgstr "MCP Adapter вече не е инсталирана."
+
+#: inc/class-registry.php:44
+msgid "Content — read"
+msgstr "Съдържание — четене"
+
+#: inc/class-registry.php:45
+msgid "Content — write"
+msgstr "Съдържание — запис"
+
+#: inc/class-registry.php:46
+msgid "Media"
+msgstr "Медия"
+
+#: inc/class-registry.php:47
+msgid "Comments"
+msgstr "Коментари"
+
+#: inc/class-registry.php:48
+msgid "Users"
+msgstr "Потребители"
+
+#: inc/class-registry.php:49
+msgid "Site Editor"
+msgstr "Редактор на сайта"
+
+#: inc/class-registry.php:50
+msgid "Site & diagnostics"
+msgstr "Сайт и диагностика"
+
+#: inc/class-registry.php:51
+msgid "WooCommerce"
+msgstr "WooCommerce"
+
+#: inc/class-registry.php:52
+msgid "SEOPress"
+msgstr "SEOPress"
+
+#: inc/class-registry.php:75
+msgid "Get post"
+msgstr "Получаване на публикация"
+
+#: inc/class-registry.php:76
+msgid "Retrieve a single post or page by ID or slug."
+msgstr "Извличане на единична публикация или страница по ID или слъг."
+
+#: inc/class-registry.php:89
+#: inc/class-registry.php:928
+#: inc/class-registry.php:949
+msgid "Post ID."
+msgstr "ID на публикацията."
+
+#: inc/class-registry.php:90
+msgid "Post slug (used if ID omitted)."
+msgstr "Слъг на публикацията (използва се, ако ID е пропуснато)."
+
+#: inc/class-registry.php:97
+msgid "List posts"
+msgstr "Списък с публикации"
+
+#: inc/class-registry.php:98
+msgid "Query posts by type, status, author, and date with pagination."
+msgstr "Заявка за публикации по тип, статус, автор и дата с странициране."
+
+#: inc/class-registry.php:129
+msgid "Search content"
+msgstr "Търсене в съдържанието"
+
+#: inc/class-registry.php:130
+msgid "Full-text search across public post types."
+msgstr "Пълнотекстово търсене в публичните типове публикации."
+
+#: inc/class-registry.php:144
+msgid "Search terms."
+msgstr "Термини за търсене."
+
+#: inc/class-registry.php:159
+msgid "Get taxonomies & terms"
+msgstr "Получаване на таксономии и термини"
+
+#: inc/class-registry.php:160
+msgid "List categories, tags, and custom taxonomy terms."
+msgstr "Списък с категории, етикети и термини от персонализирани таксономии."
+
+#: inc/class-registry.php:173
+msgid "Limit to a taxonomy (e.g. category, post_tag)."
+msgstr "Ограничаване до таксономия (напр. category, post_tag)."
+
+#: inc/class-registry.php:181
+msgid "Create post"
+msgstr "Създаване на публикация"
+
+#: inc/class-registry.php:182
+msgid "Create a new post or page (draft by default)."
+msgstr "Създаване на нова публикация или страница (чернова по подразбиране)."
+
+#: inc/class-registry.php:209
+msgid "Update post"
+msgstr "Актуализиране на публикация"
+
+#: inc/class-registry.php:210
+msgid "Update the title, content, excerpt, or status of an existing post."
+msgstr "Актуализиране на заглавието, съдържанието, откъса или статуса на съществуваща публикация."
+
+#: inc/class-registry.php:234
+msgid "Set post status"
+msgstr "Задаване на статус на публикация"
+
+#: inc/class-registry.php:235
+msgid "Transition a post between draft, pending, publish, private, or trash."
+msgstr "Преминаване на публикация между чернова, чакаща, публикувана, лична или кошче."
+
+#: inc/class-registry.php:256
+msgid "Delete post"
+msgstr "Изтриване на публикация"
+
+#: inc/class-registry.php:257
+msgid "Trash a post, or permanently delete it when force is true."
+msgstr "Преместване на публикация в кошчето или окончателно изтриване, когато force е true."
+
+#: inc/class-registry.php:274
+#: inc/class-registry.php:756
+msgid "Permanently delete instead of trashing."
+msgstr "Окончателно изтриване вместо преместване в кошчето."
+
+#: inc/class-registry.php:281
+msgid "Assign terms"
+msgstr "Присвояване на термини"
+
+#: inc/class-registry.php:282
+msgid "Set categories, tags, or custom terms on a post."
+msgstr "Задаване на категории, етикети или персонализирани термини на публикация."
+
+#: inc/class-registry.php:301
+msgid "Term slugs, names, or IDs."
+msgstr "Слъгове, имена или ID-та на термини."
+
+#: inc/class-registry.php:309
+msgid "Create term"
+msgstr "Създаване на термин"
+
+#: inc/class-registry.php:310
+msgid "Create a category, tag, or custom taxonomy term."
+msgstr "Създаване на категория, етикет или термин от персонализирана таксономия."
+
+#: inc/class-registry.php:336
+msgid "List media"
+msgstr "Списък с медия"
+
+#: inc/class-registry.php:337
+msgid "Query the media library with pagination."
+msgstr "Заявка към медийната библиотека със странициране."
+
+#: inc/class-registry.php:350
+msgid "Filter by MIME type, e.g. image."
+msgstr "Филтриране по MIME тип, напр. image."
+
+#: inc/class-registry.php:365
+msgid "Upload media"
+msgstr "Качване на медия"
+
+#: inc/class-registry.php:366
+msgid "Upload an image or file to the media library from a URL."
+msgstr "Качване на изображение или файл в медийната библиотека от URL адрес."
+
+#: inc/class-registry.php:382
+msgid "Source URL to sideload."
+msgstr "Изходен URL адрес за странично зареждане."
+
+#: inc/class-registry.php:386
+msgid "Attach to this post."
+msgstr "Прикачване към тази публикация."
+
+#: inc/class-registry.php:394
+msgid "List comments"
+msgstr "Списък с коментари"
+
+#: inc/class-registry.php:395
+msgid "List comments, optionally filtered by post or status."
+msgstr "Списък с коментари, по избор филтрирани по публикация или статус."
+
+#: inc/class-registry.php:427
+msgid "Moderate comment"
+msgstr "Модериране на коментар"
+
+#: inc/class-registry.php:428
+msgid "Approve, unapprove, spam, or trash a comment."
+msgstr "Одобряване, отмяна на одобрение, маркиране като спам или преместване в кошчето на коментар."
+
+#: inc/class-registry.php:451
+msgid "Get current user"
+msgstr "Получаване на текущия потребител"
+
+#: inc/class-registry.php:452
+msgid "Identity and capabilities of the authenticated MCP caller."
+msgstr "Самоличност и права на удостоверения MCP извикващ."
+
+#: inc/class-registry.php:469
+msgid "List users"
+msgstr "Списък с потребители"
+
+#: inc/class-registry.php:470
+msgid "List site users (contains personal data — off by default)."
+msgstr "Списък с потребители на сайта (съдържа лични данни — изключено по подразбиране)."
+
+#: inc/class-registry.php:501
+msgid "List templates"
+msgstr "Списък с шаблони"
+
+#: inc/class-registry.php:502
+msgid "List block templates or template parts for the active theme."
+msgstr "Списък с блокови шаблони или части от шаблони за активната тема."
+
+#: inc/class-registry.php:520
+msgid "Filter template parts by area, e.g. header, footer."
+msgstr "Филтриране на частите от шаблони по област, напр. header, footer."
+
+#: inc/class-registry.php:526
+msgid "Get template"
+msgstr "Получаване на шаблон"
+
+#: inc/class-registry.php:527
+msgid "Retrieve a single template or template part, including its block markup."
+msgstr "Извличане на единичен шаблон или част от шаблон, включително неговия блоков код."
+
+#: inc/class-registry.php:542
+#: inc/class-registry.php:598
+#: inc/class-registry.php:627
+msgid "Template id, e.g. themeslug//slug."
+msgstr "ID на шаблона, напр. themeslug//slug."
+
+#: inc/class-registry.php:552
+msgid "Create template"
+msgstr "Създаване на шаблон"
+
+#: inc/class-registry.php:553
+msgid "Create a new custom template or template part."
+msgstr "Създаване на нов персонализиран шаблон или част от шаблон."
+
+#: inc/class-registry.php:570
+#: inc/class-registry.php:604
+#: inc/class-registry.php:702
+#: inc/class-registry.php:730
+msgid "Block markup."
+msgstr "Блоков код."
+
+#: inc/class-registry.php:576
+msgid "Template-part area, e.g. header, footer."
+msgstr "Област на частта от шаблона, напр. header, footer."
+
+#: inc/class-registry.php:582
+msgid "Update template"
+msgstr "Актуализиране на шаблон"
+
+#: inc/class-registry.php:583
+msgid "Update the title, content, or description of a template or template part."
+msgstr "Актуализиране на заглавието, съдържанието или описанието на шаблон или част от шаблон."
+
+#: inc/class-registry.php:611
+msgid "Delete template"
+msgstr "Изтриване на шаблон"
+
+#: inc/class-registry.php:612
+msgid "Delete a custom template, or revert a customized theme template back to its theme file."
+msgstr "Изтриване на персонализиран шаблон или връщане на персонализиран шаблон на темата към неговия файл в темата."
+
+#: inc/class-registry.php:637
+msgid "List patterns"
+msgstr "Списък с шарки"
+
+#: inc/class-registry.php:638
+msgid "List user-created patterns (reusable blocks)."
+msgstr "Списък с потребителски шарки (използваеми блокове)."
+
+#: inc/class-registry.php:652
+#: inc/class-registry.php:777
+msgid "Filter by pattern category slug."
+msgstr "Филтриране по слъг на категория шарки."
+
+#: inc/class-registry.php:667
+msgid "Get pattern"
+msgstr "Получаване на шарка"
+
+#: inc/class-registry.php:668
+msgid "Retrieve a single user-created pattern, including its block markup."
+msgstr "Извличане на единична потребителска шарка, включително нейния блоков код."
+
+#: inc/class-registry.php:686
+msgid "Create pattern"
+msgstr "Създаване на шарка"
+
+#: inc/class-registry.php:687
+msgid "Create a new user pattern (reusable block)."
+msgstr "Създаване на нова потребителска шарка (използваем блок)."
+
+#: inc/class-registry.php:703
+#: inc/class-registry.php:731
+msgid "Pattern category name or slug."
+msgstr "Име или слъг на категория шарки."
+
+#: inc/class-registry.php:706
+msgid "False creates an unsynced pattern (edits in one place do not propagate)."
+msgstr "False създава несинхронизирана шарка (редакциите на едно място не се разпространяват)."
+
+#: inc/class-registry.php:713
+msgid "Update pattern"
+msgstr "Актуализиране на шарка"
+
+#: inc/class-registry.php:714
+msgid "Update the title, content, category, or sync status of a user pattern."
+msgstr "Актуализиране на заглавието, съдържанието, категорията или статуса на синхронизация на потребителска шарка."
+
+#: inc/class-registry.php:738
+msgid "Delete pattern"
+msgstr "Изтриване на шарка"
+
+#: inc/class-registry.php:739
+msgid "Trash a user pattern, or permanently delete it when force is true."
+msgstr "Преместване на потребителска шарка в кошчето или окончателно изтриване, когато force е true."
+
+#: inc/class-registry.php:763
+msgid "List registered patterns"
+msgstr "Списък с регистрирани шарки"
+
+#: inc/class-registry.php:764
+msgid "List code-registered theme/plugin block patterns (read-only; not user-editable posts)."
+msgstr "Списък с регистрирани в кода блокови шарки на тема/приставка (само за четене; не са публикации, редактируеми от потребителя)."
+
+#: inc/class-registry.php:785
+msgid "Get site info"
+msgstr "Получаване на информация за сайта"
+
+#: inc/class-registry.php:786
+msgid "Site name, URL, WordPress version, language, and timezone."
+msgstr "Име на сайта, URL адрес, версия на WordPress, език и часова зона."
+
+#: inc/class-registry.php:803
+msgid "Get active theme"
+msgstr "Получаване на активната тема"
+
+#: inc/class-registry.php:804
+msgid "The active theme, its version, and whether it is a block theme."
+msgstr "Активната тема, нейната версия и дали е блокова тема."
+
+#: inc/class-registry.php:821
+msgid "List active plugins"
+msgstr "Списък с активни приставки"
+
+#: inc/class-registry.php:822
+msgid "Active plugins with name and version (admin diagnostics)."
+msgstr "Активни приставки с име и версия (администраторска диагностика)."
+
+#: inc/class-registry.php:839
+msgid "List network sites"
+msgstr "Списък с мрежови сайтове"
+
+#: inc/class-registry.php:840
+msgid "List the subsites in the multisite network so a `site` argument can target them (network mode)."
+msgstr "Списък с подсайтовете в мрежата от сайтове, за да могат да бъдат насочвани чрез аргумент `site` (мрежов режим)."
+
+#: inc/class-registry.php:860
+msgid "List products (WooCommerce)"
+msgstr "Списък с продукти (WooCommerce)"
+
+#: inc/class-registry.php:861
+msgid "Query WooCommerce products with pagination."
+msgstr "Заявка за продукти на WooCommerce със странициране."
+
+#: inc/class-registry.php:891
+msgid "Get order (WooCommerce)"
+msgstr "Получаване на поръчка (WooCommerce)"
+
+#: inc/class-registry.php:892
+msgid "Fetch a WooCommerce order by ID (contains personal data — off by default)."
+msgstr "Извличане на поръчка на WooCommerce по ID (съдържа лични данни — изключено по подразбиране)."
+
+#: inc/class-registry.php:913
+msgid "Get SEO meta (SEOPress)"
+msgstr "Получаване на SEO мета данни (SEOPress)"
+
+#: inc/class-registry.php:914
+msgid "Retrieve a post's SEOPress title, description, robots, and social preview meta."
+msgstr "Извличане на SEOPress заглавие, описание, robots и мета данни за преглед в социални мрежи на публикация."
+
+#: inc/class-registry.php:933
+msgid "Update SEO meta (SEOPress)"
+msgstr "Актуализиране на SEO мета данни (SEOPress)"
+
+#: inc/class-registry.php:934
+msgid "Update a post's SEOPress title, description, robots, and social preview meta."
+msgstr "Актуализиране на SEOPress заглавие, описание, robots и мета данни за преглед в социални мрежи на публикация."
+
+#: inc/class-registry.php:950
+msgid "SEO title (Titles & Metas tab)."
+msgstr "SEO заглавие (раздел Titles & Metas)."
+
+#: inc/class-registry.php:951
+msgid "Meta description (Titles & Metas tab)."
+msgstr "Мета описание (раздел Titles & Metas)."
+
+#: inc/class-registry.php:954
+msgid "Custom canonical URL."
+msgstr "Персонализиран канонизиран URL адрес."
+
+#: inc/class-registry.php:956
+msgid "Exclude this post from search engine indexing."
+msgstr "Изключване на тази публикация от индексиране от търсачките."
+
+#: inc/class-registry.php:957
+msgid "Tell search engines not to follow links on this post."
+msgstr "Указване на търсачките да не следват връзките в тази публикация."
+
+#: inc/class-registry.php:958
+msgid "Primary target keyword for content analysis."
+msgstr "Основна целева ключова дума за анализ на съдържанието."
+
+#: inc/class-registry.php:959
+msgid "Facebook/Open Graph title."
+msgstr "Facebook/Open Graph заглавие."
+
+#: inc/class-registry.php:960
+msgid "Facebook/Open Graph description."
+msgstr "Facebook/Open Graph описание."
+
+#: inc/class-registry.php:963
+msgid "Facebook/Open Graph image URL."
+msgstr "URL адрес на изображение за Facebook/Open Graph."
+
+#: inc/class-registry.php:965
+msgid "Twitter card title."
+msgstr "Заглавие на Twitter карта."
+
+#: inc/class-registry.php:966
+msgid "Twitter card description."
+msgstr "Описание на Twitter карта."
+
+#: inc/class-registry.php:969
+msgid "Twitter card image URL."
+msgstr "URL адрес на изображение за Twitter карта."
+
+#: inc/class-server.php:79
+msgid "HLB MCP Abilities — curated WordPress abilities for third-party agents."
+msgstr "HLB MCP Abilities — подбрани WordPress възможности за агенти на трети страни."
+
+#. translators: %s: site host.
+#: inc/class-settings.php:282
+#, php-format
+msgid "HLB MCP — %s"
+msgstr "HLB MCP — %s"
+
+#: inc/handlers/class-comments.php:70
+msgid "Comment not found."
+msgstr "Коментарът не е намерен."
+
+#: inc/handlers/class-comments.php:73
+msgid "You cannot moderate this comment."
+msgstr "Нямате право да модерирате този коментар."
+
+#: inc/handlers/class-comments.php:90
+msgid "Unknown action."
+msgstr "Неизвестно действие."
+
+#: inc/handlers/class-comments.php:94
+msgid "Moderation action failed."
+msgstr "Действието по модериране е неуспешно."
+
+#: inc/handlers/class-content.php:67
+msgid "Provide an id or slug."
+msgstr "Посочете ID или слъг."
+
+#: inc/handlers/class-content.php:71
+#: inc/handlers/class-content.php:77
+#: inc/handlers/class-content.php:242
+#: inc/handlers/class-content.php:287
+#: inc/handlers/class-content.php:329
+#: inc/handlers/class-content.php:359
+#: inc/handlers/class-seopress.php:60
+#: inc/handlers/class-seopress.php:66
+#: inc/handlers/class-seopress.php:86
+msgid "Post not found."
+msgstr "Публикацията не е намерена."
+
+#: inc/handlers/class-content.php:206
+msgid "Unknown post type."
+msgstr "Неизвестен тип публикация."
+
+#: inc/handlers/class-content.php:209
+msgid "You cannot create this type of content."
+msgstr "Нямате право да създавате този тип съдържание."
+
+#: inc/handlers/class-content.php:214
+msgid "You cannot publish this type of content."
+msgstr "Нямате право да публикувате този тип съдържание."
+
+#: inc/handlers/class-content.php:245
+#: inc/handlers/class-content.php:290
+#: inc/handlers/class-content.php:365
+#: inc/handlers/class-seopress.php:89
+msgid "You cannot edit this post."
+msgstr "Нямате право да редактирате тази публикация."
+
+#: inc/handlers/class-content.php:263
+#: inc/handlers/class-content.php:295
+msgid "You cannot publish this post."
+msgstr "Нямате право да публикувате тази публикация."
+
+#: inc/handlers/class-content.php:299
+msgid "You cannot trash this post."
+msgstr "Нямате право да премествате тази публикация в кошчето."
+
+#: inc/handlers/class-content.php:305
+msgid "Could not trash the post."
+msgstr "Публикацията не можа да бъде преместена в кошчето."
+
+#: inc/handlers/class-content.php:332
+msgid "You cannot delete this post."
+msgstr "Нямате право да изтривате тази публикация."
+
+#: inc/handlers/class-content.php:337
+msgid "Could not delete the post."
+msgstr "Публикацията не можа да бъде изтрита."
+
+#: inc/handlers/class-content.php:362
+#: inc/handlers/class-content.php:393
+msgid "Unknown taxonomy."
+msgstr "Неизвестна таксономия."
+
+#: inc/handlers/class-content.php:369
+msgid "You cannot assign terms in this taxonomy."
+msgstr "Нямате право да присвоявате термини в тази таксономия."
+
+#: inc/handlers/class-content.php:397
+msgid "You cannot manage terms in this taxonomy."
+msgstr "Нямате право да управлявате термини в тази таксономия."
+
+#: inc/handlers/class-media.php:71
+msgid "A valid URL is required."
+msgstr "Изисква се валиден URL адрес."
+
+#: inc/handlers/class-media.php:74
+msgid "This host is not allowed for media uploads."
+msgstr "Този хост не е разрешен за качване на медия."
+
+#: inc/handlers/class-media.php:79
+msgid "You cannot attach media to this post."
+msgstr "Нямате право да прикачвате медия към тази публикация."
+
+#: inc/handlers/class-patterns.php:61
+msgid "Pattern categories are unavailable."
+msgstr "Категориите шарки не са налични."
+
+#: inc/handlers/class-patterns.php:64
+msgid "You cannot assign pattern categories."
+msgstr "Нямате право да присвоявате категории шарки."
+
+#: inc/handlers/class-patterns.php:76
+msgid "You cannot create pattern categories."
+msgstr "Нямате право да създавате категории шарки."
+
+#: inc/handlers/class-patterns.php:132
+#: inc/handlers/class-patterns.php:135
+#: inc/handlers/class-patterns.php:190
+#: inc/handlers/class-patterns.php:238
+msgid "Pattern not found."
+msgstr "Шарката не е намерена."
+
+#: inc/handlers/class-patterns.php:152
+msgid "You cannot create patterns."
+msgstr "Нямате право да създавате шарки."
+
+#: inc/handlers/class-patterns.php:193
+msgid "You cannot edit this pattern."
+msgstr "Нямате право да редактирате тази шарка."
+
+#: inc/handlers/class-patterns.php:241
+msgid "You cannot delete this pattern."
+msgstr "Нямате право да изтривате тази шарка."
+
+#: inc/handlers/class-patterns.php:246
+msgid "Could not delete the pattern."
+msgstr "Шарката не можа да бъде изтрита."
+
+#: inc/handlers/class-seopress.php:54
+#: inc/handlers/class-seopress.php:80
+msgid "SEOPress is not active."
+msgstr "SEOPress не е активна."
+
+#: inc/handlers/class-site.php:44
+msgid "This is not a multisite network."
+msgstr "Това не е мрежа от сайтове (multisite)."
+
+#: inc/handlers/class-templates.php:92
+msgid "Provide a template id."
+msgstr "Посочете ID на шаблона."
+
+#: inc/handlers/class-templates.php:97
+#: inc/handlers/class-templates.php:171
+#: inc/handlers/class-templates.php:224
+msgid "Template not found."
+msgstr "Шаблонът не е намерен."
+
+#: inc/handlers/class-templates.php:113
+#: inc/handlers/class-templates.php:164
+#: inc/handlers/class-templates.php:217
+msgid "You cannot edit templates."
+msgstr "Нямате право да редактирате шаблони."
+
+#: inc/handlers/class-templates.php:119
+msgid "Provide a slug."
+msgstr "Посочете слъг."
+
+#: inc/handlers/class-templates.php:125
+msgid "A template with this slug already exists."
+msgstr "Вече съществува шаблон с този слъг."
+
+#: inc/handlers/class-templates.php:227
+msgid "This template is not customized; there is nothing to delete."
+msgstr "Този шаблон не е персонализиран; няма какво да бъде изтрито."
+
+#: inc/handlers/class-templates.php:232
+msgid "Could not delete the template."
+msgstr "Шаблонът не можа да бъде изтрит."
+
+#: inc/handlers/class-woocommerce.php:37
+#: inc/handlers/class-woocommerce.php:84
+msgid "WooCommerce is not active."
+msgstr "WooCommerce не е активна."
+
+#: inc/handlers/class-woocommerce.php:90
+msgid "Order not found."
+msgstr "Поръчката не е намерена."

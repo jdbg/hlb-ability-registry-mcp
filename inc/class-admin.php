@@ -555,7 +555,7 @@ class Admin {
 	private function posted_ability_ids() {
 		// Nonce is verified by the calling save handler (check_admin_referer); values are
 		// sanitized on the next line and then validated against the ability registry.
-		// phpcs:ignore HM.Security.NonceVerification.Missing, HM.Security.ValidatedSanitizedInput.InputNotSanitized
+		// phpcs:ignore HM.Security.NonceVerification.Missing, HM.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 		$raw = isset( $_POST['hlb_abilities'] ) ? (array) wp_unslash( $_POST['hlb_abilities'] ) : [];
 		$raw = array_map( 'sanitize_text_field', $raw );
 		return $this->settings->sanitize_ids( $raw );

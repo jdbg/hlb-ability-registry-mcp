@@ -1,10 +1,14 @@
 <?php
 /**
- * MCP Adapter dependency management: detect, offer to install, and offer to activate.
+ * MCP Adapter dependency detection.
  *
- * The MCP Adapter is distributed via GitHub (not the wordpress.org directory), so the
- * one-click install sideloads its published release ZIP rather than using the core
- * install-by-slug flow.
+ * The MCP Adapter is distributed via GitHub, not the wordpress.org directory. This
+ * plugin never fetches or installs it automatically — that would mean downloading and
+ * running executable code from a third-party source, which wordpress.org's guidelines
+ * disallow. Instead this class only detects the adapter's state and, if it's missing,
+ * shows an admin notice linking to the adapter's GitHub releases page for manual
+ * install. If the adapter is already installed but inactive, activating it is a local
+ * operation (no code is downloaded), so that action is still offered directly.
  *
  * @package HLB\MCP
  */
@@ -14,26 +18,24 @@ namespace HLB\MCP;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Guards the MCP Adapter dependency and drives install/activate from an admin notice.
+ * Detects the MCP Adapter dependency and offers to activate it if already installed.
  */
 class Dependency {
 
 	const ADAPTER_CLASS    = '\\WP\\MCP\\Core\\McpAdapter';
 	const ADAPTER_BASENAME = 'mcp-adapter/mcp-adapter.php';
-	const DOWNLOAD_URL     = 'https://github.com/WordPress/mcp-adapter/releases/latest/download/mcp-adapter.zip';
+	const ADAPTER_REPO_URL = 'https://github.com/WordPress/mcp-adapter';
 
-	const ACTION_INSTALL  = 'hlb_mcp_install_adapter';
 	const ACTION_ACTIVATE = 'hlb_mcp_activate_adapter';
 
 	/**
-	 * Register admin hooks (notices + action handlers).
+	 * Register admin hooks (notices + action handler).
 	 *
 	 * @return void
 	 */
 	public function hooks() {
 		add_action( 'admin_notices', [ $this, 'render_notice' ] );
 		add_action( 'network_admin_notices', [ $this, 'render_notice' ] );
-		add_action( 'admin_post_' . self::ACTION_INSTALL, [ $this, 'handle_install' ] );
 		add_action( 'admin_post_' . self::ACTION_ACTIVATE, [ $this, 'handle_activate' ] );
 	}
 
@@ -63,8 +65,8 @@ class Dependency {
 			return self::ADAPTER_BASENAME;
 		}
 
-		// Resilient fallback: match by folder or plugin name in case the ZIP unpacked
-		// to a differently-named directory.
+		// Resilient fallback: match by folder or plugin name in case it was installed
+		// under a differently-named directory.
 		foreach ( $plugins as $file => $data ) {
 			if ( 0 === strpos( $file, 'mcp-adapter/' ) ) {
 				return $file;
@@ -116,41 +118,50 @@ class Dependency {
 
 		$installed = $this->is_installed();
 
-		if ( ! $installed && current_user_can( 'install_plugins' ) ) {
-			$this->notice_box(
-				__( 'requires the WordPress MCP Adapter plugin, which is not installed.', 'hlb-mcp-abilities' ),
-				self::ACTION_INSTALL,
-				__( 'Install &amp; activate MCP Adapter', 'hlb-mcp-abilities' )
-			);
-			return;
-		}
-
 		if ( $installed && current_user_can( 'activate_plugins' ) ) {
-			$this->notice_box(
-				__( 'requires the WordPress MCP Adapter plugin, which is installed but not active.', 'hlb-mcp-abilities' ),
-				self::ACTION_ACTIVATE,
-				__( 'Activate MCP Adapter', 'hlb-mcp-abilities' )
+			$this->activate_notice_box();
+			return;
+		}
+
+		if ( $installed ) {
+			// Installed but this user can't activate it — inform only.
+			printf(
+				'<div class="notice notice-warning"><p><strong>%s</strong> %s</p></div>',
+				esc_html__( 'HLB MCP Abilities', 'hlb-mcp-abilities' ),
+				esc_html__( 'the MCP Adapter plugin is installed but not active. Ask a site administrator to activate it.', 'hlb-mcp-abilities' )
 			);
 			return;
 		}
 
-		// User lacks the capability to fix it — inform only.
+		// Not installed — never fetched automatically; point to manual install.
+		if ( current_user_can( 'install_plugins' ) ) {
+			printf(
+				'<div class="notice notice-warning"><p><strong>%1$s</strong> %2$s</p><p>%3$s</p></div>',
+				esc_html__( 'HLB MCP Abilities', 'hlb-mcp-abilities' ),
+				esc_html__( 'the MCP Adapter plugin is not installed, so no MCP endpoint is exposed yet. Abilities still register normally and are available via the core Abilities REST API.', 'hlb-mcp-abilities' ),
+				sprintf(
+					/* translators: %s: link to the MCP Adapter GitHub releases page. */
+					esc_html__( 'Download the latest release from %s, then install it from Plugins → Add New → Upload Plugin.', 'hlb-mcp-abilities' ),
+					'<a href="' . esc_url( self::ADAPTER_REPO_URL . '/releases/latest' ) . '" target="_blank" rel="noopener">' . esc_html__( 'the MCP Adapter GitHub releases page', 'hlb-mcp-abilities' ) . '</a>'
+				)
+			);
+			return;
+		}
+
+		// User lacks the capability to install it — inform only.
 		printf(
 			'<div class="notice notice-warning"><p><strong>%s</strong> %s</p></div>',
 			esc_html__( 'HLB MCP Abilities', 'hlb-mcp-abilities' ),
-			esc_html__( 'requires the WordPress MCP Adapter plugin. Ask a site administrator to install and activate it.', 'hlb-mcp-abilities' )
+			esc_html__( 'the MCP Adapter plugin is not installed. Ask a site administrator to install and activate it.', 'hlb-mcp-abilities' )
 		);
 	}
 
 	/**
-	 * Render a notice with a single POST action button.
+	 * Render a notice offering to activate an already-installed adapter.
 	 *
-	 * @param string $message Sentence following the plugin name.
-	 * @param string $action  admin-post action.
-	 * @param string $label   Button label (may contain entities).
 	 * @return void
 	 */
-	private function notice_box( $message, $action, $label ) {
+	private function activate_notice_box() {
 		// admin-post.php only exists at /wp-admin/admin-post.php (there is no network
 		// variant); the redirect_to field returns the user to the originating screen.
 		$post_url = admin_url( 'admin-post.php' );
@@ -158,15 +169,15 @@ class Dependency {
 		<div class="notice notice-warning">
 			<p>
 				<strong><?php esc_html_e( 'HLB MCP Abilities', 'hlb-mcp-abilities' ); ?></strong>
-				<?php echo esc_html( $message ); ?>
+				<?php esc_html_e( 'the MCP Adapter plugin is installed but not active.', 'hlb-mcp-abilities' ); ?>
 			</p>
 			<p>
 				<form method="post" action="<?php echo esc_url( $post_url ); ?>" style="display:inline;">
-					<input type="hidden" name="action" value="<?php echo esc_attr( $action ); ?>" />
-					<input type="hidden" name="redirect_to" value="<?php echo esc_attr( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) ); ?>" />
-					<?php wp_nonce_field( $action ); ?>
-					<button type="submit" class="button button-primary"><?php echo esc_html( $label ); ?></button>
-					<a href="https://github.com/WordPress/mcp-adapter" target="_blank" rel="noopener" class="button-link" style="margin-left:.5em;"><?php esc_html_e( 'View plugin', 'hlb-mcp-abilities' ); ?></a>
+					<input type="hidden" name="action" value="<?php echo esc_attr( self::ACTION_ACTIVATE ); ?>" />
+					<input type="hidden" name="redirect_to" value="<?php echo esc_attr( esc_url_raw( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) ) ); ?>" />
+					<?php wp_nonce_field( self::ACTION_ACTIVATE ); ?>
+					<button type="submit" class="button button-primary"><?php esc_html_e( 'Activate MCP Adapter', 'hlb-mcp-abilities' ); ?></button>
+					<a href="<?php echo esc_url( self::ADAPTER_REPO_URL ); ?>" target="_blank" rel="noopener" class="button-link" style="margin-left:.5em;"><?php esc_html_e( 'View plugin', 'hlb-mcp-abilities' ); ?></a>
 				</form>
 			</p>
 		</div>
@@ -174,7 +185,7 @@ class Dependency {
 	}
 
 	/**
-	 * Show a one-time result notice after an install/activate attempt.
+	 * Show a one-time result notice after an activation attempt.
 	 *
 	 * @return void
 	 */
@@ -184,13 +195,11 @@ class Dependency {
 		}
 		$state = sanitize_key( wp_unslash( $_GET['hlb_dep'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
-		if ( 'installed' === $state ) {
-			$this->result( 'success', __( 'MCP Adapter installed and activated. Your MCP endpoint is now live.', 'hlb-mcp-abilities' ) );
-		} elseif ( 'activated' === $state ) {
+		if ( 'activated' === $state ) {
 			$this->result( 'success', __( 'MCP Adapter activated. Your MCP endpoint is now live.', 'hlb-mcp-abilities' ) );
 		} elseif ( 'failed' === $state ) {
 			$detail = isset( $_GET['hlb_msg'] ) ? sanitize_text_field( wp_unslash( $_GET['hlb_msg'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			$this->result( 'error', __( 'Could not install or activate the MCP Adapter.', 'hlb-mcp-abilities' ) . ( $detail ? ' ' . $detail : '' ) );
+			$this->result( 'error', __( 'Could not activate the MCP Adapter.', 'hlb-mcp-abilities' ) . ( $detail ? ' ' . $detail : '' ) );
 		}
 	}
 
@@ -211,54 +220,6 @@ class Dependency {
 	}
 
 	/* --------------------------------------------------------------------- Handlers */
-
-	/**
-	 * Download and install the MCP Adapter from its GitHub release, then activate it.
-	 *
-	 * @return void
-	 */
-	public function handle_install() {
-		if ( ! current_user_can( 'install_plugins' ) ) {
-			wp_die( esc_html__( 'You do not have permission to install plugins.', 'hlb-mcp-abilities' ) );
-		}
-		check_admin_referer( self::ACTION_INSTALL );
-
-		require_once ABSPATH . 'wp-admin/includes/file.php';
-		require_once ABSPATH . 'wp-admin/includes/misc.php';
-		require_once ABSPATH . 'wp-admin/includes/plugin.php';
-		require_once ABSPATH . 'wp-admin/includes/plugin-install.php';
-		require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
-		require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader-skins.php';
-
-		$skin     = new \WP_Ajax_Upgrader_Skin();
-		$upgrader = new \Plugin_Upgrader( $skin );
-		$result   = $upgrader->install( self::DOWNLOAD_URL );
-
-		if ( is_wp_error( $result ) ) {
-			$this->redirect_result( 'failed', $result->get_error_message() );
-		}
-		if ( is_wp_error( $skin->result ) ) {
-			$this->redirect_result( 'failed', $skin->result->get_error_message() );
-		}
-		if ( true !== $result ) {
-			$errors = $skin->get_errors();
-			$msg    = is_wp_error( $errors ) && $errors->has_errors() ? $errors->get_error_message() : __( 'Installation did not complete.', 'hlb-mcp-abilities' );
-			$this->redirect_result( 'failed', $msg );
-		}
-
-		// Activate the freshly-installed plugin.
-		$basename = $upgrader->plugin_info();
-		if ( ! $basename ) {
-			$basename = $this->installed_basename();
-		}
-		$activated = activate_plugin( $basename, '', $this->is_network_context() );
-
-		if ( is_wp_error( $activated ) ) {
-			$this->redirect_result( 'failed', $activated->get_error_message() );
-		}
-
-		$this->redirect_result( 'installed' );
-	}
 
 	/**
 	 * Activate an already-installed MCP Adapter.
@@ -289,7 +250,7 @@ class Dependency {
 	/**
 	 * Redirect back to the originating admin page with a result flag.
 	 *
-	 * @param string $state installed|activated|failed.
+	 * @param string $state activated|failed.
 	 * @param string $detail Optional detail message.
 	 * @return void
 	 */
