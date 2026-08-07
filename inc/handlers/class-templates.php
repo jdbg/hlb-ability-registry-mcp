@@ -89,12 +89,12 @@ class Templates {
 		$type = self::normalize_type( $input );
 		$id   = isset( $input['id'] ) ? sanitize_text_field( $input['id'] ) : '';
 		if ( '' === $id ) {
-			return new WP_Error( 'hlb_mcp_invalid_input', __( 'Provide a template id.', 'hlb-mcp-abilities' ), [ 'status' => 400 ] );
+			return new WP_Error( 'hlb_mcp_invalid_input', __( 'Provide a template id.', 'hlb-ability-registry-mcp' ), [ 'status' => 400 ] );
 		}
 
 		$template = get_block_template( $id, $type );
 		if ( ! $template ) {
-			return new WP_Error( 'hlb_mcp_not_found', __( 'Template not found.', 'hlb-mcp-abilities' ), [ 'status' => 404 ] );
+			return new WP_Error( 'hlb_mcp_not_found', __( 'Template not found.', 'hlb-ability-registry-mcp' ), [ 'status' => 404 ] );
 		}
 
 		$data            = self::shape_template( $template );
@@ -110,19 +110,19 @@ class Templates {
 	 */
 	public static function create_template( array $input ) {
 		if ( ! current_user_can( 'edit_theme_options' ) ) {
-			return new WP_Error( 'hlb_mcp_forbidden', __( 'You cannot edit templates.', 'hlb-mcp-abilities' ), [ 'status' => 403 ] );
+			return new WP_Error( 'hlb_mcp_forbidden', __( 'You cannot edit templates.', 'hlb-ability-registry-mcp' ), [ 'status' => 403 ] );
 		}
 
 		$type = self::normalize_type( $input );
 		$slug = isset( $input['slug'] ) ? sanitize_title( $input['slug'] ) : '';
 		if ( '' === $slug ) {
-			return new WP_Error( 'hlb_mcp_invalid_input', __( 'Provide a slug.', 'hlb-mcp-abilities' ), [ 'status' => 400 ] );
+			return new WP_Error( 'hlb_mcp_invalid_input', __( 'Provide a slug.', 'hlb-ability-registry-mcp' ), [ 'status' => 400 ] );
 		}
 
 		$theme    = get_stylesheet();
 		$existing = get_block_template( $theme . '//' . $slug, $type );
 		if ( $existing && ! empty( $existing->wp_id ) ) {
-			return new WP_Error( 'hlb_mcp_conflict', __( 'A template with this slug already exists.', 'hlb-mcp-abilities' ), [ 'status' => 409 ] );
+			return new WP_Error( 'hlb_mcp_conflict', __( 'A template with this slug already exists.', 'hlb-ability-registry-mcp' ), [ 'status' => 409 ] );
 		}
 
 		$postarr = [
@@ -161,14 +161,14 @@ class Templates {
 	 */
 	public static function update_template( array $input ) {
 		if ( ! current_user_can( 'edit_theme_options' ) ) {
-			return new WP_Error( 'hlb_mcp_forbidden', __( 'You cannot edit templates.', 'hlb-mcp-abilities' ), [ 'status' => 403 ] );
+			return new WP_Error( 'hlb_mcp_forbidden', __( 'You cannot edit templates.', 'hlb-ability-registry-mcp' ), [ 'status' => 403 ] );
 		}
 
 		$type     = self::normalize_type( $input );
 		$id       = isset( $input['id'] ) ? sanitize_text_field( $input['id'] ) : '';
 		$template = $id ? get_block_template( $id, $type ) : null;
 		if ( ! $template ) {
-			return new WP_Error( 'hlb_mcp_not_found', __( 'Template not found.', 'hlb-mcp-abilities' ), [ 'status' => 404 ] );
+			return new WP_Error( 'hlb_mcp_not_found', __( 'Template not found.', 'hlb-ability-registry-mcp' ), [ 'status' => 404 ] );
 		}
 
 		$customizing = empty( $template->wp_id );
@@ -214,22 +214,22 @@ class Templates {
 	 */
 	public static function delete_template( array $input ) {
 		if ( ! current_user_can( 'edit_theme_options' ) ) {
-			return new WP_Error( 'hlb_mcp_forbidden', __( 'You cannot edit templates.', 'hlb-mcp-abilities' ), [ 'status' => 403 ] );
+			return new WP_Error( 'hlb_mcp_forbidden', __( 'You cannot edit templates.', 'hlb-ability-registry-mcp' ), [ 'status' => 403 ] );
 		}
 
 		$type     = self::normalize_type( $input );
 		$id       = isset( $input['id'] ) ? sanitize_text_field( $input['id'] ) : '';
 		$template = $id ? get_block_template( $id, $type ) : null;
 		if ( ! $template ) {
-			return new WP_Error( 'hlb_mcp_not_found', __( 'Template not found.', 'hlb-mcp-abilities' ), [ 'status' => 404 ] );
+			return new WP_Error( 'hlb_mcp_not_found', __( 'Template not found.', 'hlb-ability-registry-mcp' ), [ 'status' => 404 ] );
 		}
 		if ( empty( $template->wp_id ) ) {
-			return new WP_Error( 'hlb_mcp_invalid_input', __( 'This template is not customized; there is nothing to delete.', 'hlb-mcp-abilities' ), [ 'status' => 400 ] );
+			return new WP_Error( 'hlb_mcp_invalid_input', __( 'This template is not customized; there is nothing to delete.', 'hlb-ability-registry-mcp' ), [ 'status' => 400 ] );
 		}
 
 		$result = wp_delete_post( $template->wp_id, true );
 		if ( ! $result ) {
-			return new WP_Error( 'hlb_mcp_failed', __( 'Could not delete the template.', 'hlb-mcp-abilities' ), [ 'status' => 500 ] );
+			return new WP_Error( 'hlb_mcp_failed', __( 'Could not delete the template.', 'hlb-ability-registry-mcp' ), [ 'status' => 500 ] );
 		}
 		return [
 			'id'                      => $id,

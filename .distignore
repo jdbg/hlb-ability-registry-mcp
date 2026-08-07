@@ -3,6 +3,7 @@
 .gitattributes
 .gitignore
 .distignore
+.wordpress-org
 AGENTS.md
 CLAUDE.md
 PLAN.md
@@ -14,5 +15,4 @@ vendor
 dist
 examples
 blueprints
-languages/*.po
-languages/*.pot
+languages

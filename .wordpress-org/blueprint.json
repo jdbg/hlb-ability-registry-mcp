@@ -5,7 +5,7 @@
 		"wp": "latest"
 	},
 	"phpExtensionBundles": [ "kitchen-sink" ],
-	"landingPage": "/wp-admin/options-general.php?page=hlb-mcp-abilities",
+	"landingPage": "/wp-admin/options-general.php?page=hlb-ability-registry-mcp",
 	"steps": [
 		{
 			"step": "login",
@@ -14,7 +14,7 @@
 		},
 		{
 			"step": "activatePlugin",
-			"pluginPath": "hlb-mcp-abilities/hlb-mcp-abilities.php"
+			"pluginPath": "hlb-ability-registry-mcp/hlb-ability-registry-mcp.php"
 		}
 	]
 }

@@ -279,7 +279,7 @@ class Settings {
 	public function server_display_name() {
 		$host = (string) wp_parse_url( home_url(), PHP_URL_HOST );
 		/* translators: %s: site host. */
-		return sprintf( __( 'HLB MCP — %s', 'hlb-mcp-abilities' ), $host );
+		return sprintf( __( 'HLB Ability Registry — %s', 'hlb-ability-registry-mcp' ), $host );
 	}
 
 	/**

@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<ruleset name="HLB MCP Abilities">
-	<description>Human Made coding standards for the HLB MCP Abilities plugin.</description>
+<ruleset name="HLB Ability Registry for MCP">
+	<description>Human Made coding standards for the HLB Ability Registry for MCP plugin.</description>
 
 	<!-- Scan the plugin, ignoring dependencies and non-code. -->
 	<file>.</file>
@@ -29,7 +29,7 @@
 	<rule ref="WordPress.WP.I18n">
 		<properties>
 			<property name="text_domain" type="array">
-				<element value="hlb-mcp-abilities"/>
+				<element value="hlb-ability-registry-mcp"/>
 			</property>
 		</properties>
 	</rule>

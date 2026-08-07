@@ -58,10 +58,10 @@ class Patterns {
 		$category = sanitize_text_field( $category );
 
 		if ( ! $taxonomy ) {
-			return new WP_Error( 'hlb_mcp_failed', __( 'Pattern categories are unavailable.', 'hlb-mcp-abilities' ), [ 'status' => 500 ] );
+			return new WP_Error( 'hlb_mcp_failed', __( 'Pattern categories are unavailable.', 'hlb-ability-registry-mcp' ), [ 'status' => 500 ] );
 		}
 		if ( ! current_user_can( $taxonomy->cap->assign_terms ) ) {
-			return new WP_Error( 'hlb_mcp_forbidden', __( 'You cannot assign pattern categories.', 'hlb-mcp-abilities' ), [ 'status' => 403 ] );
+			return new WP_Error( 'hlb_mcp_forbidden', __( 'You cannot assign pattern categories.', 'hlb-ability-registry-mcp' ), [ 'status' => 403 ] );
 		}
 		if ( '' === $category ) {
 			$result = wp_set_object_terms( $post_id, [], 'wp_pattern_category' );
@@ -73,7 +73,7 @@ class Patterns {
 			$term = get_term_by( 'name', $category, 'wp_pattern_category' );
 		}
 		if ( ! $term && ! current_user_can( $taxonomy->cap->manage_terms ) ) {
-			return new WP_Error( 'hlb_mcp_forbidden', __( 'You cannot create pattern categories.', 'hlb-mcp-abilities' ), [ 'status' => 403 ] );
+			return new WP_Error( 'hlb_mcp_forbidden', __( 'You cannot create pattern categories.', 'hlb-ability-registry-mcp' ), [ 'status' => 403 ] );
 		}
 
 		$result = wp_set_object_terms( $post_id, $term ? (int) $term->term_id : $category, 'wp_pattern_category' );
@@ -129,10 +129,10 @@ class Patterns {
 		$id   = isset( $input['id'] ) ? (int) $input['id'] : 0;
 		$post = $id ? get_post( $id ) : null;
 		if ( ! $post || 'wp_block' !== $post->post_type ) {
-			return new WP_Error( 'hlb_mcp_not_found', __( 'Pattern not found.', 'hlb-mcp-abilities' ), [ 'status' => 404 ] );
+			return new WP_Error( 'hlb_mcp_not_found', __( 'Pattern not found.', 'hlb-ability-registry-mcp' ), [ 'status' => 404 ] );
 		}
 		if ( ! current_user_can( 'read_post', $post->ID ) ) {
-			return new WP_Error( 'hlb_mcp_not_found', __( 'Pattern not found.', 'hlb-mcp-abilities' ), [ 'status' => 404 ] );
+			return new WP_Error( 'hlb_mcp_not_found', __( 'Pattern not found.', 'hlb-ability-registry-mcp' ), [ 'status' => 404 ] );
 		}
 
 		$data            = self::shape_pattern( $post );
@@ -149,7 +149,7 @@ class Patterns {
 	public static function create_pattern( array $input ) {
 		$type_obj = get_post_type_object( 'wp_block' );
 		if ( ! $type_obj || ! current_user_can( $type_obj->cap->create_posts ) ) {
-			return new WP_Error( 'hlb_mcp_forbidden', __( 'You cannot create patterns.', 'hlb-mcp-abilities' ), [ 'status' => 403 ] );
+			return new WP_Error( 'hlb_mcp_forbidden', __( 'You cannot create patterns.', 'hlb-ability-registry-mcp' ), [ 'status' => 403 ] );
 		}
 
 		$postarr = [
@@ -187,10 +187,10 @@ class Patterns {
 		$id   = isset( $input['id'] ) ? (int) $input['id'] : 0;
 		$post = $id ? get_post( $id ) : null;
 		if ( ! $post || 'wp_block' !== $post->post_type ) {
-			return new WP_Error( 'hlb_mcp_not_found', __( 'Pattern not found.', 'hlb-mcp-abilities' ), [ 'status' => 404 ] );
+			return new WP_Error( 'hlb_mcp_not_found', __( 'Pattern not found.', 'hlb-ability-registry-mcp' ), [ 'status' => 404 ] );
 		}
 		if ( ! current_user_can( 'edit_post', $id ) ) {
-			return new WP_Error( 'hlb_mcp_forbidden', __( 'You cannot edit this pattern.', 'hlb-mcp-abilities' ), [ 'status' => 403 ] );
+			return new WP_Error( 'hlb_mcp_forbidden', __( 'You cannot edit this pattern.', 'hlb-ability-registry-mcp' ), [ 'status' => 403 ] );
 		}
 
 		$postarr = [ 'ID' => $id ];
@@ -235,15 +235,15 @@ class Patterns {
 		$force = ! empty( $input['force'] );
 		$post  = $id ? get_post( $id ) : null;
 		if ( ! $post || 'wp_block' !== $post->post_type ) {
-			return new WP_Error( 'hlb_mcp_not_found', __( 'Pattern not found.', 'hlb-mcp-abilities' ), [ 'status' => 404 ] );
+			return new WP_Error( 'hlb_mcp_not_found', __( 'Pattern not found.', 'hlb-ability-registry-mcp' ), [ 'status' => 404 ] );
 		}
 		if ( ! current_user_can( 'delete_post', $id ) ) {
-			return new WP_Error( 'hlb_mcp_forbidden', __( 'You cannot delete this pattern.', 'hlb-mcp-abilities' ), [ 'status' => 403 ] );
+			return new WP_Error( 'hlb_mcp_forbidden', __( 'You cannot delete this pattern.', 'hlb-ability-registry-mcp' ), [ 'status' => 403 ] );
 		}
 
 		$result = wp_delete_post( $id, $force );
 		if ( ! $result ) {
-			return new WP_Error( 'hlb_mcp_failed', __( 'Could not delete the pattern.', 'hlb-mcp-abilities' ), [ 'status' => 500 ] );
+			return new WP_Error( 'hlb_mcp_failed', __( 'Could not delete the pattern.', 'hlb-ability-registry-mcp' ), [ 'status' => 500 ] );
 		}
 		return [
 			'id'      => $id,

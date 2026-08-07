@@ -1,6 +1,6 @@
 <?php
 /**
- * Uninstall cleanup for HLB MCP Abilities.
+ * Uninstall cleanup for HLB Ability Registry for MCP.
  *
  * Removes the network default option and every per-site option row, on both
  * single-site and multisite installs. Leaves no orphan data.

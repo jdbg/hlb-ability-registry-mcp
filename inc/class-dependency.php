@@ -127,8 +127,8 @@ class Dependency {
 			// Installed but this user can't activate it — inform only.
 			printf(
 				'<div class="notice notice-warning"><p><strong>%s</strong> %s</p></div>',
-				esc_html__( 'HLB MCP Abilities', 'hlb-mcp-abilities' ),
-				esc_html__( 'the MCP Adapter plugin is installed but not active. Ask a site administrator to activate it.', 'hlb-mcp-abilities' )
+				esc_html__( 'HLB Ability Registry for MCP', 'hlb-ability-registry-mcp' ),
+				esc_html__( 'the MCP Adapter plugin is installed but not active. Ask a site administrator to activate it.', 'hlb-ability-registry-mcp' )
 			);
 			return;
 		}
@@ -137,12 +137,12 @@ class Dependency {
 		if ( current_user_can( 'install_plugins' ) ) {
 			printf(
 				'<div class="notice notice-warning"><p><strong>%1$s</strong> %2$s</p><p>%3$s</p></div>',
-				esc_html__( 'HLB MCP Abilities', 'hlb-mcp-abilities' ),
-				esc_html__( 'the MCP Adapter plugin is not installed, so no MCP endpoint is exposed yet. Abilities still register normally and are available via the core Abilities REST API.', 'hlb-mcp-abilities' ),
+				esc_html__( 'HLB Ability Registry for MCP', 'hlb-ability-registry-mcp' ),
+				esc_html__( 'the MCP Adapter plugin is not installed, so no MCP endpoint is exposed yet. Abilities still register normally and are available via the core Abilities REST API.', 'hlb-ability-registry-mcp' ),
 				sprintf(
 					/* translators: %s: link to the MCP Adapter GitHub releases page. */
-					esc_html__( 'Download the latest release from %s, then install it from Plugins → Add New → Upload Plugin.', 'hlb-mcp-abilities' ),
-					'<a href="' . esc_url( self::ADAPTER_REPO_URL . '/releases/latest' ) . '" target="_blank" rel="noopener">' . esc_html__( 'the MCP Adapter GitHub releases page', 'hlb-mcp-abilities' ) . '</a>'
+					esc_html__( 'Download the latest release from %s, then install it from Plugins → Add New → Upload Plugin.', 'hlb-ability-registry-mcp' ),
+					'<a href="' . esc_url( self::ADAPTER_REPO_URL . '/releases/latest' ) . '" target="_blank" rel="noopener">' . esc_html__( 'the MCP Adapter GitHub releases page', 'hlb-ability-registry-mcp' ) . '</a>'
 				)
 			);
 			return;
@@ -151,8 +151,8 @@ class Dependency {
 		// User lacks the capability to install it — inform only.
 		printf(
 			'<div class="notice notice-warning"><p><strong>%s</strong> %s</p></div>',
-			esc_html__( 'HLB MCP Abilities', 'hlb-mcp-abilities' ),
-			esc_html__( 'the MCP Adapter plugin is not installed. Ask a site administrator to install and activate it.', 'hlb-mcp-abilities' )
+			esc_html__( 'HLB Ability Registry for MCP', 'hlb-ability-registry-mcp' ),
+			esc_html__( 'the MCP Adapter plugin is not installed. Ask a site administrator to install and activate it.', 'hlb-ability-registry-mcp' )
 		);
 	}
 
@@ -168,16 +168,16 @@ class Dependency {
 		?>
 		<div class="notice notice-warning">
 			<p>
-				<strong><?php esc_html_e( 'HLB MCP Abilities', 'hlb-mcp-abilities' ); ?></strong>
-				<?php esc_html_e( 'the MCP Adapter plugin is installed but not active.', 'hlb-mcp-abilities' ); ?>
+				<strong><?php esc_html_e( 'HLB Ability Registry for MCP', 'hlb-ability-registry-mcp' ); ?></strong>
+				<?php esc_html_e( 'the MCP Adapter plugin is installed but not active.', 'hlb-ability-registry-mcp' ); ?>
 			</p>
 			<p>
 				<form method="post" action="<?php echo esc_url( $post_url ); ?>" style="display:inline;">
 					<input type="hidden" name="action" value="<?php echo esc_attr( self::ACTION_ACTIVATE ); ?>" />
 					<input type="hidden" name="redirect_to" value="<?php echo esc_attr( esc_url_raw( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) ) ); ?>" />
 					<?php wp_nonce_field( self::ACTION_ACTIVATE ); ?>
-					<button type="submit" class="button button-primary"><?php esc_html_e( 'Activate MCP Adapter', 'hlb-mcp-abilities' ); ?></button>
-					<a href="<?php echo esc_url( self::ADAPTER_REPO_URL ); ?>" target="_blank" rel="noopener" class="button-link" style="margin-left:.5em;"><?php esc_html_e( 'View plugin', 'hlb-mcp-abilities' ); ?></a>
+					<button type="submit" class="button button-primary"><?php esc_html_e( 'Activate MCP Adapter', 'hlb-ability-registry-mcp' ); ?></button>
+					<a href="<?php echo esc_url( self::ADAPTER_REPO_URL ); ?>" target="_blank" rel="noopener" class="button-link" style="margin-left:.5em;"><?php esc_html_e( 'View plugin', 'hlb-ability-registry-mcp' ); ?></a>
 				</form>
 			</p>
 		</div>
@@ -196,10 +196,10 @@ class Dependency {
 		$state = sanitize_key( wp_unslash( $_GET['hlb_dep'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 		if ( 'activated' === $state ) {
-			$this->result( 'success', __( 'MCP Adapter activated. Your MCP endpoint is now live.', 'hlb-mcp-abilities' ) );
+			$this->result( 'success', __( 'MCP Adapter activated. Your MCP endpoint is now live.', 'hlb-ability-registry-mcp' ) );
 		} elseif ( 'failed' === $state ) {
 			$detail = isset( $_GET['hlb_msg'] ) ? sanitize_text_field( wp_unslash( $_GET['hlb_msg'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			$this->result( 'error', __( 'Could not activate the MCP Adapter.', 'hlb-mcp-abilities' ) . ( $detail ? ' ' . $detail : '' ) );
+			$this->result( 'error', __( 'Could not activate the MCP Adapter.', 'hlb-ability-registry-mcp' ) . ( $detail ? ' ' . $detail : '' ) );
 		}
 	}
 
@@ -214,7 +214,7 @@ class Dependency {
 		printf(
 			'<div class="notice notice-%s is-dismissible"><p><strong>%s</strong> %s</p></div>',
 			esc_attr( $type ),
-			esc_html__( 'HLB MCP Abilities:', 'hlb-mcp-abilities' ),
+			esc_html__( 'HLB Ability Registry for MCP:', 'hlb-ability-registry-mcp' ),
 			esc_html( $message )
 		);
 	}
@@ -228,7 +228,7 @@ class Dependency {
 	 */
 	public function handle_activate() {
 		if ( ! current_user_can( 'activate_plugins' ) ) {
-			wp_die( esc_html__( 'You do not have permission to activate plugins.', 'hlb-mcp-abilities' ) );
+			wp_die( esc_html__( 'You do not have permission to activate plugins.', 'hlb-ability-registry-mcp' ) );
 		}
 		check_admin_referer( self::ACTION_ACTIVATE );
 
@@ -236,7 +236,7 @@ class Dependency {
 
 		$basename = $this->installed_basename();
 		if ( ! $basename ) {
-			$this->redirect_result( 'failed', __( 'The MCP Adapter is no longer installed.', 'hlb-mcp-abilities' ) );
+			$this->redirect_result( 'failed', __( 'The MCP Adapter is no longer installed.', 'hlb-ability-registry-mcp' ) );
 		}
 
 		$activated = activate_plugin( $basename, '', $this->is_network_context() );

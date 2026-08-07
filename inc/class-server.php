@@ -76,7 +76,7 @@ class Server {
 			$slug,                                // server_route_namespace.
 			Settings::ROUTE,                      // server_route  → /wp-json/{slug}/mcp.
 			$this->settings->server_display_name(),
-			__( 'HLB MCP Abilities — curated WordPress abilities for third-party agents.', 'hlb-mcp-abilities' ),
+			__( 'HLB Ability Registry for MCP — curated WordPress abilities for third-party agents.', 'hlb-ability-registry-mcp' ),
 			HLB_MCP_VERSION,
 			$transports,
 			$this->error_handler(),

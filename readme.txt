@@ -1,4 +1,4 @@
-=== HLB MCP Abilities ===
+=== HLB Ability Registry for MCP ===
 Contributors: jdbg
 Tags: abilities-api, mcp, ai, multisite, rest-api
 Requires at least: 6.9
@@ -12,12 +12,12 @@ An admin-curated ability registry for the WordPress Abilities API, with a per-ab
 
 == Description ==
 
-Most "connect AI to WordPress" tools expose either everything or nothing: a single broad REST scope, or a fixed bundle of tools the site owner can't trim. HLB MCP Abilities takes a different approach — it ships a **declarative catalogue** of individually-togglable [WordPress Abilities](https://make.wordpress.org/core/2025/09/09/introducing-the-wordpress-abilities-api/), and the *site owner* decides exactly which ones are live, per site.
+Most "connect AI to WordPress" tools expose either everything or nothing: a single broad REST scope, or a fixed bundle of tools the site owner can't trim. HLB Ability Registry for MCP takes a different approach — it ships a **declarative catalogue** of individually-togglable [WordPress Abilities](https://make.wordpress.org/core/2025/09/09/introducing-the-wordpress-abilities-api/), and the *site owner* decides exactly which ones are live, per site.
 
 = What it actually does =
 
 * Registers a curated set of abilities against WordPress core's own Abilities API (`wp_register_ability()`) — content, media, comments, users, Site Editor templates & patterns, and optional WooCommerce and SEOPress integrations when those plugins are active.
-* Every ability has its own admin toggle in **Settings → HLB MCP Abilities**, searchable and grouped by category. Read-only abilities default on; write and destructive abilities default off.
+* Every ability has its own admin toggle in **Settings → HLB Ability Registry for MCP**, searchable and grouped by category. Read-only abilities default on; write and destructive abilities default off.
 * Read handlers do per-object capability checks (not just a blanket `current_user_can`), so a low-privilege caller can't read drafts or private posts by ID just because a coarse capability check passed.
 * On **multisite**, each subsite gets its own on/off set, inherited from a network default unless a subsite administrator explicitly overrides it. An optional **network mode** lets the main site's server target any subsite by id, with every permission and capability check re-run inside that subsite's own context — nothing is granted network-wide by default.
 * If the [MCP Adapter](https://github.com/WordPress/mcp-adapter) plugin is active, the enabled abilities are projected onto a standard MCP server at `/wp-json/{server-slug}/mcp`, so any MCP-speaking client or agent can call them. Without the MCP Adapter, the abilities you enable are still fully registered and reachable through core's own `/wp-json/wp-abilities/v1/` REST routes — this plugin has value on a bare WordPress 6.9 install, the MCP Adapter is an optional extra hop for MCP clients specifically, not a hard requirement.
@@ -33,7 +33,7 @@ This plugin ships a [WordPress Playground](https://playground.wordpress.net/) bl
 == Installation ==
 
 1. Install and activate the plugin as usual (upload the zip, or `wp plugin install`).
-2. Visit **Settings → HLB MCP Abilities** to review and toggle the abilities available on this site.
+2. Visit **Settings → HLB Ability Registry for MCP** to review and toggle the abilities available on this site.
 3. (Optional) Install the [MCP Adapter plugin](https://github.com/WordPress/mcp-adapter) — it's not in the wordpress.org directory, so download it from its GitHub releases page and upload it via **Plugins → Add New → Upload Plugin**. Once it's active, this plugin's admin notice clears and your MCP endpoint goes live automatically; no extra configuration needed.
 4. On multisite, network-activate to set a network default; individual subsites can override it from their own settings screen unless network mode is enabled.
 

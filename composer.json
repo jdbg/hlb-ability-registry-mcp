@@ -1,5 +1,5 @@
 {
-	"name": "hlebarov/hlb-mcp-abilities",
+	"name": "hlebarov/hlb-ability-registry-mcp",
 	"description": "Expose a curated, admin-controlled set of WordPress Abilities to the MCP Adapter.",
 	"type": "wordpress-plugin",
 	"license": "GPL-2.0-or-later",
@@ -24,6 +24,6 @@
 	"scripts": {
 		"lint": "phpcs",
 		"lint:fix": "phpcbf",
-		"build": "mkdir -p dist && git archive --format=zip --prefix=hlb-mcp-abilities/ -o dist/hlb-mcp-abilities.zip HEAD"
+		"build": "mkdir -p dist && git archive --format=zip --prefix=hlb-ability-registry-mcp/ -o dist/hlb-ability-registry-mcp.zip HEAD"
 	}
 }

@@ -41,15 +41,15 @@ class Registry {
 	 */
 	public function categories() {
 		return [
-			'content-read'  => __( 'Content — read', 'hlb-mcp-abilities' ),
-			'content-write' => __( 'Content — write', 'hlb-mcp-abilities' ),
-			'media'         => __( 'Media', 'hlb-mcp-abilities' ),
-			'comments'      => __( 'Comments', 'hlb-mcp-abilities' ),
-			'users'         => __( 'Users', 'hlb-mcp-abilities' ),
-			'site-editor'   => __( 'Site Editor', 'hlb-mcp-abilities' ),
-			'site'          => __( 'Site & diagnostics', 'hlb-mcp-abilities' ),
-			'woocommerce'   => __( 'WooCommerce', 'hlb-mcp-abilities' ),
-			'seopress'      => __( 'SEOPress', 'hlb-mcp-abilities' ),
+			'content-read'  => __( 'Content — read', 'hlb-ability-registry-mcp' ),
+			'content-write' => __( 'Content — write', 'hlb-ability-registry-mcp' ),
+			'media'         => __( 'Media', 'hlb-ability-registry-mcp' ),
+			'comments'      => __( 'Comments', 'hlb-ability-registry-mcp' ),
+			'users'         => __( 'Users', 'hlb-ability-registry-mcp' ),
+			'site-editor'   => __( 'Site Editor', 'hlb-ability-registry-mcp' ),
+			'site'          => __( 'Site & diagnostics', 'hlb-ability-registry-mcp' ),
+			'woocommerce'   => __( 'WooCommerce', 'hlb-ability-registry-mcp' ),
+			'seopress'      => __( 'SEOPress', 'hlb-ability-registry-mcp' ),
 		];
 	}
 
@@ -72,8 +72,8 @@ class Registry {
 			/* ----------------------------------------------------------- Content: read */
 
 			'hlb/get-post' => [
-				'label'       => __( 'Get post', 'hlb-mcp-abilities' ),
-				'description' => __( 'Retrieve a single post or page by ID or slug.', 'hlb-mcp-abilities' ),
+				'label'       => __( 'Get post', 'hlb-ability-registry-mcp' ),
+				'description' => __( 'Retrieve a single post or page by ID or slug.', 'hlb-ability-registry-mcp' ),
 				'category'    => 'content-read',
 				'capability'  => 'read',
 				'default'     => true,
@@ -86,16 +86,16 @@ class Registry {
 				'input_schema' => [
 					'type'       => 'object',
 					'properties' => [
-						'id'        => $integer + [ 'description' => __( 'Post ID.', 'hlb-mcp-abilities' ) ],
-						'slug'      => $string + [ 'description' => __( 'Post slug (used if ID omitted).', 'hlb-mcp-abilities' ) ],
+						'id'        => $integer + [ 'description' => __( 'Post ID.', 'hlb-ability-registry-mcp' ) ],
+						'slug'      => $string + [ 'description' => __( 'Post slug (used if ID omitted).', 'hlb-ability-registry-mcp' ) ],
 						'post_type' => $string + [ 'default' => 'post' ],
 					],
 				],
 			],
 
 			'hlb/list-posts' => [
-				'label'       => __( 'List posts', 'hlb-mcp-abilities' ),
-				'description' => __( 'Query posts by type, status, author, and date with pagination.', 'hlb-mcp-abilities' ),
+				'label'       => __( 'List posts', 'hlb-ability-registry-mcp' ),
+				'description' => __( 'Query posts by type, status, author, and date with pagination.', 'hlb-ability-registry-mcp' ),
 				'category'    => 'content-read',
 				'capability'  => 'read',
 				'default'     => true,
@@ -126,8 +126,8 @@ class Registry {
 			],
 
 			'hlb/search-content' => [
-				'label'       => __( 'Search content', 'hlb-mcp-abilities' ),
-				'description' => __( 'Full-text search across public post types.', 'hlb-mcp-abilities' ),
+				'label'       => __( 'Search content', 'hlb-ability-registry-mcp' ),
+				'description' => __( 'Full-text search across public post types.', 'hlb-ability-registry-mcp' ),
 				'category'    => 'content-read',
 				'capability'  => 'read',
 				'default'     => true,
@@ -141,7 +141,7 @@ class Registry {
 					'type'       => 'object',
 					'required'   => [ 'query' ],
 					'properties' => [
-						'query'    => $string + [ 'description' => __( 'Search terms.', 'hlb-mcp-abilities' ) ],
+						'query'    => $string + [ 'description' => __( 'Search terms.', 'hlb-ability-registry-mcp' ) ],
 						'per_page' => $integer + [
 							'default' => 10,
 							'minimum' => 1,
@@ -156,8 +156,8 @@ class Registry {
 			],
 
 			'hlb/get-taxonomies' => [
-				'label'       => __( 'Get taxonomies & terms', 'hlb-mcp-abilities' ),
-				'description' => __( 'List categories, tags, and custom taxonomy terms.', 'hlb-mcp-abilities' ),
+				'label'       => __( 'Get taxonomies & terms', 'hlb-ability-registry-mcp' ),
+				'description' => __( 'List categories, tags, and custom taxonomy terms.', 'hlb-ability-registry-mcp' ),
 				'category'    => 'content-read',
 				'capability'  => 'read',
 				'default'     => true,
@@ -170,7 +170,7 @@ class Registry {
 				'input_schema' => [
 					'type'       => 'object',
 					'properties' => [
-						'taxonomy' => $string + [ 'description' => __( 'Limit to a taxonomy (e.g. category, post_tag).', 'hlb-mcp-abilities' ) ],
+						'taxonomy' => $string + [ 'description' => __( 'Limit to a taxonomy (e.g. category, post_tag).', 'hlb-ability-registry-mcp' ) ],
 					],
 				],
 			],
@@ -178,8 +178,8 @@ class Registry {
 			/* ---------------------------------------------------------- Content: write */
 
 			'hlb/create-post' => [
-				'label'       => __( 'Create post', 'hlb-mcp-abilities' ),
-				'description' => __( 'Create a new post or page (draft by default).', 'hlb-mcp-abilities' ),
+				'label'       => __( 'Create post', 'hlb-ability-registry-mcp' ),
+				'description' => __( 'Create a new post or page (draft by default).', 'hlb-ability-registry-mcp' ),
 				'category'    => 'content-write',
 				'capability'  => 'edit_posts',
 				'default'     => false,
@@ -206,8 +206,8 @@ class Registry {
 			],
 
 			'hlb/update-post' => [
-				'label'       => __( 'Update post', 'hlb-mcp-abilities' ),
-				'description' => __( 'Update the title, content, excerpt, or status of an existing post.', 'hlb-mcp-abilities' ),
+				'label'       => __( 'Update post', 'hlb-ability-registry-mcp' ),
+				'description' => __( 'Update the title, content, excerpt, or status of an existing post.', 'hlb-ability-registry-mcp' ),
 				'category'    => 'content-write',
 				'capability'  => 'edit_posts',
 				'default'     => false,
@@ -231,8 +231,8 @@ class Registry {
 			],
 
 			'hlb/set-post-status' => [
-				'label'       => __( 'Set post status', 'hlb-mcp-abilities' ),
-				'description' => __( 'Transition a post between draft, pending, publish, private, or trash.', 'hlb-mcp-abilities' ),
+				'label'       => __( 'Set post status', 'hlb-ability-registry-mcp' ),
+				'description' => __( 'Transition a post between draft, pending, publish, private, or trash.', 'hlb-ability-registry-mcp' ),
 				'category'    => 'content-write',
 				'capability'  => 'edit_posts',
 				'default'     => false,
@@ -253,8 +253,8 @@ class Registry {
 			],
 
 			'hlb/delete-post' => [
-				'label'       => __( 'Delete post', 'hlb-mcp-abilities' ),
-				'description' => __( 'Trash a post, or permanently delete it when force is true.', 'hlb-mcp-abilities' ),
+				'label'       => __( 'Delete post', 'hlb-ability-registry-mcp' ),
+				'description' => __( 'Trash a post, or permanently delete it when force is true.', 'hlb-ability-registry-mcp' ),
 				'category'    => 'content-write',
 				'capability'  => 'delete_posts',
 				'default'     => false,
@@ -271,15 +271,15 @@ class Registry {
 						'id'    => $integer,
 						'force' => $boolean + [
 							'default' => false,
-							'description' => __( 'Permanently delete instead of trashing.', 'hlb-mcp-abilities' ),
+							'description' => __( 'Permanently delete instead of trashing.', 'hlb-ability-registry-mcp' ),
 						],
 					],
 				],
 			],
 
 			'hlb/assign-terms' => [
-				'label'       => __( 'Assign terms', 'hlb-mcp-abilities' ),
-				'description' => __( 'Set categories, tags, or custom terms on a post.', 'hlb-mcp-abilities' ),
+				'label'       => __( 'Assign terms', 'hlb-ability-registry-mcp' ),
+				'description' => __( 'Set categories, tags, or custom terms on a post.', 'hlb-ability-registry-mcp' ),
 				'category'    => 'content-write',
 				'capability'  => 'edit_posts',
 				'default'     => false,
@@ -298,7 +298,7 @@ class Registry {
 						'terms'    => [
 							'type' => 'array',
 							'items' => $string,
-							'description' => __( 'Term slugs, names, or IDs.', 'hlb-mcp-abilities' ),
+							'description' => __( 'Term slugs, names, or IDs.', 'hlb-ability-registry-mcp' ),
 						],
 						'append'   => $boolean + [ 'default' => false ],
 					],
@@ -306,8 +306,8 @@ class Registry {
 			],
 
 			'hlb/create-term' => [
-				'label'       => __( 'Create term', 'hlb-mcp-abilities' ),
-				'description' => __( 'Create a category, tag, or custom taxonomy term.', 'hlb-mcp-abilities' ),
+				'label'       => __( 'Create term', 'hlb-ability-registry-mcp' ),
+				'description' => __( 'Create a category, tag, or custom taxonomy term.', 'hlb-ability-registry-mcp' ),
 				'category'    => 'content-write',
 				'capability'  => 'manage_categories',
 				'default'     => false,
@@ -333,8 +333,8 @@ class Registry {
 			/* ------------------------------------------------------------------ Media */
 
 			'hlb/list-media' => [
-				'label'       => __( 'List media', 'hlb-mcp-abilities' ),
-				'description' => __( 'Query the media library with pagination.', 'hlb-mcp-abilities' ),
+				'label'       => __( 'List media', 'hlb-ability-registry-mcp' ),
+				'description' => __( 'Query the media library with pagination.', 'hlb-ability-registry-mcp' ),
 				'category'    => 'media',
 				'capability'  => 'upload_files',
 				'default'     => true,
@@ -347,7 +347,7 @@ class Registry {
 				'input_schema' => [
 					'type'       => 'object',
 					'properties' => [
-						'mime_type' => $string + [ 'description' => __( 'Filter by MIME type, e.g. image.', 'hlb-mcp-abilities' ) ],
+						'mime_type' => $string + [ 'description' => __( 'Filter by MIME type, e.g. image.', 'hlb-ability-registry-mcp' ) ],
 						'per_page'  => $integer + [
 							'default' => 10,
 							'minimum' => 1,
@@ -362,8 +362,8 @@ class Registry {
 			],
 
 			'hlb/upload-media' => [
-				'label'       => __( 'Upload media', 'hlb-mcp-abilities' ),
-				'description' => __( 'Upload an image or file to the media library from a URL.', 'hlb-mcp-abilities' ),
+				'label'       => __( 'Upload media', 'hlb-ability-registry-mcp' ),
+				'description' => __( 'Upload an image or file to the media library from a URL.', 'hlb-ability-registry-mcp' ),
 				'category'    => 'media',
 				'capability'  => 'upload_files',
 				'default'     => false,
@@ -379,11 +379,11 @@ class Registry {
 					'properties' => [
 						'url'     => $string + [
 							'format' => 'uri',
-							'description' => __( 'Source URL to sideload.', 'hlb-mcp-abilities' ),
+							'description' => __( 'Source URL to sideload.', 'hlb-ability-registry-mcp' ),
 						],
 						'title'   => $string,
 						'alt'     => $string,
-						'post_id' => $integer + [ 'description' => __( 'Attach to this post.', 'hlb-mcp-abilities' ) ],
+						'post_id' => $integer + [ 'description' => __( 'Attach to this post.', 'hlb-ability-registry-mcp' ) ],
 					],
 				],
 			],
@@ -391,8 +391,8 @@ class Registry {
 			/* --------------------------------------------------------------- Comments */
 
 			'hlb/list-comments' => [
-				'label'       => __( 'List comments', 'hlb-mcp-abilities' ),
-				'description' => __( 'List comments, optionally filtered by post or status.', 'hlb-mcp-abilities' ),
+				'label'       => __( 'List comments', 'hlb-ability-registry-mcp' ),
+				'description' => __( 'List comments, optionally filtered by post or status.', 'hlb-ability-registry-mcp' ),
 				'category'    => 'comments',
 				'capability'  => 'moderate_comments',
 				'default'     => true,
@@ -424,8 +424,8 @@ class Registry {
 			],
 
 			'hlb/moderate-comment' => [
-				'label'       => __( 'Moderate comment', 'hlb-mcp-abilities' ),
-				'description' => __( 'Approve, unapprove, spam, or trash a comment.', 'hlb-mcp-abilities' ),
+				'label'       => __( 'Moderate comment', 'hlb-ability-registry-mcp' ),
+				'description' => __( 'Approve, unapprove, spam, or trash a comment.', 'hlb-ability-registry-mcp' ),
 				'category'    => 'comments',
 				'capability'  => 'moderate_comments',
 				'default'     => false,
@@ -448,8 +448,8 @@ class Registry {
 			/* ------------------------------------------------------------------ Users */
 
 			'hlb/get-current-user' => [
-				'label'       => __( 'Get current user', 'hlb-mcp-abilities' ),
-				'description' => __( 'Identity and capabilities of the authenticated MCP caller.', 'hlb-mcp-abilities' ),
+				'label'       => __( 'Get current user', 'hlb-ability-registry-mcp' ),
+				'description' => __( 'Identity and capabilities of the authenticated MCP caller.', 'hlb-ability-registry-mcp' ),
 				'category'    => 'users',
 				'capability'  => 'read',
 				'default'     => true,
@@ -466,8 +466,8 @@ class Registry {
 			],
 
 			'hlb/list-users' => [
-				'label'       => __( 'List users', 'hlb-mcp-abilities' ),
-				'description' => __( 'List site users (contains personal data — off by default).', 'hlb-mcp-abilities' ),
+				'label'       => __( 'List users', 'hlb-ability-registry-mcp' ),
+				'description' => __( 'List site users (contains personal data — off by default).', 'hlb-ability-registry-mcp' ),
 				'category'    => 'users',
 				'capability'  => 'list_users',
 				'default'     => false,
@@ -498,8 +498,8 @@ class Registry {
 			/* ------------------------------------------------------------ Site Editor */
 
 			'hlb/list-templates' => [
-				'label'       => __( 'List templates', 'hlb-mcp-abilities' ),
-				'description' => __( 'List block templates or template parts for the active theme.', 'hlb-mcp-abilities' ),
+				'label'       => __( 'List templates', 'hlb-ability-registry-mcp' ),
+				'description' => __( 'List block templates or template parts for the active theme.', 'hlb-ability-registry-mcp' ),
 				'category'    => 'site-editor',
 				'capability'  => 'edit_theme_options',
 				'default'     => true,
@@ -517,14 +517,14 @@ class Registry {
 							'default' => 'wp_template',
 							'enum' => [ 'wp_template', 'wp_template_part' ],
 						],
-						'area'          => $string + [ 'description' => __( 'Filter template parts by area, e.g. header, footer.', 'hlb-mcp-abilities' ) ],
+						'area'          => $string + [ 'description' => __( 'Filter template parts by area, e.g. header, footer.', 'hlb-ability-registry-mcp' ) ],
 					],
 				],
 			],
 
 			'hlb/get-template' => [
-				'label'       => __( 'Get template', 'hlb-mcp-abilities' ),
-				'description' => __( 'Retrieve a single template or template part, including its block markup.', 'hlb-mcp-abilities' ),
+				'label'       => __( 'Get template', 'hlb-ability-registry-mcp' ),
+				'description' => __( 'Retrieve a single template or template part, including its block markup.', 'hlb-ability-registry-mcp' ),
 				'category'    => 'site-editor',
 				'capability'  => 'edit_theme_options',
 				'default'     => true,
@@ -539,7 +539,7 @@ class Registry {
 					'type'       => 'object',
 					'required'   => [ 'id' ],
 					'properties' => [
-						'id'            => $string + [ 'description' => __( 'Template id, e.g. themeslug//slug.', 'hlb-mcp-abilities' ) ],
+						'id'            => $string + [ 'description' => __( 'Template id, e.g. themeslug//slug.', 'hlb-ability-registry-mcp' ) ],
 						'template_type' => $string + [
 							'default' => 'wp_template',
 							'enum' => [ 'wp_template', 'wp_template_part' ],
@@ -549,8 +549,8 @@ class Registry {
 			],
 
 			'hlb/create-template' => [
-				'label'       => __( 'Create template', 'hlb-mcp-abilities' ),
-				'description' => __( 'Create a new custom template or template part.', 'hlb-mcp-abilities' ),
+				'label'       => __( 'Create template', 'hlb-ability-registry-mcp' ),
+				'description' => __( 'Create a new custom template or template part.', 'hlb-ability-registry-mcp' ),
 				'category'    => 'site-editor',
 				'capability'  => 'edit_theme_options',
 				'default'     => false,
@@ -567,20 +567,20 @@ class Registry {
 					'properties' => [
 						'slug'          => $string,
 						'title'         => $string,
-						'content'       => $string + [ 'description' => __( 'Block markup.', 'hlb-mcp-abilities' ) ],
+						'content'       => $string + [ 'description' => __( 'Block markup.', 'hlb-ability-registry-mcp' ) ],
 						'description'   => $string,
 						'template_type' => $string + [
 							'default' => 'wp_template',
 							'enum' => [ 'wp_template', 'wp_template_part' ],
 						],
-						'area'          => $string + [ 'description' => __( 'Template-part area, e.g. header, footer.', 'hlb-mcp-abilities' ) ],
+						'area'          => $string + [ 'description' => __( 'Template-part area, e.g. header, footer.', 'hlb-ability-registry-mcp' ) ],
 					],
 				],
 			],
 
 			'hlb/update-template' => [
-				'label'       => __( 'Update template', 'hlb-mcp-abilities' ),
-				'description' => __( 'Update the title, content, or description of a template or template part.', 'hlb-mcp-abilities' ),
+				'label'       => __( 'Update template', 'hlb-ability-registry-mcp' ),
+				'description' => __( 'Update the title, content, or description of a template or template part.', 'hlb-ability-registry-mcp' ),
 				'category'    => 'site-editor',
 				'capability'  => 'edit_theme_options',
 				'default'     => false,
@@ -595,21 +595,21 @@ class Registry {
 					'type'       => 'object',
 					'required'   => [ 'id' ],
 					'properties' => [
-						'id'            => $string + [ 'description' => __( 'Template id, e.g. themeslug//slug.', 'hlb-mcp-abilities' ) ],
+						'id'            => $string + [ 'description' => __( 'Template id, e.g. themeslug//slug.', 'hlb-ability-registry-mcp' ) ],
 						'template_type' => $string + [
 							'default' => 'wp_template',
 							'enum' => [ 'wp_template', 'wp_template_part' ],
 						],
 						'title'         => $string,
-						'content'       => $string + [ 'description' => __( 'Block markup.', 'hlb-mcp-abilities' ) ],
+						'content'       => $string + [ 'description' => __( 'Block markup.', 'hlb-ability-registry-mcp' ) ],
 						'description'   => $string,
 					],
 				],
 			],
 
 			'hlb/delete-template' => [
-				'label'       => __( 'Delete template', 'hlb-mcp-abilities' ),
-				'description' => __( 'Delete a custom template, or revert a customized theme template back to its theme file.', 'hlb-mcp-abilities' ),
+				'label'       => __( 'Delete template', 'hlb-ability-registry-mcp' ),
+				'description' => __( 'Delete a custom template, or revert a customized theme template back to its theme file.', 'hlb-ability-registry-mcp' ),
 				'category'    => 'site-editor',
 				'capability'  => 'edit_theme_options',
 				'default'     => false,
@@ -624,7 +624,7 @@ class Registry {
 					'type'       => 'object',
 					'required'   => [ 'id' ],
 					'properties' => [
-						'id'            => $string + [ 'description' => __( 'Template id, e.g. themeslug//slug.', 'hlb-mcp-abilities' ) ],
+						'id'            => $string + [ 'description' => __( 'Template id, e.g. themeslug//slug.', 'hlb-ability-registry-mcp' ) ],
 						'template_type' => $string + [
 							'default' => 'wp_template',
 							'enum' => [ 'wp_template', 'wp_template_part' ],
@@ -634,8 +634,8 @@ class Registry {
 			],
 
 			'hlb/list-patterns' => [
-				'label'       => __( 'List patterns', 'hlb-mcp-abilities' ),
-				'description' => __( 'List user-created patterns (reusable blocks).', 'hlb-mcp-abilities' ),
+				'label'       => __( 'List patterns', 'hlb-ability-registry-mcp' ),
+				'description' => __( 'List user-created patterns (reusable blocks).', 'hlb-ability-registry-mcp' ),
 				'category'    => 'site-editor',
 				'capability'  => 'edit_posts',
 				'default'     => true,
@@ -649,7 +649,7 @@ class Registry {
 					'type'       => 'object',
 					'properties' => [
 						'search'   => $string,
-						'category' => $string + [ 'description' => __( 'Filter by pattern category slug.', 'hlb-mcp-abilities' ) ],
+						'category' => $string + [ 'description' => __( 'Filter by pattern category slug.', 'hlb-ability-registry-mcp' ) ],
 						'per_page' => $integer + [
 							'default' => 10,
 							'minimum' => 1,
@@ -664,8 +664,8 @@ class Registry {
 			],
 
 			'hlb/get-pattern' => [
-				'label'       => __( 'Get pattern', 'hlb-mcp-abilities' ),
-				'description' => __( 'Retrieve a single user-created pattern, including its block markup.', 'hlb-mcp-abilities' ),
+				'label'       => __( 'Get pattern', 'hlb-ability-registry-mcp' ),
+				'description' => __( 'Retrieve a single user-created pattern, including its block markup.', 'hlb-ability-registry-mcp' ),
 				'category'    => 'site-editor',
 				'capability'  => 'edit_posts',
 				'default'     => true,
@@ -683,8 +683,8 @@ class Registry {
 			],
 
 			'hlb/create-pattern' => [
-				'label'       => __( 'Create pattern', 'hlb-mcp-abilities' ),
-				'description' => __( 'Create a new user pattern (reusable block).', 'hlb-mcp-abilities' ),
+				'label'       => __( 'Create pattern', 'hlb-ability-registry-mcp' ),
+				'description' => __( 'Create a new user pattern (reusable block).', 'hlb-ability-registry-mcp' ),
 				'category'    => 'site-editor',
 				'capability'  => 'edit_posts',
 				'default'     => false,
@@ -699,19 +699,19 @@ class Registry {
 					'required'   => [ 'title', 'content' ],
 					'properties' => [
 						'title'    => $string,
-						'content'  => $string + [ 'description' => __( 'Block markup.', 'hlb-mcp-abilities' ) ],
-						'category' => $string + [ 'description' => __( 'Pattern category name or slug.', 'hlb-mcp-abilities' ) ],
+						'content'  => $string + [ 'description' => __( 'Block markup.', 'hlb-ability-registry-mcp' ) ],
+						'category' => $string + [ 'description' => __( 'Pattern category name or slug.', 'hlb-ability-registry-mcp' ) ],
 						'synced'   => $boolean + [
 							'default' => true,
-							'description' => __( 'False creates an unsynced pattern (edits in one place do not propagate).', 'hlb-mcp-abilities' ),
+							'description' => __( 'False creates an unsynced pattern (edits in one place do not propagate).', 'hlb-ability-registry-mcp' ),
 						],
 					],
 				],
 			],
 
 			'hlb/update-pattern' => [
-				'label'       => __( 'Update pattern', 'hlb-mcp-abilities' ),
-				'description' => __( 'Update the title, content, category, or sync status of a user pattern.', 'hlb-mcp-abilities' ),
+				'label'       => __( 'Update pattern', 'hlb-ability-registry-mcp' ),
+				'description' => __( 'Update the title, content, category, or sync status of a user pattern.', 'hlb-ability-registry-mcp' ),
 				'category'    => 'site-editor',
 				'capability'  => 'edit_posts',
 				'default'     => false,
@@ -727,16 +727,16 @@ class Registry {
 					'properties' => [
 						'id'       => $integer,
 						'title'    => $string,
-						'content'  => $string + [ 'description' => __( 'Block markup.', 'hlb-mcp-abilities' ) ],
-						'category' => $string + [ 'description' => __( 'Pattern category name or slug.', 'hlb-mcp-abilities' ) ],
+						'content'  => $string + [ 'description' => __( 'Block markup.', 'hlb-ability-registry-mcp' ) ],
+						'category' => $string + [ 'description' => __( 'Pattern category name or slug.', 'hlb-ability-registry-mcp' ) ],
 						'synced'   => $boolean,
 					],
 				],
 			],
 
 			'hlb/delete-pattern' => [
-				'label'       => __( 'Delete pattern', 'hlb-mcp-abilities' ),
-				'description' => __( 'Trash a user pattern, or permanently delete it when force is true.', 'hlb-mcp-abilities' ),
+				'label'       => __( 'Delete pattern', 'hlb-ability-registry-mcp' ),
+				'description' => __( 'Trash a user pattern, or permanently delete it when force is true.', 'hlb-ability-registry-mcp' ),
 				'category'    => 'site-editor',
 				'capability'  => 'edit_posts',
 				'default'     => false,
@@ -753,15 +753,15 @@ class Registry {
 						'id'    => $integer,
 						'force' => $boolean + [
 							'default' => false,
-							'description' => __( 'Permanently delete instead of trashing.', 'hlb-mcp-abilities' ),
+							'description' => __( 'Permanently delete instead of trashing.', 'hlb-ability-registry-mcp' ),
 						],
 					],
 				],
 			],
 
 			'hlb/list-registered-patterns' => [
-				'label'       => __( 'List registered patterns', 'hlb-mcp-abilities' ),
-				'description' => __( 'List code-registered theme/plugin block patterns (read-only; not user-editable posts).', 'hlb-mcp-abilities' ),
+				'label'       => __( 'List registered patterns', 'hlb-ability-registry-mcp' ),
+				'description' => __( 'List code-registered theme/plugin block patterns (read-only; not user-editable posts).', 'hlb-ability-registry-mcp' ),
 				'category'    => 'site-editor',
 				'capability'  => 'edit_posts',
 				'default'     => true,
@@ -774,7 +774,7 @@ class Registry {
 				'input_schema' => [
 					'type'       => 'object',
 					'properties' => [
-						'category' => $string + [ 'description' => __( 'Filter by pattern category slug.', 'hlb-mcp-abilities' ) ],
+						'category' => $string + [ 'description' => __( 'Filter by pattern category slug.', 'hlb-ability-registry-mcp' ) ],
 					],
 				],
 			],
@@ -782,8 +782,8 @@ class Registry {
 			/* ------------------------------------------------------ Site & diagnostics */
 
 			'hlb/get-site-info' => [
-				'label'       => __( 'Get site info', 'hlb-mcp-abilities' ),
-				'description' => __( 'Site name, URL, WordPress version, language, and timezone.', 'hlb-mcp-abilities' ),
+				'label'       => __( 'Get site info', 'hlb-ability-registry-mcp' ),
+				'description' => __( 'Site name, URL, WordPress version, language, and timezone.', 'hlb-ability-registry-mcp' ),
 				'category'    => 'site',
 				'capability'  => 'read',
 				'default'     => true,
@@ -800,8 +800,8 @@ class Registry {
 			],
 
 			'hlb/get-active-theme' => [
-				'label'       => __( 'Get active theme', 'hlb-mcp-abilities' ),
-				'description' => __( 'The active theme, its version, and whether it is a block theme.', 'hlb-mcp-abilities' ),
+				'label'       => __( 'Get active theme', 'hlb-ability-registry-mcp' ),
+				'description' => __( 'The active theme, its version, and whether it is a block theme.', 'hlb-ability-registry-mcp' ),
 				'category'    => 'site',
 				'capability'  => 'read',
 				'default'     => true,
@@ -818,8 +818,8 @@ class Registry {
 			],
 
 			'hlb/list-active-plugins' => [
-				'label'       => __( 'List active plugins', 'hlb-mcp-abilities' ),
-				'description' => __( 'Active plugins with name and version (admin diagnostics).', 'hlb-mcp-abilities' ),
+				'label'       => __( 'List active plugins', 'hlb-ability-registry-mcp' ),
+				'description' => __( 'Active plugins with name and version (admin diagnostics).', 'hlb-ability-registry-mcp' ),
 				'category'    => 'site',
 				'capability'  => 'activate_plugins',
 				'default'     => true,
@@ -836,8 +836,8 @@ class Registry {
 			],
 
 			'hlb/list-sites' => [
-				'label'       => __( 'List network sites', 'hlb-mcp-abilities' ),
-				'description' => __( 'List the subsites in the multisite network so a `site` argument can target them (network mode).', 'hlb-mcp-abilities' ),
+				'label'       => __( 'List network sites', 'hlb-ability-registry-mcp' ),
+				'description' => __( 'List the subsites in the multisite network so a `site` argument can target them (network mode).', 'hlb-ability-registry-mcp' ),
 				'category'    => 'site',
 				'capability'  => 'manage_sites',
 				'default'     => true,
@@ -857,8 +857,8 @@ class Registry {
 			/* ------------------------------------------------------------ WooCommerce */
 
 			'hlb/wc-list-products' => [
-				'label'       => __( 'List products (WooCommerce)', 'hlb-mcp-abilities' ),
-				'description' => __( 'Query WooCommerce products with pagination.', 'hlb-mcp-abilities' ),
+				'label'       => __( 'List products (WooCommerce)', 'hlb-ability-registry-mcp' ),
+				'description' => __( 'Query WooCommerce products with pagination.', 'hlb-ability-registry-mcp' ),
 				'category'    => 'woocommerce',
 				'capability'  => 'read',
 				'default'     => true,
@@ -888,8 +888,8 @@ class Registry {
 			],
 
 			'hlb/wc-get-order' => [
-				'label'       => __( 'Get order (WooCommerce)', 'hlb-mcp-abilities' ),
-				'description' => __( 'Fetch a WooCommerce order by ID (contains personal data — off by default).', 'hlb-mcp-abilities' ),
+				'label'       => __( 'Get order (WooCommerce)', 'hlb-ability-registry-mcp' ),
+				'description' => __( 'Fetch a WooCommerce order by ID (contains personal data — off by default).', 'hlb-ability-registry-mcp' ),
 				'category'    => 'woocommerce',
 				'capability'  => 'edit_shop_orders',
 				'default'     => false,
@@ -910,8 +910,8 @@ class Registry {
 			/* -------------------------------------------------------------- SEOPress */
 
 			'hlb/seopress-get-meta' => [
-				'label'       => __( 'Get SEO meta (SEOPress)', 'hlb-mcp-abilities' ),
-				'description' => __( 'Retrieve a post\'s SEOPress title, description, robots, and social preview meta.', 'hlb-mcp-abilities' ),
+				'label'       => __( 'Get SEO meta (SEOPress)', 'hlb-ability-registry-mcp' ),
+				'description' => __( 'Retrieve a post\'s SEOPress title, description, robots, and social preview meta.', 'hlb-ability-registry-mcp' ),
 				'category'    => 'seopress',
 				'capability'  => 'read',
 				'default'     => true,
@@ -925,13 +925,13 @@ class Registry {
 				'input_schema' => [
 					'type'       => 'object',
 					'required'   => [ 'id' ],
-					'properties' => [ 'id' => $integer + [ 'description' => __( 'Post ID.', 'hlb-mcp-abilities' ) ] ],
+					'properties' => [ 'id' => $integer + [ 'description' => __( 'Post ID.', 'hlb-ability-registry-mcp' ) ] ],
 				],
 			],
 
 			'hlb/seopress-update-meta' => [
-				'label'       => __( 'Update SEO meta (SEOPress)', 'hlb-mcp-abilities' ),
-				'description' => __( 'Update a post\'s SEOPress title, description, robots, and social preview meta.', 'hlb-mcp-abilities' ),
+				'label'       => __( 'Update SEO meta (SEOPress)', 'hlb-ability-registry-mcp' ),
+				'description' => __( 'Update a post\'s SEOPress title, description, robots, and social preview meta.', 'hlb-ability-registry-mcp' ),
 				'category'    => 'seopress',
 				'capability'  => 'edit_posts',
 				'default'     => false,
@@ -946,27 +946,27 @@ class Registry {
 					'type'       => 'object',
 					'required'   => [ 'id' ],
 					'properties' => [
-						'id'                  => $integer + [ 'description' => __( 'Post ID.', 'hlb-mcp-abilities' ) ],
-						'title'               => $string + [ 'description' => __( 'SEO title (Titles & Metas tab).', 'hlb-mcp-abilities' ) ],
-						'description'         => $string + [ 'description' => __( 'Meta description (Titles & Metas tab).', 'hlb-mcp-abilities' ) ],
+						'id'                  => $integer + [ 'description' => __( 'Post ID.', 'hlb-ability-registry-mcp' ) ],
+						'title'               => $string + [ 'description' => __( 'SEO title (Titles & Metas tab).', 'hlb-ability-registry-mcp' ) ],
+						'description'         => $string + [ 'description' => __( 'Meta description (Titles & Metas tab).', 'hlb-ability-registry-mcp' ) ],
 						'canonical_url'       => $string + [
 							'format' => 'uri',
-							'description' => __( 'Custom canonical URL.', 'hlb-mcp-abilities' ),
+							'description' => __( 'Custom canonical URL.', 'hlb-ability-registry-mcp' ),
 						],
-						'noindex'             => $boolean + [ 'description' => __( 'Exclude this post from search engine indexing.', 'hlb-mcp-abilities' ) ],
-						'nofollow'            => $boolean + [ 'description' => __( 'Tell search engines not to follow links on this post.', 'hlb-mcp-abilities' ) ],
-						'focus_keyword'       => $string + [ 'description' => __( 'Primary target keyword for content analysis.', 'hlb-mcp-abilities' ) ],
-						'og_title'            => $string + [ 'description' => __( 'Facebook/Open Graph title.', 'hlb-mcp-abilities' ) ],
-						'og_description'      => $string + [ 'description' => __( 'Facebook/Open Graph description.', 'hlb-mcp-abilities' ) ],
+						'noindex'             => $boolean + [ 'description' => __( 'Exclude this post from search engine indexing.', 'hlb-ability-registry-mcp' ) ],
+						'nofollow'            => $boolean + [ 'description' => __( 'Tell search engines not to follow links on this post.', 'hlb-ability-registry-mcp' ) ],
+						'focus_keyword'       => $string + [ 'description' => __( 'Primary target keyword for content analysis.', 'hlb-ability-registry-mcp' ) ],
+						'og_title'            => $string + [ 'description' => __( 'Facebook/Open Graph title.', 'hlb-ability-registry-mcp' ) ],
+						'og_description'      => $string + [ 'description' => __( 'Facebook/Open Graph description.', 'hlb-ability-registry-mcp' ) ],
 						'og_image_url'        => $string + [
 							'format' => 'uri',
-							'description' => __( 'Facebook/Open Graph image URL.', 'hlb-mcp-abilities' ),
+							'description' => __( 'Facebook/Open Graph image URL.', 'hlb-ability-registry-mcp' ),
 						],
-						'twitter_title'       => $string + [ 'description' => __( 'Twitter card title.', 'hlb-mcp-abilities' ) ],
-						'twitter_description' => $string + [ 'description' => __( 'Twitter card description.', 'hlb-mcp-abilities' ) ],
+						'twitter_title'       => $string + [ 'description' => __( 'Twitter card title.', 'hlb-ability-registry-mcp' ) ],
+						'twitter_description' => $string + [ 'description' => __( 'Twitter card description.', 'hlb-ability-registry-mcp' ) ],
 						'twitter_image_url'   => $string + [
 							'format' => 'uri',
-							'description' => __( 'Twitter card image URL.', 'hlb-mcp-abilities' ),
+							'description' => __( 'Twitter card image URL.', 'hlb-ability-registry-mcp' ),
 						],
 					],
 				],

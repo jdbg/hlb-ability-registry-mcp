@@ -13,3 +13,4 @@
 /dist             export-ignore
 /examples         export-ignore
 /blueprints       export-ignore
+/languages        export-ignore

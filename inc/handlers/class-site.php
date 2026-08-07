@@ -41,7 +41,7 @@ class Site {
 	 */
 	public static function list_sites( array $input ) {
 		if ( ! is_multisite() ) {
-			return new WP_Error( 'hlb_mcp_unavailable', __( 'This is not a multisite network.', 'hlb-mcp-abilities' ), [ 'status' => 400 ] );
+			return new WP_Error( 'hlb_mcp_unavailable', __( 'This is not a multisite network.', 'hlb-ability-registry-mcp' ), [ 'status' => 400 ] );
 		}
 
 		$items = [];

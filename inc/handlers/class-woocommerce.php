@@ -34,7 +34,7 @@ class WooCommerce {
 	 */
 	public static function list_products( array $input ) {
 		if ( ! self::is_active() ) {
-			return new WP_Error( 'hlb_mcp_unavailable', __( 'WooCommerce is not active.', 'hlb-mcp-abilities' ), [ 'status' => 501 ] );
+			return new WP_Error( 'hlb_mcp_unavailable', __( 'WooCommerce is not active.', 'hlb-ability-registry-mcp' ), [ 'status' => 501 ] );
 		}
 
 		$per_page = isset( $input['per_page'] ) ? max( 1, min( 100, (int) $input['per_page'] ) ) : 10;
@@ -81,13 +81,13 @@ class WooCommerce {
 	 */
 	public static function get_order( array $input ) {
 		if ( ! self::is_active() ) {
-			return new WP_Error( 'hlb_mcp_unavailable', __( 'WooCommerce is not active.', 'hlb-mcp-abilities' ), [ 'status' => 501 ] );
+			return new WP_Error( 'hlb_mcp_unavailable', __( 'WooCommerce is not active.', 'hlb-ability-registry-mcp' ), [ 'status' => 501 ] );
 		}
 
 		$id    = isset( $input['id'] ) ? (int) $input['id'] : 0;
 		$order = $id ? wc_get_order( $id ) : false;
 		if ( ! $order ) {
-			return new WP_Error( 'hlb_mcp_not_found', __( 'Order not found.', 'hlb-mcp-abilities' ), [ 'status' => 404 ] );
+			return new WP_Error( 'hlb_mcp_not_found', __( 'Order not found.', 'hlb-ability-registry-mcp' ), [ 'status' => 404 ] );
 		}
 
 		$items = [];

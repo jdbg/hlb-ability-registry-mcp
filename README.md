@@ -1,4 +1,4 @@
-# HLB MCP Abilities
+# HLB Ability Registry for MCP
 
 [![Lint](https://github.com/jdbg/hlb-mcp-abilities/actions/workflows/lint.yml/badge.svg)](https://github.com/jdbg/hlb-mcp-abilities/actions/workflows/lint.yml)
 
@@ -45,9 +45,9 @@ abilities against core's Abilities API — only the MCP endpoint is skipped, nev
 
 ## Installation
 
-1. Copy the plugin folder to `wp-content/plugins/hlb-mcp-abilities` (the distributed files are
-   `hlb-mcp-abilities.php`, `uninstall.php`, and `inc/` — no Composer dependencies are needed at
-   runtime).
+1. Copy the plugin folder to `wp-content/plugins/hlb-ability-registry-mcp` (the distributed files
+   are `hlb-ability-registry-mcp.php`, `uninstall.php`, and `inc/` — no Composer dependencies are
+   needed at runtime).
 2. Activate it (single site or **Network Activate** on multisite).
 3. (Optional) Download the [MCP Adapter](https://github.com/WordPress/mcp-adapter/releases/latest)
    and install it via **Plugins → Add New → Upload Plugin**, then activate it — or use the
@@ -92,10 +92,11 @@ Add your own via the `hlb_mcp_abilities` filter.
 
 ## Multisite
 
-- **Network defaults** are set on the Network Admin → Settings → *HLB MCP Abilities* page.
-- Each subsite has an **HLB MCP Abilities** settings page with an *Override network defaults*
-  toggle. When off, the subsite inherits the network defaults (shown read-only); when on, it uses
-  its own selection.
+- **Network defaults** are set on the Network Admin → Settings → *HLB Ability Registry for MCP*
+  page.
+- Each subsite has an **HLB Ability Registry for MCP** settings page with an *Override network
+  defaults* toggle. When off, the subsite inherits the network defaults (shown read-only); when
+  on, it uses its own selection.
 - Uninstalling removes the network option and every per-site option.
 
 ### Two ways to reach subsites
@@ -104,7 +105,7 @@ By default the plugin registers **one MCP server per subsite** — to act on a s
 that subsite's own endpoint (`hlb_{maindomain}_{subsiteslug}`). Each server only ever touches its
 own subsite.
 
-Alternatively, enable **Network mode** (Network Admin → HLB MCP Abilities):
+Alternatively, enable **Network mode** (Network Admin → HLB Ability Registry for MCP):
 
 - Connect **only the main site's endpoint** to your client — no per-subsite registration.
 - Every enabled ability gains an optional `site` argument (blog ID, path slug, or domain); the

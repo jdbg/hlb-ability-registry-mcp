@@ -69,7 +69,7 @@ class Abilities {
 					// without it the category (and every ability using it) fails to register.
 					'description' => sprintf(
 						/* translators: %s: category label. */
-						__( '%s abilities exposed to MCP clients by HLB MCP Abilities.', 'hlb-mcp-abilities' ),
+						__( '%s abilities exposed to MCP clients by HLB Ability Registry for MCP.', 'hlb-ability-registry-mcp' ),
 						$label
 					),
 				]
@@ -116,7 +116,7 @@ class Abilities {
 				if ( $network && ! empty( $input['site'] ) ) {
 					$blog_id = $self->resolve_blog_id( $input['site'] );
 					if ( ! $blog_id ) {
-						return new \WP_Error( 'hlb_mcp_invalid_site', __( 'Unknown target site.', 'hlb-mcp-abilities' ), [ 'status' => 400 ] );
+						return new \WP_Error( 'hlb_mcp_invalid_site', __( 'Unknown target site.', 'hlb-ability-registry-mcp' ), [ 'status' => 400 ] );
 					}
 					switch_to_blog( $blog_id );
 					$result = call_user_func( $handler, $input );
@@ -171,7 +171,7 @@ class Abilities {
 			}
 			$args['input_schema']['properties']['site'] = [
 				'type'        => 'string',
-				'description' => __( 'Target subsite: blog ID, path slug, or domain. Omit to act on the main site.', 'hlb-mcp-abilities' ),
+				'description' => __( 'Target subsite: blog ID, path slug, or domain. Omit to act on the main site.', 'hlb-ability-registry-mcp' ),
 			];
 		}
 

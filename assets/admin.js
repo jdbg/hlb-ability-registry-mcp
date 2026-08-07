@@ -1,5 +1,5 @@
 /**
- * HLB MCP Abilities — settings screen behavior.
+ * HLB Ability Registry for MCP — settings screen behavior.
  *
  * Progressive enhancement only: every ability checkbox is rendered visible and
  * enabled server-side, so the page is fully usable with this script disabled.

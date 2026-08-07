@@ -51,19 +51,19 @@ class SEOPress {
 	 */
 	public static function get_meta( array $input ) {
 		if ( ! self::is_active() ) {
-			return new WP_Error( 'hlb_mcp_unavailable', __( 'SEOPress is not active.', 'hlb-mcp-abilities' ), [ 'status' => 501 ] );
+			return new WP_Error( 'hlb_mcp_unavailable', __( 'SEOPress is not active.', 'hlb-ability-registry-mcp' ), [ 'status' => 501 ] );
 		}
 
 		$id   = isset( $input['id'] ) ? (int) $input['id'] : 0;
 		$post = $id ? get_post( $id ) : null;
 		if ( ! $post ) {
-			return new WP_Error( 'hlb_mcp_not_found', __( 'Post not found.', 'hlb-mcp-abilities' ), [ 'status' => 404 ] );
+			return new WP_Error( 'hlb_mcp_not_found', __( 'Post not found.', 'hlb-ability-registry-mcp' ), [ 'status' => 404 ] );
 		}
 
 		// Per-object read check: the coarse `read` permission_callback does not gate
 		// unpublished content. Return 404 (not 403) so we don't disclose existence.
 		if ( ! current_user_can( 'read_post', $id ) ) {
-			return new WP_Error( 'hlb_mcp_not_found', __( 'Post not found.', 'hlb-mcp-abilities' ), [ 'status' => 404 ] );
+			return new WP_Error( 'hlb_mcp_not_found', __( 'Post not found.', 'hlb-ability-registry-mcp' ), [ 'status' => 404 ] );
 		}
 
 		return self::shape_meta( $id );
@@ -77,16 +77,16 @@ class SEOPress {
 	 */
 	public static function update_meta( array $input ) {
 		if ( ! self::is_active() ) {
-			return new WP_Error( 'hlb_mcp_unavailable', __( 'SEOPress is not active.', 'hlb-mcp-abilities' ), [ 'status' => 501 ] );
+			return new WP_Error( 'hlb_mcp_unavailable', __( 'SEOPress is not active.', 'hlb-ability-registry-mcp' ), [ 'status' => 501 ] );
 		}
 
 		$id   = isset( $input['id'] ) ? (int) $input['id'] : 0;
 		$post = $id ? get_post( $id ) : null;
 		if ( ! $post ) {
-			return new WP_Error( 'hlb_mcp_not_found', __( 'Post not found.', 'hlb-mcp-abilities' ), [ 'status' => 404 ] );
+			return new WP_Error( 'hlb_mcp_not_found', __( 'Post not found.', 'hlb-ability-registry-mcp' ), [ 'status' => 404 ] );
 		}
 		if ( ! current_user_can( 'edit_post', $id ) ) {
-			return new WP_Error( 'hlb_mcp_forbidden', __( 'You cannot edit this post.', 'hlb-mcp-abilities' ), [ 'status' => 403 ] );
+			return new WP_Error( 'hlb_mcp_forbidden', __( 'You cannot edit this post.', 'hlb-ability-registry-mcp' ), [ 'status' => 403 ] );
 		}
 
 		foreach ( self::FIELD_MAP as $field => $meta ) {

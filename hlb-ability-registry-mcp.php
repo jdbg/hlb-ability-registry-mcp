@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name:       HLB MCP Abilities
+ * Plugin Name:       HLB Ability Registry for MCP
  * Plugin URI:        https://github.com/jdbg/hlb-mcp-abilities
  * Description:       Exposes a curated, admin-controlled set of WordPress Abilities to the MCP Adapter so third-party tools and AI agents can interact with the site over MCP. Multisite-ready with network defaults and per-subsite overrides. Source: https://github.com/jdbg/hlb-mcp-abilities
  * Version:           1.5.0
@@ -10,7 +10,7 @@
  * Author URI:        https://jdbg.com/
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       hlb-mcp-abilities
+ * Text Domain:       hlb-ability-registry-mcp
  *
  * @package HLB\MCP
  */

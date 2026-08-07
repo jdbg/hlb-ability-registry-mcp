@@ -1,7 +1,7 @@
 # Connecting an MCP client
 
 These are sample project-scoped MCP configs (Claude Code format) for connecting to a site running
-HLB MCP Abilities. Each server is a remote **Streamable-HTTP** endpoint authenticated with a
+HLB Ability Registry for MCP. Each server is a remote **Streamable-HTTP** endpoint authenticated with a
 WordPress **Application Password** over HTTP Basic auth.
 
 ## Which sample to use
@@ -20,7 +20,7 @@ Copy one, then fill in three site-specific values:
 `https://<domain>/wp-json/<server-name>/mcp`
 
 The `<server-name>` is shown on the plugin settings page
-(**Settings → HLB MCP Abilities → MCP connection**). It follows the naming scheme:
+(**Settings → HLB Ability Registry for MCP → MCP connection**). It follows the naming scheme:
 
 | Site | Server name | URL |
 | --- | --- | --- |
@@ -52,8 +52,8 @@ export HLB_MCP_TOKEN="YWRtaW46YWJjZCBFR0dIIGlqa2wgTU5PUCBxcnN0IFVWV1g="
 
 ## Multisite: one endpoint for all subsites (network mode)
 
-If the site is a multisite network with **Network mode** enabled (Network Admin → HLB MCP
-Abilities), you only need the **main site's** endpoint — no per-subsite entries:
+If the site is a multisite network with **Network mode** enabled (Network Admin → HLB Ability
+Registry for MCP), you only need the **main site's** endpoint — no per-subsite entries:
 
 ```json
 {

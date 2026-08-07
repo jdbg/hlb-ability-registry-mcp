@@ -2,7 +2,7 @@
 
 ## Why this matters
 
-HLB MCP Abilities exposes WordPress **Abilities** — including, when an admin enables
+HLB Ability Registry for MCP exposes WordPress **Abilities** — including, when an admin enables
 them, write and destructive capabilities (creating/editing/deleting content, managing
 users, etc.) — over an authenticated MCP/REST API. A vulnerability here could let an
 authenticated (or, in the worst case, unauthenticated) caller perform actions beyond

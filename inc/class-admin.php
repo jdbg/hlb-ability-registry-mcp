@@ -14,7 +14,7 @@ defined( 'ABSPATH' ) || exit;
  */
 class Admin {
 
-	const MENU_SLUG         = 'hlb-mcp-abilities';
+	const MENU_SLUG         = 'hlb-ability-registry-mcp';
 	const NONCE_NET         = 'hlb_mcp_save_network';
 	const ACTION_NET        = 'hlb_mcp_save_network';
 	const SITE_OPTION_GROUP = 'hlb_mcp_site_group';
@@ -85,8 +85,8 @@ class Admin {
 	 */
 	public function register_site_page() {
 		$this->site_page_hook = add_options_page(
-			__( 'HLB MCP Abilities', 'hlb-mcp-abilities' ),
-			__( 'HLB MCP Abilities', 'hlb-mcp-abilities' ),
+			__( 'HLB Ability Registry for MCP', 'hlb-ability-registry-mcp' ),
+			__( 'HLB Ability Registry for MCP', 'hlb-ability-registry-mcp' ),
 			'manage_options',
 			self::MENU_SLUG,
 			[ $this, 'render_site_page' ]
@@ -101,8 +101,8 @@ class Admin {
 	public function register_network_page() {
 		$this->network_page_hook = add_submenu_page(
 			'settings.php',
-			__( 'HLB MCP Abilities', 'hlb-mcp-abilities' ),
-			__( 'HLB MCP Abilities', 'hlb-mcp-abilities' ),
+			__( 'HLB Ability Registry for MCP', 'hlb-ability-registry-mcp' ),
+			__( 'HLB Ability Registry for MCP', 'hlb-ability-registry-mcp' ),
 			'manage_network_options',
 			self::MENU_SLUG,
 			[ $this, 'render_network_page' ]
@@ -140,7 +140,7 @@ class Admin {
 		add_settings_section( 'hlb_mcp_site_override', '', '__return_false', self::MENU_SLUG );
 		add_settings_field(
 			'hlb_mcp_site_override_field',
-			__( 'Network defaults', 'hlb-mcp-abilities' ),
+			__( 'Network defaults', 'hlb-ability-registry-mcp' ),
 			[ $this, 'render_override_field' ],
 			self::MENU_SLUG,
 			'hlb_mcp_site_override'
@@ -166,8 +166,8 @@ class Admin {
 			'hlbMcpAdminL10n',
 			[
 				/* translators: 1: number of matching abilities, 2: total number of abilities, 3: search term. */
-				'searchStatus'  => __( '%1$d of %2$d abilities match "%3$s".', 'hlb-mcp-abilities' ),
-				'searchCleared' => __( 'Showing all abilities.', 'hlb-mcp-abilities' ),
+				'searchStatus'  => __( '%1$d of %2$d abilities match "%3$s".', 'hlb-ability-registry-mcp' ),
+				'searchCleared' => __( 'Showing all abilities.', 'hlb-ability-registry-mcp' ),
 			]
 		);
 	}
@@ -180,7 +180,7 @@ class Admin {
 	 */
 	public function action_links( $links ) {
 		$url = admin_url( 'options-general.php?page=' . self::MENU_SLUG );
-		array_unshift( $links, '<a href="' . esc_url( $url ) . '">' . esc_html__( 'Settings', 'hlb-mcp-abilities' ) . '</a>' );
+		array_unshift( $links, '<a href="' . esc_url( $url ) . '">' . esc_html__( 'Settings', 'hlb-ability-registry-mcp' ) . '</a>' );
 		return $links;
 	}
 
@@ -193,15 +193,15 @@ class Admin {
 	 */
 	public function render_network_page() {
 		if ( ! current_user_can( 'manage_network_options' ) ) {
-			wp_die( esc_html__( 'You do not have permission to manage this network.', 'hlb-mcp-abilities' ) );
+			wp_die( esc_html__( 'You do not have permission to manage this network.', 'hlb-ability-registry-mcp' ) );
 		}
 
 		$enabled      = $this->settings->network_enabled_ids();
 		$network_mode = $this->settings->is_network_mode();
 		?>
 		<div class="wrap">
-			<h1><?php esc_html_e( 'HLB MCP Abilities — Network Defaults', 'hlb-mcp-abilities' ); ?></h1>
-			<p><?php esc_html_e( 'These defaults apply to every subsite that does not override them.', 'hlb-mcp-abilities' ); ?></p>
+			<h1><?php esc_html_e( 'HLB Ability Registry for MCP — Network Defaults', 'hlb-ability-registry-mcp' ); ?></h1>
+			<p><?php esc_html_e( 'These defaults apply to every subsite that does not override them.', 'hlb-ability-registry-mcp' ); ?></p>
 			<?php $this->maybe_updated_notice(); ?>
 
 			<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
@@ -210,21 +210,21 @@ class Admin {
 
 				<table class="form-table" role="presentation">
 					<tr>
-						<th scope="row"><?php esc_html_e( 'Network mode', 'hlb-mcp-abilities' ); ?></th>
+						<th scope="row"><?php esc_html_e( 'Network mode', 'hlb-ability-registry-mcp' ); ?></th>
 						<td>
 							<label>
 								<input type="checkbox" name="network_mode" value="1" <?php checked( $network_mode ); ?> />
-								<?php esc_html_e( 'Let the main site\'s MCP server target any subsite via a "site" argument', 'hlb-mcp-abilities' ); ?>
+								<?php esc_html_e( 'Let the main site\'s MCP server target any subsite via a "site" argument', 'hlb-ability-registry-mcp' ); ?>
 							</label>
 							<p class="description">
-								<?php esc_html_e( 'When enabled, connect only the main site\'s endpoint to your MCP client. Every enabled ability gains an optional "site" argument (blog ID, path slug, or domain), and a "List network sites" ability lets agents discover subsites. Capabilities are still checked on the target subsite, so use a Super Admin credential.', 'hlb-mcp-abilities' ); ?>
+								<?php esc_html_e( 'When enabled, connect only the main site\'s endpoint to your MCP client. Every enabled ability gains an optional "site" argument (blog ID, path slug, or domain), and a "List network sites" ability lets agents discover subsites. Capabilities are still checked on the target subsite, so use a Super Admin credential.', 'hlb-ability-registry-mcp' ); ?>
 							</p>
 						</td>
 					</tr>
 				</table>
 
 				<?php $this->render_ability_tabs( $enabled, false ); ?>
-				<?php submit_button( __( 'Save network defaults', 'hlb-mcp-abilities' ) ); ?>
+				<?php submit_button( __( 'Save network defaults', 'hlb-ability-registry-mcp' ) ); ?>
 			</form>
 		</div>
 		<?php
@@ -237,7 +237,7 @@ class Admin {
 	 */
 	public function render_site_page() {
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die( esc_html__( 'You do not have permission to manage this site.', 'hlb-mcp-abilities' ) );
+			wp_die( esc_html__( 'You do not have permission to manage this site.', 'hlb-ability-registry-mcp' ) );
 		}
 
 		$multisite = is_multisite();
@@ -253,7 +253,7 @@ class Admin {
 		$disabled_fields = $multisite && ! $override;
 		?>
 		<div class="wrap">
-			<h1><?php esc_html_e( 'HLB MCP Abilities', 'hlb-mcp-abilities' ); ?></h1>
+			<h1><?php esc_html_e( 'HLB Ability Registry for MCP', 'hlb-ability-registry-mcp' ); ?></h1>
 			<?php $this->render_connection_box(); ?>
 			<?php settings_errors(); ?>
 
@@ -268,7 +268,7 @@ class Admin {
 					<?php $this->render_ability_tabs( $checked, $disabled_fields, Settings::SITE_OPTION . '[enabled][]' ); ?>
 				</div>
 
-				<?php submit_button( __( 'Save changes', 'hlb-mcp-abilities' ) ); ?>
+				<?php submit_button( __( 'Save changes', 'hlb-ability-registry-mcp' ) ); ?>
 			</form>
 		</div>
 		<?php
@@ -286,10 +286,10 @@ class Admin {
 		?>
 		<label>
 			<input type="checkbox" id="hlb-mcp-override" name="<?php echo esc_attr( Settings::SITE_OPTION ); ?>[override]" value="1" <?php checked( $override ); ?> />
-			<?php esc_html_e( 'Override network defaults for this site', 'hlb-mcp-abilities' ); ?>
+			<?php esc_html_e( 'Override network defaults for this site', 'hlb-ability-registry-mcp' ); ?>
 		</label>
 		<p class="description">
-			<?php esc_html_e( 'When unchecked, this site inherits the network defaults shown below (read-only).', 'hlb-mcp-abilities' ); ?>
+			<?php esc_html_e( 'When unchecked, this site inherits the network defaults shown below (read-only).', 'hlb-ability-registry-mcp' ); ?>
 		</p>
 		<?php
 	}
@@ -331,18 +331,18 @@ class Admin {
 		?>
 		<div class="hlb-mcp-tabs">
 			<p class="hlb-mcp-search">
-				<label for="hlb-mcp-search-input" class="screen-reader-text"><?php esc_html_e( 'Search abilities', 'hlb-mcp-abilities' ); ?></label>
+				<label for="hlb-mcp-search-input" class="screen-reader-text"><?php esc_html_e( 'Search abilities', 'hlb-ability-registry-mcp' ); ?></label>
 				<input
 					type="search"
 					id="hlb-mcp-search-input"
 					class="regular-text"
 					autocomplete="off"
-					placeholder="<?php esc_attr_e( 'Search by name, id, or description…', 'hlb-mcp-abilities' ); ?>"
+					placeholder="<?php esc_attr_e( 'Search by name, id, or description…', 'hlb-ability-registry-mcp' ); ?>"
 				/>
 				<span class="hlb-mcp-search-status screen-reader-text" role="status" aria-live="polite"></span>
 			</p>
 
-			<div class="nav-tab-wrapper hlb-mcp-tablist" role="tablist" aria-label="<?php esc_attr_e( 'Ability categories', 'hlb-mcp-abilities' ); ?>">
+			<div class="nav-tab-wrapper hlb-mcp-tablist" role="tablist" aria-label="<?php esc_attr_e( 'Ability categories', 'hlb-ability-registry-mcp' ); ?>">
 				<?php foreach ( $groups as $cat_id => $group ) : ?>
 					<?php $slug = sanitize_html_class( $cat_id ); ?>
 					<button
@@ -412,12 +412,12 @@ class Admin {
 	private function badge( array $def ) {
 		$ann = isset( $def['annotations'] ) ? $def['annotations'] : [];
 		if ( ! empty( $ann['destructive'] ) ) {
-			return $this->badge_markup( 'destructive', 'dashicons-warning', __( 'destructive', 'hlb-mcp-abilities' ) );
+			return $this->badge_markup( 'destructive', 'dashicons-warning', __( 'destructive', 'hlb-ability-registry-mcp' ) );
 		}
 		if ( ! empty( $ann['readonly'] ) ) {
-			return $this->badge_markup( 'readonly', 'dashicons-visibility', __( 'read-only', 'hlb-mcp-abilities' ) );
+			return $this->badge_markup( 'readonly', 'dashicons-visibility', __( 'read-only', 'hlb-ability-registry-mcp' ) );
 		}
-		return $this->badge_markup( 'writes', 'dashicons-edit', __( 'writes', 'hlb-mcp-abilities' ) );
+		return $this->badge_markup( 'writes', 'dashicons-edit', __( 'writes', 'hlb-ability-registry-mcp' ) );
 	}
 
 	/**
@@ -446,32 +446,32 @@ class Admin {
 		$adapter_ok = class_exists( '\\WP\\MCP\\Core\\McpAdapter' );
 		?>
 		<div class="card hlb-mcp-card">
-			<h2 class="hlb-mcp-card__title"><?php esc_html_e( 'MCP connection', 'hlb-mcp-abilities' ); ?></h2>
+			<h2 class="hlb-mcp-card__title"><?php esc_html_e( 'MCP connection', 'hlb-ability-registry-mcp' ); ?></h2>
 			<table class="form-table" role="presentation">
 				<tr>
-					<th scope="row"><?php esc_html_e( 'Server name', 'hlb-mcp-abilities' ); ?></th>
+					<th scope="row"><?php esc_html_e( 'Server name', 'hlb-ability-registry-mcp' ); ?></th>
 					<td><code><?php echo esc_html( $this->settings->server_slug() ); ?></code></td>
 				</tr>
 				<tr>
-					<th scope="row"><?php esc_html_e( 'Endpoint', 'hlb-mcp-abilities' ); ?></th>
+					<th scope="row"><?php esc_html_e( 'Endpoint', 'hlb-ability-registry-mcp' ); ?></th>
 					<td>
 						<code><?php echo esc_html( $this->settings->endpoint_url() ); ?></code>
 						<?php if ( ! $adapter_ok ) : ?>
 							<p class="description hlb-mcp-error-text">
-								<?php esc_html_e( 'The MCP Adapter plugin is not active, so this endpoint is not live yet.', 'hlb-mcp-abilities' ); ?>
+								<?php esc_html_e( 'The MCP Adapter plugin is not active, so this endpoint is not live yet.', 'hlb-ability-registry-mcp' ); ?>
 							</p>
 						<?php endif; ?>
 					</td>
 				</tr>
 				<tr>
-					<th scope="row"><?php esc_html_e( 'Authentication', 'hlb-mcp-abilities' ); ?></th>
+					<th scope="row"><?php esc_html_e( 'Authentication', 'hlb-ability-registry-mcp' ); ?></th>
 					<td>
 						<p class="description">
 							<?php
 							printf(
 								/* translators: %s: link to the Application Passwords profile section. */
-								esc_html__( 'Third-party agents authenticate as a WordPress user. Create an %s and use it with HTTP Basic auth. Each ability is additionally gated by that user\'s capabilities.', 'hlb-mcp-abilities' ),
-								'<a href="' . esc_url( admin_url( 'profile.php#application-passwords-section' ) ) . '">' . esc_html__( 'Application Password', 'hlb-mcp-abilities' ) . '</a>'
+								esc_html__( 'Third-party agents authenticate as a WordPress user. Create an %s and use it with HTTP Basic auth. Each ability is additionally gated by that user\'s capabilities.', 'hlb-ability-registry-mcp' ),
+								'<a href="' . esc_url( admin_url( 'profile.php#application-passwords-section' ) ) . '">' . esc_html__( 'Application Password', 'hlb-ability-registry-mcp' ) . '</a>'
 							);
 							?>
 						</p>
@@ -479,10 +479,10 @@ class Admin {
 				</tr>
 				<?php if ( \HLB\MCP\Gatekeeper::active() ) : ?>
 					<tr>
-						<th scope="row"><?php esc_html_e( 'Frontend Gatekeeper', 'hlb-mcp-abilities' ); ?></th>
+						<th scope="row"><?php esc_html_e( 'Frontend Gatekeeper', 'hlb-ability-registry-mcp' ); ?></th>
 						<td>
 							<p class="description">
-								<?php esc_html_e( 'Detected. If its gate is enabled, permalinks and site URLs returned by abilities are automatically tagged with its access parameter so agents can follow them without hitting its 404 gate.', 'hlb-mcp-abilities' ); ?>
+								<?php esc_html_e( 'Detected. If its gate is enabled, permalinks and site URLs returned by abilities are automatically tagged with its access parameter so agents can follow them without hitting its 404 gate.', 'hlb-ability-registry-mcp' ); ?>
 							</p>
 						</td>
 					</tr>
@@ -504,7 +504,7 @@ class Admin {
 		if ( isset( $_GET['hlb_updated'] ) && '1' === $_GET['hlb_updated'] ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			printf(
 				'<div class="notice notice-success is-dismissible"><p>%s</p></div>',
-				esc_html__( 'Settings saved.', 'hlb-mcp-abilities' )
+				esc_html__( 'Settings saved.', 'hlb-ability-registry-mcp' )
 			);
 		}
 	}
@@ -518,7 +518,7 @@ class Admin {
 	 */
 	public function handle_save_network() {
 		if ( ! current_user_can( 'manage_network_options' ) ) {
-			wp_die( esc_html__( 'Permission denied.', 'hlb-mcp-abilities' ) );
+			wp_die( esc_html__( 'Permission denied.', 'hlb-ability-registry-mcp' ) );
 		}
 		check_admin_referer( self::NONCE_NET );
 

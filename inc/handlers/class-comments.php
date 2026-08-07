@@ -67,10 +67,10 @@ class Comments {
 		$id     = isset( $input['id'] ) ? (int) $input['id'] : 0;
 		$action = isset( $input['action'] ) ? sanitize_key( $input['action'] ) : '';
 		if ( ! $id || ! get_comment( $id ) ) {
-			return new WP_Error( 'hlb_mcp_not_found', __( 'Comment not found.', 'hlb-mcp-abilities' ), [ 'status' => 404 ] );
+			return new WP_Error( 'hlb_mcp_not_found', __( 'Comment not found.', 'hlb-ability-registry-mcp' ), [ 'status' => 404 ] );
 		}
 		if ( ! current_user_can( 'edit_comment', $id ) ) {
-			return new WP_Error( 'hlb_mcp_forbidden', __( 'You cannot moderate this comment.', 'hlb-mcp-abilities' ), [ 'status' => 403 ] );
+			return new WP_Error( 'hlb_mcp_forbidden', __( 'You cannot moderate this comment.', 'hlb-ability-registry-mcp' ), [ 'status' => 403 ] );
 		}
 
 		switch ( $action ) {
@@ -87,11 +87,11 @@ class Comments {
 				$ok = wp_trash_comment( $id );
 				break;
 			default:
-				return new WP_Error( 'hlb_mcp_invalid_input', __( 'Unknown action.', 'hlb-mcp-abilities' ), [ 'status' => 400 ] );
+				return new WP_Error( 'hlb_mcp_invalid_input', __( 'Unknown action.', 'hlb-ability-registry-mcp' ), [ 'status' => 400 ] );
 		}
 
 		if ( ! $ok ) {
-			return new WP_Error( 'hlb_mcp_failed', __( 'Moderation action failed.', 'hlb-mcp-abilities' ), [ 'status' => 500 ] );
+			return new WP_Error( 'hlb_mcp_failed', __( 'Moderation action failed.', 'hlb-ability-registry-mcp' ), [ 'status' => 500 ] );
 		}
 		return [
 			'id' => $id,

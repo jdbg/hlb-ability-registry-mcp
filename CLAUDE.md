@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-A WordPress plugin (**HLB MCP Abilities**) that exposes a curated, admin-controlled set of
+A WordPress plugin (**HLB Ability Registry for MCP**) that exposes a curated, admin-controlled set of
 WordPress **Abilities** to the [MCP Adapter](https://github.com/WordPress/mcp-adapter) so
 third-party tools/agents can drive the site over MCP. Multisite-ready and network-activatable.
 Requires WordPress 6.9+ (Abilities API in core), PHP 7.4+, and the MCP Adapter plugin.
@@ -21,7 +21,7 @@ composer lint:fix         # phpcbf — auto-fix formatting (short arrays, spacin
 vendor/bin/phpcs inc/class-registry.php   # lint a single file
 ```
 
-- The plugin ships as `hlb-mcp-abilities.php` + `uninstall.php` + `inc/`. `vendor/` and
+- The plugin ships as `hlb-ability-registry-mcp.php` + `uninstall.php` + `inc/`. `vendor/` and
   `composer.lock` are git-ignored — Composer is dev-only tooling, never a runtime dependency.
 - PHP syntax check: use `/opt/homebrew/bin/php -l <file>` (the shell's `php` alias may point at
   a stale MAMP path).
@@ -117,7 +117,7 @@ abilities still register, only the MCP server is skipped.
 
 Custom autoloader in the bootstrap file maps `HLB\MCP\Foo_Bar` → `inc/class-foo-bar.php` and
 `HLB\MCP\Handlers\Content` → `inc/handlers/class-content.php`. By convention, the
-bootstrap (`hlb-mcp-abilities.php`) is **not** namespaced; all namespaced classes live in `inc/`.
+bootstrap (`hlb-ability-registry-mcp.php`) is **not** namespaced; all namespaced classes live in `inc/`.
 
 ## Gotchas (learned from real runtime failures — don't reintroduce)
 

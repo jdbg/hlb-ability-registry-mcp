@@ -68,15 +68,15 @@ class Media {
 	public static function upload_media( array $input ) {
 		$url = isset( $input['url'] ) ? esc_url_raw( $input['url'] ) : '';
 		if ( ! $url || ! wp_http_validate_url( $url ) ) {
-			return new WP_Error( 'hlb_mcp_invalid_input', __( 'A valid URL is required.', 'hlb-mcp-abilities' ), [ 'status' => 400 ] );
+			return new WP_Error( 'hlb_mcp_invalid_input', __( 'A valid URL is required.', 'hlb-ability-registry-mcp' ), [ 'status' => 400 ] );
 		}
 		if ( ! self::host_allowed( $url ) ) {
-			return new WP_Error( 'hlb_mcp_forbidden', __( 'This host is not allowed for media uploads.', 'hlb-mcp-abilities' ), [ 'status' => 403 ] );
+			return new WP_Error( 'hlb_mcp_forbidden', __( 'This host is not allowed for media uploads.', 'hlb-ability-registry-mcp' ), [ 'status' => 403 ] );
 		}
 
 		$post_id = isset( $input['post_id'] ) ? (int) $input['post_id'] : 0;
 		if ( $post_id && ! current_user_can( 'edit_post', $post_id ) ) {
-			return new WP_Error( 'hlb_mcp_forbidden', __( 'You cannot attach media to this post.', 'hlb-mcp-abilities' ), [ 'status' => 403 ] );
+			return new WP_Error( 'hlb_mcp_forbidden', __( 'You cannot attach media to this post.', 'hlb-ability-registry-mcp' ), [ 'status' => 403 ] );
 		}
 
 		require_once ABSPATH . 'wp-admin/includes/media.php';
