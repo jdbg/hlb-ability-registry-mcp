@@ -154,10 +154,10 @@ class Abilities {
 		];
 
 		if ( isset( $def['input_schema'] ) ) {
-			$args['input_schema'] = $def['input_schema'];
+			$args['input_schema'] = $this->normalize_schema( $def['input_schema'] );
 		}
 		if ( isset( $def['output_schema'] ) ) {
-			$args['output_schema'] = $def['output_schema'];
+			$args['output_schema'] = $this->normalize_schema( $def['output_schema'] );
 		}
 
 		// In network mode, expose a `site` argument on every ability except the site
@@ -166,7 +166,7 @@ class Abilities {
 			if ( ! isset( $args['input_schema'] ) || ! is_array( $args['input_schema'] ) ) {
 				$args['input_schema'] = [
 					'type'       => 'object',
-					'properties' => [],
+					'properties' => new \stdClass(),
 				];
 			}
 			$args['input_schema']['properties']['site'] = [
@@ -176,6 +176,22 @@ class Abilities {
 		}
 
 		return $args;
+	}
+
+	/**
+	 * Ensure JSON Schema objects with no properties serialize as {} not [].
+	 *
+	 * Walks a schema array and casts any 'properties' value that is an empty
+	 * array to stdClass so json_encode() produces the correct JSON object.
+	 *
+	 * @param array $schema JSON Schema array.
+	 * @return array
+	 */
+	private function normalize_schema( array $schema ) {
+		if ( isset( $schema['properties'] ) && is_array( $schema['properties'] ) && empty( $schema['properties'] ) ) {
+			$schema['properties'] = new \stdClass();
+		}
+		return $schema;
 	}
 
 	/**
