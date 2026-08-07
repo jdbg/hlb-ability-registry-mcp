@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: HLB Ability Registry for MCP 1.5.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/hlb-ability-"
 "registry-mcp\n"
-"POT-Creation-Date: 2026-08-07T11:21:35+00:00\n"
+"POT-Creation-Date: 2026-08-07T11:39:14+00:00\n"
 "PO-Revision-Date: 2026-07-30 12:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: Bulgarian\n"
@@ -26,17 +26,16 @@ msgstr ""
 
 #. Plugin URI of the plugin
 #: hlb-ability-registry-mcp.php
-msgid "https://github.com/jdbg/hlb-mcp-abilities"
+msgid "https://github.com/jdbg/hlb-ability-registry-mcp"
 msgstr ""
 
 #. Description of the plugin
 #: hlb-ability-registry-mcp.php
-#, fuzzy
 msgid ""
 "Exposes a curated, admin-controlled set of WordPress Abilities to the MCP "
 "Adapter so third-party tools and AI agents can interact with the site over "
 "MCP. Multisite-ready with network defaults and per-subsite overrides. "
-"Source: https://github.com/jdbg/hlb-mcp-abilities"
+"Source: https://github.com/jdbg/hlb-ability-registry-mcp"
 msgstr ""
 "Предоставя подбран набор от WordPress Abilities, контролирани от "
 "администратора, на MCP Adapter, за да могат инструменти на трети страни и AI "

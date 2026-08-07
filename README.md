@@ -1,6 +1,6 @@
 # HLB Ability Registry for MCP
 
-[![Lint](https://github.com/jdbg/hlb-mcp-abilities/actions/workflows/lint.yml/badge.svg)](https://github.com/jdbg/hlb-mcp-abilities/actions/workflows/lint.yml)
+[![Lint](https://github.com/jdbg/hlb-ability-registry-mcp/actions/workflows/lint.yml/badge.svg)](https://github.com/jdbg/hlb-ability-registry-mcp/actions/workflows/lint.yml)
 
 A WordPress plugin that exposes a curated, admin-controlled set of WordPress **Abilities** to
 the [WordPress MCP Adapter](https://github.com/WordPress/mcp-adapter), so third-party tools and
@@ -8,12 +8,12 @@ AI agents can interact with your site over the Model Context Protocol (MCP). Mul
 network-activatable, with network-wide defaults each subsite can inherit or override.
 
 - **Author:** [Jordan Hlebarov](https://jdbg.com/)
-- **Source:** [github.com/jdbg/hlb-mcp-abilities](https://github.com/jdbg/hlb-mcp-abilities)
+- **Source:** [github.com/jdbg/hlb-ability-registry-mcp](https://github.com/jdbg/hlb-ability-registry-mcp)
 - **License:** GPL-2.0-or-later
 
 ### Try it without installing anything
 
-[Open in WordPress Playground](https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/jdbg/hlb-mcp-abilities/main/blueprints/demo.json) —
+[Open in WordPress Playground](https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/jdbg/hlb-ability-registry-mcp/main/blueprints/demo.json) —
 a disposable in-browser WordPress instance with this plugin and the MCP Adapter pre-installed and
 activated.
 

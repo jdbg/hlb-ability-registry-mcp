@@ -9,7 +9,7 @@
 			"homepage": "https://jdbg.com/"
 		}
 	],
-	"homepage": "https://github.com/jdbg/hlb-mcp-abilities",
+	"homepage": "https://github.com/jdbg/hlb-ability-registry-mcp",
 	"require": {
 		"php": ">=7.4"
 	},

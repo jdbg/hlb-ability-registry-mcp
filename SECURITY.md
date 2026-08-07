@@ -17,7 +17,7 @@ the newest release before reporting, in case the issue is already fixed.
 ## Reporting a vulnerability
 
 Please report security issues privately using
-[GitHub's private vulnerability reporting](https://github.com/jdbg/hlb-mcp-abilities/security/advisories/new)
+[GitHub's private vulnerability reporting](https://github.com/jdbg/hlb-ability-registry-mcp/security/advisories/new)
 (repo → **Security** tab → **Report a vulnerability**). Do not open a public issue or
 pull request for a suspected vulnerability.
 

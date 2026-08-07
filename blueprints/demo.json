@@ -19,7 +19,7 @@
 			"step": "installPlugin",
 			"pluginData": {
 				"resource": "url",
-				"url": "https://github.com/jdbg/hlb-mcp-abilities/releases/latest/download/hlb-ability-registry-mcp.zip"
+				"url": "https://github.com/jdbg/hlb-ability-registry-mcp/releases/latest/download/hlb-ability-registry-mcp.zip"
 			},
 			"options": {
 				"activate": true

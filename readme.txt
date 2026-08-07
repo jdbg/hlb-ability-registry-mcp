@@ -24,7 +24,7 @@ Most "connect AI to WordPress" tools expose either everything or nothing: a sing
 
 = Source code =
 
-Development happens in the open: https://github.com/jdbg/hlb-mcp-abilities
+Development happens in the open: https://github.com/jdbg/hlb-ability-registry-mcp
 
 = Try it without installing anything =
 
@@ -49,7 +49,7 @@ Read-only abilities (listing/getting posts, media, comments, taxonomies, templat
 
 = Can I try this before installing it? =
 
-Yes — open it in WordPress Playground: https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/jdbg/hlb-mcp-abilities/main/blueprints/demo.json
+Yes — open it in WordPress Playground: https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/jdbg/hlb-ability-registry-mcp/main/blueprints/demo.json
 
 = Is this safe on multisite? =
 
