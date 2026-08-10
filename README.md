@@ -88,7 +88,60 @@ or contains personal data).
 | WooCommerce *(when active)* | `hlb/wc-list-products` ✅ · `hlb/wc-get-order` ⬜ | |
 | SEOPress *(when active)* | `hlb/seopress-get-meta` ✅ · `hlb/seopress-update-meta` ⬜ | |
 
-Add your own via the `hlb_mcp_abilities` filter.
+Add your own via the `hlb_mcp_abilities` filter — see [Extending](#extending) below.
+
+## Extending
+
+Other plugins/mu-plugins can register additional abilities by filtering `hlb_mcp_abilities`.
+Each entry uses the same shape as the built-in registry: a label/description, an existing
+category id (categories themselves aren't filterable — reuse one from the table above), a
+capability, a `default` on/off state, `readonly`/`destructive`/`idempotent` annotations, a
+`handler` callable, and a JSON Schema `input_schema`. Give your ability id its own prefix
+(e.g. `acme/…`) so it can't collide with `hlb/…` ids.
+
+```php
+add_filter( 'hlb_mcp_abilities', function ( array $defs ) {
+	$defs['acme/count-posts'] = [
+		'label'        => __( 'Count posts', 'acme' ),
+		'description'  => __( 'Return the number of published posts of a given type.', 'acme' ),
+		'category'     => 'content-read', // must match a category id from Registry::categories().
+		'capability'   => 'read',
+		'default'      => true, // read-only abilities default on; write/destructive default off.
+		'annotations'  => [
+			'readonly'    => true,
+			'destructive' => false,
+			'idempotent'  => true,
+		],
+		'handler'      => 'acme_count_posts',
+		'input_schema' => [
+			'type'       => 'object',
+			'properties' => [
+				'post_type' => [ 'type' => 'string', 'default' => 'post' ],
+			],
+		],
+	];
+
+	return $defs;
+} );
+
+function acme_count_posts( array $input ) {
+	$type   = isset( $input['post_type'] ) ? sanitize_key( $input['post_type'] ) : 'post';
+	$counts = wp_count_posts( $type );
+
+	if ( ! $counts ) {
+		return new WP_Error( 'acme_invalid_post_type', __( 'Unknown post type.', 'acme' ), [ 'status' => 400 ] );
+	}
+
+	return [
+		'post_type' => $type,
+		'published' => (int) $counts->publish,
+	];
+}
+```
+
+The handler receives the request's `input` array and returns either a value (array/scalar) or a
+`WP_Error`. Once registered, the ability shows up in the settings UI like any built-in one and is
+gated by the same enabled-set resolver — nothing else to wire up.
 
 ## Multisite
 
