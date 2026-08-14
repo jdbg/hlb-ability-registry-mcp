@@ -127,7 +127,13 @@ bootstrap (`hlb-ability-registry-mcp.php`) is **not** namespaced; all namespaced
 - **Read handlers must do per-object capability checks.** A coarse `permission_callback` like
   `current_user_can('read')` does *not* gate unpublished content — `get_post()` returns drafts.
   Read handlers re-check (`read_post`, or force public statuses for non-editors) so a
-  low-privilege caller can't read drafts/private posts by ID.
+  low-privilege caller can't read drafts/private posts by ID. `HLB\MCP\Access` holds the
+  shared rules: `safe_status()` (never honour a non-public status for a caller who can't edit
+  that post type — this was the wordpress.org review finding on `hlb/wc-list-products`) and
+  `post_type_allowed()` / `post_allowed()` (abilities only address post types that are `public`
+  or `show_in_rest`, so a coarse `read` can't reach a plugin's private CPT; opt in via the
+  `hlb_mcp_allowed_post_types` filter). Any new handler that takes a `status` or a `post_type`
+  from input, or resolves a post by id, must route through them.
 - **Hook timing:** abilities register on `wp_abilities_api_init` (fired lazily on first registry
   access after `init`); the server is created on `mcp_adapter_init`. The resolver is read at both
   points — abilities must be registered before the server resolves its tool ids.

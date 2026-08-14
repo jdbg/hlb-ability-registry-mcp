@@ -7,6 +7,7 @@
 
 namespace HLB\MCP\Handlers;
 
+use HLB\MCP\Access;
 use WP_Error;
 
 defined( 'ABSPATH' ) || exit;
@@ -56,7 +57,7 @@ class SEOPress {
 
 		$id   = isset( $input['id'] ) ? (int) $input['id'] : 0;
 		$post = $id ? get_post( $id ) : null;
-		if ( ! $post ) {
+		if ( ! Access::post_allowed( $post ) ) {
 			return new WP_Error( 'hlb_mcp_not_found', __( 'Post not found.', 'hlb-ability-registry-mcp' ), [ 'status' => 404 ] );
 		}
 
@@ -82,7 +83,7 @@ class SEOPress {
 
 		$id   = isset( $input['id'] ) ? (int) $input['id'] : 0;
 		$post = $id ? get_post( $id ) : null;
-		if ( ! $post ) {
+		if ( ! Access::post_allowed( $post ) ) {
 			return new WP_Error( 'hlb_mcp_not_found', __( 'Post not found.', 'hlb-ability-registry-mcp' ), [ 'status' => 404 ] );
 		}
 		if ( ! current_user_can( 'edit_post', $id ) ) {

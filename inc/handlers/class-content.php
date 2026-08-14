@@ -10,6 +10,7 @@
 
 namespace HLB\MCP\Handlers;
 
+use HLB\MCP\Access;
 use HLB\MCP\Gatekeeper;
 use WP_Error;
 use WP_Query;
@@ -51,6 +52,10 @@ class Content {
 	public static function get_post( array $input ) {
 		$type = isset( $input['post_type'] ) ? sanitize_key( $input['post_type'] ) : 'post';
 
+		if ( ! Access::post_type_allowed( $type ) ) {
+			return self::unsupported_type();
+		}
+
 		if ( ! empty( $input['id'] ) ) {
 			$post = get_post( (int) $input['id'] );
 		} elseif ( ! empty( $input['slug'] ) ) {
@@ -86,20 +91,20 @@ class Content {
 	 * Query posts.
 	 *
 	 * @param array $input Ability input.
-	 * @return array
+	 * @return array|WP_Error
 	 */
 	public static function list_posts( array $input ) {
-		$status = isset( $input['status'] ) ? sanitize_key( $input['status'] ) : 'publish';
-
-		// Only users who can edit posts may enumerate non-public statuses (draft, private,
-		// pending, trash). Everyone else is forced to public content.
-		$public_statuses = get_post_stati( [ 'public' => true ] );
-		if ( ! in_array( $status, $public_statuses, true ) && ! current_user_can( 'edit_posts' ) ) {
-			$status = 'publish';
+		$type = isset( $input['post_type'] ) ? sanitize_key( $input['post_type'] ) : 'post';
+		if ( ! Access::post_type_allowed( $type ) ) {
+			return self::unsupported_type();
 		}
 
+		// Only users who can edit this post type may enumerate non-public statuses
+		// (draft, private, pending, trash). Everyone else is forced to public content.
+		$status = Access::safe_status( isset( $input['status'] ) ? $input['status'] : 'publish', $type );
+
 		$args = [
-			'post_type'      => isset( $input['post_type'] ) ? sanitize_key( $input['post_type'] ) : 'post',
+			'post_type'      => $type,
 			'post_status'    => $status,
 			'posts_per_page' => self::per_page( $input ),
 			'paged'          => self::page( $input ),
@@ -205,6 +210,9 @@ class Content {
 		if ( ! $type_obj ) {
 			return new WP_Error( 'hlb_mcp_invalid_input', __( 'Unknown post type.', 'hlb-ability-registry-mcp' ), [ 'status' => 400 ] );
 		}
+		if ( ! Access::post_type_allowed( $type ) ) {
+			return self::unsupported_type();
+		}
 		if ( ! current_user_can( $type_obj->cap->create_posts ) ) {
 			return new WP_Error( 'hlb_mcp_forbidden', __( 'You cannot create this type of content.', 'hlb-ability-registry-mcp' ), [ 'status' => 403 ] );
 		}
@@ -238,7 +246,7 @@ class Content {
 	public static function update_post( array $input ) {
 		$id   = isset( $input['id'] ) ? (int) $input['id'] : 0;
 		$post = $id ? get_post( $id ) : null;
-		if ( ! $post ) {
+		if ( ! Access::post_allowed( $post ) ) {
 			return new WP_Error( 'hlb_mcp_not_found', __( 'Post not found.', 'hlb-ability-registry-mcp' ), [ 'status' => 404 ] );
 		}
 		if ( ! current_user_can( 'edit_post', $id ) ) {
@@ -283,7 +291,7 @@ class Content {
 		$id     = isset( $input['id'] ) ? (int) $input['id'] : 0;
 		$status = isset( $input['status'] ) ? sanitize_key( $input['status'] ) : '';
 		$post   = $id ? get_post( $id ) : null;
-		if ( ! $post ) {
+		if ( ! Access::post_allowed( $post ) ) {
 			return new WP_Error( 'hlb_mcp_not_found', __( 'Post not found.', 'hlb-ability-registry-mcp' ), [ 'status' => 404 ] );
 		}
 		if ( ! current_user_can( 'edit_post', $id ) ) {
@@ -325,7 +333,7 @@ class Content {
 	public static function delete_post( array $input ) {
 		$id    = isset( $input['id'] ) ? (int) $input['id'] : 0;
 		$force = ! empty( $input['force'] );
-		if ( ! $id || ! get_post( $id ) ) {
+		if ( ! $id || ! Access::post_allowed( get_post( $id ) ) ) {
 			return new WP_Error( 'hlb_mcp_not_found', __( 'Post not found.', 'hlb-ability-registry-mcp' ), [ 'status' => 404 ] );
 		}
 		if ( ! current_user_can( 'delete_post', $id ) ) {
@@ -355,7 +363,7 @@ class Content {
 		$terms    = isset( $input['terms'] ) ? (array) $input['terms'] : [];
 		$append   = ! empty( $input['append'] );
 
-		if ( ! $id || ! get_post( $id ) ) {
+		if ( ! $id || ! Access::post_allowed( get_post( $id ) ) ) {
 			return new WP_Error( 'hlb_mcp_not_found', __( 'Post not found.', 'hlb-ability-registry-mcp' ), [ 'status' => 404 ] );
 		}
 		if ( ! taxonomy_exists( $taxonomy ) ) {
@@ -416,6 +424,19 @@ class Content {
 			'term_id' => (int) $result['term_id'],
 			'taxonomy' => $taxonomy,
 		];
+	}
+
+	/**
+	 * Error returned for a post type this plugin will not address.
+	 *
+	 * @return WP_Error
+	 */
+	private static function unsupported_type() {
+		return new WP_Error(
+			'hlb_mcp_invalid_input',
+			__( 'This post type is not available: only post types that are public or exposed in the REST API can be addressed.', 'hlb-ability-registry-mcp' ),
+			[ 'status' => 400 ]
+		);
 	}
 
 	/**

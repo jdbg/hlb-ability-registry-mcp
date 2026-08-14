@@ -106,14 +106,22 @@ class Site {
 	 */
 	public static function get_active_theme( array $input ) {
 		$theme = wp_get_theme();
-		return [
+		$data  = [
 			'name'        => $theme->get( 'Name' ),
 			'stylesheet'  => $theme->get_stylesheet(),
-			'version'     => $theme->get( 'Version' ),
-			'author'      => wp_strip_all_tags( (string) $theme->get( 'Author' ) ),
 			'is_block_theme' => wp_is_block_theme(),
 			'parent'      => $theme->parent() ? $theme->parent()->get_stylesheet() : null,
 		];
+
+		// The exact theme version (vulnerability fingerprinting) is only exposed to
+		// callers who can manage the site, mirroring `get_site_info()` above, even
+		// though this ability's default capability is the much lower `read`.
+		if ( current_user_can( 'manage_options' ) ) {
+			$data['version'] = $theme->get( 'Version' );
+			$data['author']  = wp_strip_all_tags( (string) $theme->get( 'Author' ) );
+		}
+
+		return $data;
 	}
 
 	/**

@@ -873,7 +873,11 @@ class Registry {
 					'type'       => 'object',
 					'properties' => [
 						'search'   => $string,
-						'status'   => $string + [ 'default' => 'publish' ],
+						'status'   => $string + [
+							'default' => 'publish',
+							'enum'    => [ 'publish', 'draft', 'pending', 'private', 'trash', 'any' ],
+							'description' => __( 'Product status. Non-published statuses are only honoured for callers who can edit products.', 'hlb-ability-registry-mcp' ),
+						],
 						'per_page' => $integer + [
 							'default' => 10,
 							'minimum' => 1,

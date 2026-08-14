@@ -7,6 +7,7 @@
 
 namespace HLB\MCP\Handlers;
 
+use HLB\MCP\Access;
 use HLB\MCP\Gatekeeper;
 use WP_Error;
 
@@ -40,10 +41,15 @@ class WooCommerce {
 		$per_page = isset( $input['per_page'] ) ? max( 1, min( 100, (int) $input['per_page'] ) ) : 10;
 		$page     = isset( $input['page'] ) ? max( 1, (int) $input['page'] ) : 1;
 
+		// Per-object read check: this ability's coarse `read` permission callback does
+		// not gate unpublished products. Only a caller who can edit products may query
+		// draft, pending, private or trashed ones; everyone else gets published products.
+		$status = Access::safe_status( isset( $input['status'] ) ? $input['status'] : 'publish', 'product' );
+
 		$args = [
 			'limit'   => $per_page,
 			'page'    => $page,
-			'status'  => isset( $input['status'] ) ? sanitize_key( $input['status'] ) : 'publish',
+			'status'  => $status,
 			'return'  => 'objects',
 			'paginate' => true,
 		];

@@ -4,7 +4,7 @@ Tags: abilities-api, mcp, ai, multisite, rest-api
 Requires at least: 6.9
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 1.5.0
+Stable tag: 1.6.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -18,7 +18,7 @@ Most "connect AI to WordPress" tools expose either everything or nothing: a sing
 
 * Registers a curated set of abilities against WordPress core's own Abilities API (`wp_register_ability()`) — content, media, comments, users, Site Editor templates & patterns, and optional WooCommerce and SEOPress integrations when those plugins are active.
 * Every ability has its own admin toggle in **Settings → HLB Ability Registry for MCP**, searchable and grouped by category. Read-only abilities default on; write and destructive abilities default off.
-* Read handlers do per-object capability checks (not just a blanket `current_user_can`), so a low-privilege caller can't read drafts or private posts by ID just because a coarse capability check passed.
+* Read handlers do per-object capability checks (not just a blanket `current_user_can`), so a low-privilege caller can't read drafts or private posts by ID just because a coarse capability check passed. Listing abilities force unprivileged callers back to published content, and abilities only ever address post types the site already exposes publicly or over the REST API.
 * On **multisite**, each subsite gets its own on/off set, inherited from a network default unless a subsite administrator explicitly overrides it. An optional **network mode** lets the main site's server target any subsite by id, with every permission and capability check re-run inside that subsite's own context — nothing is granted network-wide by default.
 * If the [MCP Adapter](https://github.com/WordPress/mcp-adapter) plugin is active, the enabled abilities are projected onto a standard MCP server at `/wp-json/{server-slug}/mcp`, so any MCP-speaking client or agent can call them. Without the MCP Adapter, the abilities you enable are still fully registered and reachable through core's own `/wp-json/wp-abilities/v1/` REST routes — this plugin has value on a bare WordPress 6.9 install, the MCP Adapter is an optional extra hop for MCP clients specifically, not a hard requirement.
 
@@ -61,6 +61,11 @@ Yes. Per-subsite settings are always intersected with the currently-available ab
 2. Live search narrows the list by name, id, or description across every category at once.
 
 == Changelog ==
+
+= 1.6.0 =
+* Security: `wc-list-products` no longer returns draft, pending, private or trashed products to callers who cannot edit products.
+* Security: abilities only address post types that are public or exposed in the REST API, so a coarse `read` capability cannot reach a plugin's private post types. Filterable with `hlb_mcp_allowed_post_types`.
+* `get-active-theme` only reports the theme version and author to callers who can manage options, matching `get-site-info`.
 
 = 1.5.0 =
 * Rework the settings screen with tabbed categories, search, and the Settings API.
