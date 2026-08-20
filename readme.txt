@@ -2,9 +2,9 @@
 Contributors: jdbg
 Tags: abilities-api, mcp, ai, multisite, rest-api
 Requires at least: 6.9
-Tested up to: 7.0
+Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.6.0
+Stable tag: 1.6.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -61,6 +61,10 @@ Yes. Per-subsite settings are always intersected with the currently-available ab
 2. Live search narrows the list by name, id, or description across every category at once.
 
 == Changelog ==
+
+= 1.6.1 =
+* Fix a fatal error in network mode: abilities whose input schema has no properties (e.g. `get-current-user`) aborted registration, silently dropping every ability after them from the MCP tool list.
+* Tested up to WordPress 7.1.
 
 = 1.6.0 =
 * Security: `wc-list-products` no longer returns draft, pending, private or trashed products to callers who cannot edit products.

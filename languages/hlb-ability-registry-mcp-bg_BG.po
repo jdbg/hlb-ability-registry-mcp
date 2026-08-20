@@ -2,7 +2,7 @@
 # This file is distributed under the GPL-2.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: HLB Ability Registry for MCP 1.5.0\n"
+"Project-Id-Version: HLB Ability Registry for MCP 1.6.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/hlb-ability-"
 "registry-mcp\n"
 "POT-Creation-Date: 2026-08-07T11:39:14+00:00\n"

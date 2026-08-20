@@ -182,11 +182,24 @@ CI runs `composer lint` on every push to `main` and on pull requests
 (`.github/workflows/lint.yml`).
 
 See [`CLAUDE.md`](CLAUDE.md) for the architecture overview and the disposable-WordPress runtime
-verification workflow. The plugin has been verified end-to-end on **WordPress 7.0**: both plugins
+verification workflow. The plugin has been verified end-to-end on **WordPress 7.1**: both plugins
 activate, abilities register and execute, the MCP server route is live, and toggling abilities in
 settings changes the exposed tool set.
 
 ## Changelog
+
+### 1.6.1
+
+- Fix a fatal error in network mode: abilities whose input schema declares no properties (e.g.
+  `hlb/get-current-user`) aborted `Abilities::register_abilities()` part-way through the loop,
+  silently dropping every ability after them from the registry and the MCP tool list.
+- Verified end-to-end on WordPress 7.1 (PHP 8.3): plugin + MCP Adapter activate cleanly,
+  abilities register, an ability executes, unpublished content stays gated, the MCP server
+  registers at `/wp-json/hlb_{site}/mcp`, and enabling/disabling abilities in settings changes
+  the exposed tool set.
+- Verified end-to-end on a subdirectory multisite (WP 7.1) with network mode on: `hlb/list-sites`
+  discovers subsites, site-targeted reads/writes hit the right subsite with no leakage, and
+  cross-site permission checks are enforced on the target subsite.
 
 ### 1.0.0
 
@@ -194,9 +207,4 @@ settings changes the exposed tool set.
 - Network mode (multisite): a single main-site server can target any subsite via a `site`
   argument (`switch_to_blog()`), plus a `hlb/list-sites` ability for discovery. Opt-in from the
   network settings page; capabilities are enforced on the target subsite.
-- Verified end-to-end on WordPress 7.0 (PHP 8.3): plugin + MCP Adapter activate cleanly,
-  abilities register, an ability executes, the MCP server registers at `/wp-json/hlb_{site}/mcp`,
-  and enabling/disabling abilities in settings changes the exposed tool set.
-- Verified end-to-end on a subdirectory multisite (WP 7.0): site-targeted reads/writes hit the
-  right subsite with no leakage, and cross-site permission checks are enforced.
-- Ability categories are registered with a description, as required by WP 6.9/7.0.
+- Ability categories are registered with a description, as required by WP 6.9/7.x.

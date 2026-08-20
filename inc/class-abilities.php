@@ -163,16 +163,22 @@ class Abilities {
 		// In network mode, expose a `site` argument on every ability except the site
 		// listing itself, so a single main-site server can target any subsite.
 		if ( $network && 'hlb/list-sites' !== $id ) {
-			if ( ! isset( $args['input_schema'] ) || ! is_array( $args['input_schema'] ) ) {
-				$args['input_schema'] = [
-					'type'       => 'object',
-					'properties' => new \stdClass(),
-				];
-			}
-			$args['input_schema']['properties']['site'] = [
+			$schema = isset( $args['input_schema'] ) && is_array( $args['input_schema'] )
+				? $args['input_schema']
+				: [ 'type' => 'object' ];
+
+			// normalize_schema() casts empty properties to stdClass so they serialize as
+			// {}; cast back to an array before adding `site` (adding it makes the object
+			// non-empty, so it no longer needs the stdClass treatment).
+			$properties = isset( $schema['properties'] ) ? (array) $schema['properties'] : [];
+
+			$properties['site'] = [
 				'type'        => 'string',
 				'description' => __( 'Target subsite: blog ID, path slug, or domain. Omit to act on the main site.', 'hlb-ability-registry-mcp' ),
 			];
+
+			$schema['properties'] = $properties;
+			$args['input_schema'] = $schema;
 		}
 
 		return $args;

@@ -40,8 +40,13 @@ inside a real WordPress with the Abilities API **and** the MCP Adapter active. T
    `rest_api_init`, then checks: abilities register (`wp_get_ability(...)` non-null), a
    default-off write ability stays unregistered, an ability `execute()`s, and
    `rest_get_server()->get_routes()` contains `/hlb_<host>/mcp`.
+4. For the network-mode surface, `wp core multisite-convert` the same container, `wp site create`
+   a subsite, network-activate both plugins, persist `network_mode` into the `hlb_mcp_network`
+   site-option **in its own `wp` invocation** (abilities register during bootstrap, so an option
+   written inside the probe lands too late), then assert on `site`-targeted reads/writes.
 
-This exact flow (and a working probe) is what caught the WP 7.0 category bug below.
+This exact flow (and a working probe) is what caught the WP 7.0 category bug and the network-mode
+`stdClass` schema fatal below.
 
 ## Architecture
 
@@ -121,9 +126,16 @@ bootstrap (`hlb-ability-registry-mcp.php`) is **not** namespaced; all namespaced
 
 ## Gotchas (learned from real runtime failures — don't reintroduce)
 
-- **WP 7.0 requires a `description` on ability categories.** `wp_register_ability_category()`
+- **WP 7.x requires a `description` on ability categories.** `wp_register_ability_category()`
   silently fails without it, which cascades: every ability in that category bails with "category
   not registered" and the MCP server exposes zero working tools. Always pass `label` + `description`.
+- **Never index into a schema's `properties` without casting to array first.**
+  `Abilities::normalize_schema()` casts an *empty* `properties` array to `stdClass` so it
+  serializes as `{}` not `[]`. In network mode `build_args()` then adds a `site` property — writing
+  `$schema['properties']['site']` straight onto that stdClass is a fatal `Cannot use object of type
+  stdClass as array`, which aborts `register_abilities()` mid-loop and silently drops every ability
+  after the offending one (e.g. `hlb/get-current-user`) from both the registry and the MCP tool
+  list. Cast with `(array)`, mutate, assign back.
 - **Read handlers must do per-object capability checks.** A coarse `permission_callback` like
   `current_user_can('read')` does *not* gate unpublished content — `get_post()` returns drafts.
   Read handlers re-check (`read_post`, or force public statuses for non-editors) so a
