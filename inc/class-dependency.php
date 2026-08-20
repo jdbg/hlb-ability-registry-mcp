@@ -88,6 +88,66 @@ class Dependency {
 	}
 
 	/**
+	 * Whether the adapter plugin is switched on in WordPress.
+	 *
+	 * This is deliberately distinct from is_active(): the adapter bootstrap bails out
+	 * early (before defining any class) when its bundled autoloader is missing, so a
+	 * plugin that is very much "active" on the Plugins screen can still leave
+	 * class_exists() false. Telling the two apart is what keeps the notice honest.
+	 *
+	 * @return bool
+	 */
+	public function is_enabled() {
+		$basename = $this->installed_basename();
+		if ( ! $basename ) {
+			return false;
+		}
+		if ( ! function_exists( 'is_plugin_active' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/plugin.php';
+		}
+		return is_plugin_active( $basename );
+	}
+
+	/**
+	 * Whether the adapter loaded its plugin file but failed to boot its classes.
+	 *
+	 * @return bool
+	 */
+	public function is_broken() {
+		return ! $this->is_active() && $this->is_enabled();
+	}
+
+	/**
+	 * Whether the adapter's bundled autoloader is switched off by constant.
+	 *
+	 * WP_MCP_AUTOLOAD short-circuits the adapter's loader on the promise that another
+	 * autoloader already registers WP\MCP\. When the classes are missing anyway, that
+	 * promise was not kept — typically a project-level Composer autoloader that is not
+	 * reachable at runtime — and reinstalling the adapter fixes nothing.
+	 *
+	 * @return bool
+	 */
+	private function autoload_suppressed() {
+		return defined( 'WP_MCP_AUTOLOAD' ) && ! WP_MCP_AUTOLOAD;
+	}
+
+	/**
+	 * Whether the adapter's bundled autoloader is absent.
+	 *
+	 * The adapter defines WP_MCP_DIR before it guards on its autoloader, so the constant
+	 * being set means its plugin file ran; a missing autoload_packages.php then pins the
+	 * cause down to unbuilt dependencies rather than some other early bail.
+	 *
+	 * @return bool
+	 */
+	private function missing_dependencies() {
+		if ( ! defined( 'WP_MCP_DIR' ) ) {
+			return false;
+		}
+		return ! file_exists( rtrim( WP_MCP_DIR, '/' ) . '/vendor/autoload_packages.php' );
+	}
+
+	/**
 	 * Whether this plugin is network-activated (so the adapter should be too).
 	 *
 	 * @return bool
@@ -114,6 +174,11 @@ class Dependency {
 
 		if ( $this->is_active() ) {
 			return; // Dependency satisfied — nothing to show.
+		}
+
+		if ( $this->is_broken() ) {
+			$this->broken_notice();
+			return;
 		}
 
 		$installed = $this->is_installed();
@@ -157,6 +222,55 @@ class Dependency {
 	}
 
 	/**
+	 * Render a notice for an adapter that is active but failed to load its classes.
+	 *
+	 * Activating it again would be a no-op, so no action button is offered. The remedy
+	 * depends entirely on why the classes are missing — reinstalling the adapter is the
+	 * wrong advice when its loader was deliberately suppressed — so cause and remedy are
+	 * chosen together, most specific first.
+	 *
+	 * @return void
+	 */
+	private function broken_notice() {
+		if ( ! current_user_can( 'activate_plugins' ) ) {
+			printf(
+				'<div class="notice notice-error"><p><strong>%s</strong> %s</p></div>',
+				esc_html__( 'HLB Ability Registry for MCP', 'hlb-ability-registry-mcp' ),
+				esc_html__( 'the MCP Adapter plugin is active but failed to load, so no MCP endpoint is exposed. Ask a site administrator to reinstall it.', 'hlb-ability-registry-mcp' )
+			);
+			return;
+		}
+
+		$releases = '<a href="' . esc_url( self::ADAPTER_REPO_URL . '/releases/latest' ) . '" target="_blank" rel="noopener">' . esc_html__( 'the MCP Adapter GitHub releases page', 'hlb-ability-registry-mcp' ) . '</a>';
+
+		if ( $this->autoload_suppressed() ) {
+			$cause  = esc_html__( 'the MCP Adapter plugin is active but registered no classes, so no MCP endpoint is exposed. Its bundled autoloader is switched off by the WP_MCP_AUTOLOAD constant, and nothing else loaded the adapter in its place.', 'hlb-ability-registry-mcp' );
+			$remedy = esc_html__( 'Check that the autoloader meant to supply the WP\MCP\ namespace — usually a project-level Composer autoloader — is actually loaded at runtime, or remove the WP_MCP_AUTOLOAD constant so the adapter loads its own.', 'hlb-ability-registry-mcp' );
+		} elseif ( $this->missing_dependencies() ) {
+			$cause  = esc_html__( 'the MCP Adapter plugin is active but could not load — its bundled dependencies are missing, so no MCP endpoint is exposed. This happens when the adapter is installed from a source checkout instead of a packaged release.', 'hlb-ability-registry-mcp' );
+			$remedy = sprintf(
+				/* translators: %s: link to the MCP Adapter GitHub releases page. */
+				esc_html__( 'Install the latest release from %s over the current copy, or run "composer install" in the adapter\'s plugin folder.', 'hlb-ability-registry-mcp' ),
+				$releases
+			);
+		} else {
+			$cause  = esc_html__( 'the MCP Adapter plugin is active but did not load its classes, so no MCP endpoint is exposed.', 'hlb-ability-registry-mcp' );
+			$remedy = sprintf(
+				/* translators: %s: link to the MCP Adapter GitHub releases page. */
+				esc_html__( 'Check the site error log for a fatal in the adapter, then reinstall it from %s.', 'hlb-ability-registry-mcp' ),
+				$releases
+			);
+		}
+
+		printf(
+			'<div class="notice notice-error"><p><strong>%1$s</strong> %2$s</p><p>%3$s</p></div>',
+			esc_html__( 'HLB Ability Registry for MCP', 'hlb-ability-registry-mcp' ),
+			$cause, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped above.
+			$remedy // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped above.
+		);
+	}
+
+	/**
 	 * Render a notice offering to activate an already-installed adapter.
 	 *
 	 * @return void
@@ -196,7 +310,12 @@ class Dependency {
 		$state = sanitize_key( wp_unslash( $_GET['hlb_dep'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 		if ( 'activated' === $state ) {
-			$this->result( 'success', __( 'MCP Adapter activated. Your MCP endpoint is now live.', 'hlb-ability-registry-mcp' ) );
+			// Plugins have loaded normally on this request, so is_active() is trustworthy
+			// here. If the adapter still isn't there, stay quiet and let broken_notice()
+			// give the one accurate account instead of contradicting it with a success.
+			if ( $this->is_active() ) {
+				$this->result( 'success', __( 'MCP Adapter activated. Your MCP endpoint is now live.', 'hlb-ability-registry-mcp' ) );
+			}
 		} elseif ( 'failed' === $state ) {
 			$detail = isset( $_GET['hlb_msg'] ) ? sanitize_text_field( wp_unslash( $_GET['hlb_msg'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			$this->result( 'error', __( 'Could not activate the MCP Adapter.', 'hlb-ability-registry-mcp' ) . ( $detail ? ' ' . $detail : '' ) );
@@ -237,6 +356,10 @@ class Dependency {
 		$basename = $this->installed_basename();
 		if ( ! $basename ) {
 			$this->redirect_result( 'failed', __( 'The MCP Adapter is no longer installed.', 'hlb-ability-registry-mcp' ) );
+		}
+
+		if ( $this->is_enabled() ) {
+			$this->redirect_result( 'failed', __( 'The MCP Adapter is already active but failed to load its bundled dependencies. Reinstall it from a packaged release.', 'hlb-ability-registry-mcp' ) );
 		}
 
 		$activated = activate_plugin( $basename, '', $this->is_network_context() );

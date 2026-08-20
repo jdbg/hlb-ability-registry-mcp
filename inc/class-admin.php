@@ -443,7 +443,10 @@ class Admin {
 	 * @return void
 	 */
 	private function render_connection_box() {
-		$adapter_ok = class_exists( '\\WP\\MCP\\Core\\McpAdapter' );
+		$adapter_ok  = class_exists( '\\WP\\MCP\\Core\\McpAdapter' );
+		$adapter_msg = ( new \HLB\MCP\Dependency() )->is_broken()
+			? __( 'The MCP Adapter plugin is active but failed to load its bundled dependencies, so this endpoint is not live yet.', 'hlb-ability-registry-mcp' )
+			: __( 'The MCP Adapter plugin is not active, so this endpoint is not live yet.', 'hlb-ability-registry-mcp' );
 		?>
 		<div class="card hlb-mcp-card">
 			<h2 class="hlb-mcp-card__title"><?php esc_html_e( 'MCP connection', 'hlb-ability-registry-mcp' ); ?></h2>
@@ -458,7 +461,7 @@ class Admin {
 						<code><?php echo esc_html( $this->settings->endpoint_url() ); ?></code>
 						<?php if ( ! $adapter_ok ) : ?>
 							<p class="description hlb-mcp-error-text">
-								<?php esc_html_e( 'The MCP Adapter plugin is not active, so this endpoint is not live yet.', 'hlb-ability-registry-mcp' ); ?>
+								<?php echo esc_html( $adapter_msg ); ?>
 							</p>
 						<?php endif; ?>
 					</td>

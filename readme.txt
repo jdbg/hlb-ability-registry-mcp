@@ -4,7 +4,7 @@ Tags: abilities-api, mcp, ai, multisite, rest-api
 Requires at least: 6.9
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.6.1
+Stable tag: 1.6.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -61,6 +61,11 @@ Yes. Per-subsite settings are always intersected with the currently-available ab
 2. Live search narrows the list by name, id, or description across every category at once.
 
 == Changelog ==
+
+= 1.6.2 =
+* The MCP Adapter dependency notice no longer reports an adapter that is active but failed to load as "installed but not active", and no longer offers an Activate button that would do nothing.
+* The notice now names the actual cause — missing bundled dependencies, a suppressed `WP_MCP_AUTOLOAD` autoloader, or an unexplained load failure — and gives the remedy that fits it.
+* The post-activation success notice is only shown when the adapter really loaded, instead of appearing alongside the error notice.
 
 = 1.6.1 =
 * Fix a fatal error in network mode: abilities whose input schema has no properties (e.g. `get-current-user`) aborted registration, silently dropping every ability after them from the MCP tool list.
