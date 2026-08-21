@@ -4,7 +4,9 @@
 		"php": "8.2",
 		"wp": "latest"
 	},
-	"phpExtensionBundles": [ "kitchen-sink" ],
+	"phpExtensionBundles": [
+		"kitchen-sink"
+	],
 	"features": {
 		"networking": true
 	},
@@ -26,8 +28,14 @@
 			}
 		},
 		{
-			"step": "activatePlugin",
-			"pluginPath": "hlb-ability-registry-mcp/hlb-ability-registry-mcp.php"
+			"step": "installPlugin",
+			"pluginData": {
+				"resource": "wordpress.org/plugins",
+				"slug": "hlb-ability-registry-mcp"
+			},
+			"options": {
+				"activate": true
+			}
 		}
 	]
 }
