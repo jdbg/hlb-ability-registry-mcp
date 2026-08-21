@@ -24,7 +24,8 @@
 				"url": "https://github.com/WordPress/mcp-adapter/releases/latest/download/mcp-adapter.zip"
 			},
 			"options": {
-				"activate": true
+				"activate": true,
+				"targetFolderName": "mcp-adapter"
 			}
 		},
 		{
@@ -34,7 +35,8 @@
 				"slug": "hlb-ability-registry-mcp"
 			},
 			"options": {
-				"activate": true
+				"activate": true,
+				"targetFolderName": "hlb-ability-registry-mcp"
 			}
 		}
 	]
