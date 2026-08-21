@@ -1,0 +1,27 @@
+name: Update WordPress.org assets
+
+# Assets and readme.txt live outside the tagged releases: they sit next to
+# trunk rather than inside it, so changing a banner, a screenshot or the
+# Playground blueprint needs no version bump. Tag-triggered deploys would
+# force one, hence this manual entry point.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  assets:
+    name: Sync assets and readme to the wordpress.org SVN repository
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Update assets
+        uses: 10up/action-wordpress-plugin-asset-update@stable
+        env:
+          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+          SLUG: hlb-ability-registry-mcp
