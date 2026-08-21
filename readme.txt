@@ -4,7 +4,7 @@ Tags: abilities-api, mcp, ai, multisite, rest-api
 Requires at least: 6.9
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.6.3
+Stable tag: 1.6.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -61,6 +61,10 @@ Yes. Per-subsite settings are always intersected with the currently-available ab
 2. Live search narrows the list by name, id, or description across every category at once.
 
 == Changelog ==
+
+= 1.6.4 =
+* Maintenance only — no changes to plugin behaviour.
+* The Live Preview on the plugin page now installs the MCP Adapter alongside this plugin, so the preview opens on a working MCP endpoint rather than the dependency notice.
 
 = 1.6.3 =
 * Maintenance only — no changes to plugin behaviour.
