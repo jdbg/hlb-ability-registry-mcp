@@ -4,7 +4,7 @@ Tags: abilities-api, mcp, ai, multisite, rest-api
 Requires at least: 6.9
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.6.2
+Stable tag: 1.6.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -61,6 +61,10 @@ Yes. Per-subsite settings are always intersected with the currently-available ab
 2. Live search narrows the list by name, id, or description across every category at once.
 
 == Changelog ==
+
+= 1.6.3 =
+* Maintenance only — no changes to plugin behaviour.
+* The WordPress Playground blueprint now sits where wordpress.org looks for it, so the plugin page offers a Live Preview.
 
 = 1.6.2 =
 * The MCP Adapter dependency notice no longer reports an adapter that is active but failed to load as "installed but not active", and no longer offers an Activate button that would do nothing.
