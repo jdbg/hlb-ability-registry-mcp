@@ -95,6 +95,21 @@ class Abilities {
 	}
 
 	/**
+	 * Whether the current user holds the capability, or any one of a list.
+	 *
+	 * @param string|string[] $capability Capability or any-of list.
+	 * @return bool
+	 */
+	public function user_can( $capability ) {
+		foreach ( (array) $capability as $cap ) {
+			if ( current_user_can( $cap ) ) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
 	 * Assemble the wp_register_ability() args for one ability.
 	 *
 	 * @param string $id  Ability id.
@@ -133,11 +148,11 @@ class Abilities {
 						return false;
 					}
 					switch_to_blog( $blog_id );
-					$allowed = current_user_can( $capability );
+					$allowed = $self->user_can( $capability );
 					restore_current_blog();
 					return $allowed;
 				}
-				return current_user_can( $capability );
+				return $self->user_can( $capability );
 			},
 			'meta'                => [
 				'show_in_rest' => true,

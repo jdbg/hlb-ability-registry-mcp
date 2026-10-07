@@ -12,6 +12,7 @@ namespace HLB\MCP;
 
 use HLB\MCP\Handlers\Comments;
 use HLB\MCP\Handlers\Content;
+use HLB\MCP\Handlers\GravityForms;
 use HLB\MCP\Handlers\Media;
 use HLB\MCP\Handlers\Patterns;
 use HLB\MCP\Handlers\SEOPress;
@@ -50,6 +51,7 @@ class Registry {
 			'site'          => __( 'Site & diagnostics', 'hlb-ability-registry-mcp' ),
 			'woocommerce'   => __( 'WooCommerce', 'hlb-ability-registry-mcp' ),
 			'seopress'      => __( 'SEOPress', 'hlb-ability-registry-mcp' ),
+			'gravityforms'  => __( 'Gravity Forms', 'hlb-ability-registry-mcp' ),
 		];
 	}
 
@@ -973,6 +975,177 @@ class Registry {
 							'description' => __( 'Twitter card image URL.', 'hlb-ability-registry-mcp' ),
 						],
 					],
+				],
+			],
+
+			/* --------------------------------------------------------- Gravity Forms */
+
+			'hlb/gf-list-forms' => [
+				'label'       => __( 'List forms (Gravity Forms)', 'hlb-ability-registry-mcp' ),
+				'description' => __( 'List Gravity Forms forms with their entry counts.', 'hlb-ability-registry-mcp' ),
+				'category'    => 'gravityforms',
+				'capability'  => [ 'gform_full_access', 'gravityforms_edit_forms' ],
+				'default'     => true,
+				'condition'   => [ GravityForms::class, 'is_active' ],
+				'annotations' => [
+					'readonly' => true,
+					'destructive' => false,
+					'idempotent' => true,
+				],
+				'handler'     => [ GravityForms::class, 'list_forms' ],
+				'input_schema' => [
+					'type'       => 'object',
+					'properties' => [
+						'active' => $string + [
+							'default' => 'any',
+							'enum'    => [ 'any', 'active', 'inactive' ],
+						],
+					],
+				],
+			],
+
+			'hlb/gf-get-form' => [
+				'label'       => __( 'Get form (Gravity Forms)', 'hlb-ability-registry-mcp' ),
+				'description' => __( 'Retrieve a form\'s fields, choices and inputs. Notifications, confirmations and feeds are not included.', 'hlb-ability-registry-mcp' ),
+				'category'    => 'gravityforms',
+				'capability'  => [ 'gform_full_access', 'gravityforms_edit_forms' ],
+				'default'     => true,
+				'condition'   => [ GravityForms::class, 'is_active' ],
+				'annotations' => [
+					'readonly' => true,
+					'destructive' => false,
+					'idempotent' => true,
+				],
+				'handler'     => [ GravityForms::class, 'get_form' ],
+				'input_schema' => [
+					'type'       => 'object',
+					'required'   => [ 'id' ],
+					'properties' => [ 'id' => $integer + [ 'description' => __( 'Form ID.', 'hlb-ability-registry-mcp' ) ] ],
+				],
+			],
+
+			'hlb/gf-list-entries' => [
+				'label'       => __( 'List entries (Gravity Forms)', 'hlb-ability-registry-mcp' ),
+				'description' => __( 'Query form entries with pagination (contains personal data, off by default).', 'hlb-ability-registry-mcp' ),
+				'category'    => 'gravityforms',
+				'capability'  => [ 'gform_full_access', 'gravityforms_view_entries' ],
+				'default'     => false,
+				'condition'   => [ GravityForms::class, 'is_active' ],
+				'annotations' => [
+					'readonly' => true,
+					'destructive' => false,
+					'idempotent' => true,
+				],
+				'handler'     => [ GravityForms::class, 'list_entries' ],
+				'input_schema' => [
+					'type'       => 'object',
+					'properties' => [
+						'form_id'    => $integer + [ 'description' => __( 'Limit to one form. Omit for all forms.', 'hlb-ability-registry-mcp' ) ],
+						'status'     => $string + [
+							'default' => 'active',
+							'enum'    => [ 'active', 'spam', 'trash' ],
+						],
+						'search'     => $string + [ 'description' => __( 'Match any field value.', 'hlb-ability-registry-mcp' ) ],
+						'start_date' => $string + [ 'description' => __( 'Earliest submission date (Y-m-d), site timezone.', 'hlb-ability-registry-mcp' ) ],
+						'end_date'   => $string + [ 'description' => __( 'Latest submission date (Y-m-d), site timezone.', 'hlb-ability-registry-mcp' ) ],
+						'per_page'   => $integer + [
+							'default' => 20,
+							'minimum' => 1,
+							'maximum' => 100,
+						],
+						'page'       => $integer + [
+							'default' => 1,
+							'minimum' => 1,
+						],
+					],
+				],
+			],
+
+			'hlb/gf-get-entry' => [
+				'label'       => __( 'Get entry (Gravity Forms)', 'hlb-ability-registry-mcp' ),
+				'description' => __( 'Fetch a form entry by ID (contains personal data, off by default).', 'hlb-ability-registry-mcp' ),
+				'category'    => 'gravityforms',
+				'capability'  => [ 'gform_full_access', 'gravityforms_view_entries' ],
+				'default'     => false,
+				'condition'   => [ GravityForms::class, 'is_active' ],
+				'annotations' => [
+					'readonly' => true,
+					'destructive' => false,
+					'idempotent' => true,
+				],
+				'handler'     => [ GravityForms::class, 'get_entry' ],
+				'input_schema' => [
+					'type'       => 'object',
+					'required'   => [ 'id' ],
+					'properties' => [ 'id' => $integer + [ 'description' => __( 'Entry ID.', 'hlb-ability-registry-mcp' ) ] ],
+				],
+			],
+
+			'hlb/gf-update-entry-status' => [
+				'label'       => __( 'Update entry status (Gravity Forms)', 'hlb-ability-registry-mcp' ),
+				'description' => __( 'Mark an entry as spam, trash or active, or set its read and starred flags.', 'hlb-ability-registry-mcp' ),
+				'category'    => 'gravityforms',
+				'capability'  => [ 'gform_full_access', 'gravityforms_edit_entries' ],
+				'default'     => false,
+				'condition'   => [ GravityForms::class, 'is_active' ],
+				'annotations' => [
+					'readonly' => false,
+					'destructive' => false,
+					'idempotent' => true,
+				],
+				'handler'     => [ GravityForms::class, 'update_entry_status' ],
+				'input_schema' => [
+					'type'       => 'object',
+					'required'   => [ 'id' ],
+					'properties' => [
+						'id'         => $integer + [ 'description' => __( 'Entry ID.', 'hlb-ability-registry-mcp' ) ],
+						'status'     => $string + [ 'enum' => [ 'active', 'spam', 'trash' ] ],
+						'is_read'    => $boolean,
+						'is_starred' => $boolean,
+					],
+				],
+			],
+
+			'hlb/gf-add-entry-note' => [
+				'label'       => __( 'Add entry note (Gravity Forms)', 'hlb-ability-registry-mcp' ),
+				'description' => __( 'Add a note to a form entry, authored by the current user.', 'hlb-ability-registry-mcp' ),
+				'category'    => 'gravityforms',
+				'capability'  => [ 'gform_full_access', 'gravityforms_edit_entry_notes' ],
+				'default'     => false,
+				'condition'   => [ GravityForms::class, 'is_active' ],
+				'annotations' => [
+					'readonly' => false,
+					'destructive' => false,
+					'idempotent' => false,
+				],
+				'handler'     => [ GravityForms::class, 'add_entry_note' ],
+				'input_schema' => [
+					'type'       => 'object',
+					'required'   => [ 'id', 'note' ],
+					'properties' => [
+						'id'   => $integer + [ 'description' => __( 'Entry ID.', 'hlb-ability-registry-mcp' ) ],
+						'note' => $string,
+					],
+				],
+			],
+
+			'hlb/gf-delete-entry' => [
+				'label'       => __( 'Delete entry (Gravity Forms)', 'hlb-ability-registry-mcp' ),
+				'description' => __( 'Permanently delete a form entry. Use the status ability to move it to trash instead.', 'hlb-ability-registry-mcp' ),
+				'category'    => 'gravityforms',
+				'capability'  => [ 'gform_full_access', 'gravityforms_delete_entries' ],
+				'default'     => false,
+				'condition'   => [ GravityForms::class, 'is_active' ],
+				'annotations' => [
+					'readonly' => false,
+					'destructive' => true,
+					'idempotent' => true,
+				],
+				'handler'     => [ GravityForms::class, 'delete_entry' ],
+				'input_schema' => [
+					'type'       => 'object',
+					'required'   => [ 'id' ],
+					'properties' => [ 'id' => $integer + [ 'description' => __( 'Entry ID.', 'hlb-ability-registry-mcp' ) ] ],
 				],
 			],
 		];
