@@ -3,7 +3,7 @@
 [![Lint](https://github.com/jdbg/hlb-ability-registry-mcp/actions/workflows/lint.yml/badge.svg)](https://github.com/jdbg/hlb-ability-registry-mcp/actions/workflows/lint.yml)
 
 A WordPress plugin that exposes a curated, admin-controlled set of WordPress **Abilities** to
-the [WordPress MCP Adapter](https://github.com/WordPress/mcp-adapter), so third-party tools and
+the [WordPress MCP Adapter](https://wordpress.org/plugins/mcp-adapter/), so third-party tools and
 AI agents can interact with your site over the Model Context Protocol (MCP). Multisite-ready and
 network-activatable, with network-wide defaults each subsite can inherit or override.
 
@@ -35,13 +35,12 @@ Every ability maps to a real WordPress capability, checked per request.
 - PHP **7.4+**
 - The **MCP Adapter** plugin, active (network-wide if this plugin is network-activated)
 
-The MCP Adapter is **not** in the wordpress.org directory, so this plugin never downloads or
-installs it automatically — that would mean fetching and running executable code from a
-third-party source, which this plugin (and the wordpress.org guidelines) avoid. If the adapter is
-missing, an admin notice links to its GitHub releases page for a manual upload-install; if it's
-already installed but inactive, the notice offers a one-click **Activate** button (a local
-operation — no code is downloaded). Until the adapter is active, the plugin still registers its
-abilities against core's Abilities API — only the MCP endpoint is skipped, never a fatal error.
+The MCP Adapter is available from the [wordpress.org plugin directory](https://wordpress.org/plugins/mcp-adapter/).
+This plugin never installs it automatically. If the adapter is missing, an admin notice offers an
+**Install MCP Adapter** button that opens core's plugin installer for that listing; if it's
+already installed but inactive, the notice offers a one-click **Activate** button. Until the
+adapter is active, the plugin still registers its abilities against core's Abilities API. Only
+the MCP endpoint is skipped, never a fatal error.
 
 ## Installation
 
@@ -49,9 +48,9 @@ abilities against core's Abilities API — only the MCP endpoint is skipped, nev
    are `hlb-ability-registry-mcp.php`, `uninstall.php`, and `inc/` — no Composer dependencies are
    needed at runtime).
 2. Activate it (single site or **Network Activate** on multisite).
-3. (Optional) Download the [MCP Adapter](https://github.com/WordPress/mcp-adapter/releases/latest)
-   and install it via **Plugins → Add New → Upload Plugin**, then activate it — or use the
-   one-click **Activate** button in the admin notice if it's already installed but inactive.
+3. (Optional) Install the [MCP Adapter](https://wordpress.org/plugins/mcp-adapter/) from
+   **Plugins → Add New** (or `wp plugin install mcp-adapter --activate`), or use the
+   **Install MCP Adapter** / **Activate** button in the admin notice.
 4. Configure which abilities are exposed under the settings page (see below).
 
 ## MCP endpoint & authentication
@@ -87,6 +86,7 @@ or contains personal data).
 | Network *(network mode only)* | `hlb/list-sites` | ✅ |
 | WooCommerce *(when active)* | `hlb/wc-list-products` ✅ · `hlb/wc-get-order` ⬜ | |
 | SEOPress *(when active)* | `hlb/seopress-get-meta` ✅ · `hlb/seopress-update-meta` ⬜ | |
+| Gravity Forms *(when active)* | `hlb/gf-list-forms`, `hlb/gf-get-form` ✅ · `hlb/gf-list-entries`, `hlb/gf-get-entry`, `hlb/gf-update-entry-status`, `hlb/gf-add-entry-note`, `hlb/gf-delete-entry` ⬜ | |
 
 Add your own via the `hlb_mcp_abilities` filter — see [Extending](#extending) below.
 
@@ -95,7 +95,7 @@ Add your own via the `hlb_mcp_abilities` filter — see [Extending](#extending) 
 Other plugins/mu-plugins can register additional abilities by filtering `hlb_mcp_abilities`.
 Each entry uses the same shape as the built-in registry: a label/description, an existing
 category id (categories themselves aren't filterable — reuse one from the table above), a
-capability, a `default` on/off state, `readonly`/`destructive`/`idempotent` annotations, a
+capability (or a list of capabilities, any one of which grants access), a `default` on/off state, `readonly`/`destructive`/`idempotent` annotations, a
 `handler` callable, and a JSON Schema `input_schema`. Give your ability id its own prefix
 (e.g. `acme/…`) so it can't collide with `hlb/…` ids.
 

@@ -5,7 +5,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## What this is
 
 A WordPress plugin (**HLB Ability Registry for MCP**) that exposes a curated, admin-controlled set of
-WordPress **Abilities** to the [MCP Adapter](https://github.com/WordPress/mcp-adapter) so
+WordPress **Abilities** to the [MCP Adapter](https://wordpress.org/plugins/mcp-adapter/) so
 third-party tools/agents can drive the site over MCP. Multisite-ready and network-activatable.
 Requires WordPress 6.9+ (Abilities API in core), PHP 7.4+, and the MCP Adapter plugin.
 
@@ -35,7 +35,7 @@ inside a real WordPress with the Abilities API **and** the MCP Adapter active. T
 1. Spin up a disposable MariaDB + a named volume, download WP core on the host (wp-cli's
    extractor OOMs), copy it into the volume **mounted at `/var/www/html`** (a fresh volume
    mounted anywhere else is root-owned and copies fail), `wp config create` + `wp core install`.
-2. Copy this plugin + the MCP Adapter into `wp-content/plugins`, `wp plugin activate` both.
+2. Copy this plugin + the MCP Adapter (`wp plugin install mcp-adapter`) into `wp-content/plugins`, `wp plugin activate` both.
 3. Drive assertions with `wp eval-file` against a probe script that fires `init` +
    `rest_api_init`, then checks: abilities register (`wp_get_ability(...)` non-null), a
    default-off write ability stays unregistered, an ability `execute()`s, and
@@ -110,13 +110,14 @@ network domain + subdomain-label-or-path). Endpoint: `/wp-json/{slug}/mcp`. Over
 ### Dependency handling
 
 `inc/class-dependency.php` detects three states (active / installed-inactive / not-installed) and
-shows an admin notice, but never downloads anything: the MCP Adapter is **not on wordpress.org**,
-and fetching/installing executable code from a third-party source is a wordpress.org guideline
-violation. When not-installed, the notice only links to the adapter's GitHub releases page for a
-manual upload-install. When installed-but-inactive, a one-click **Activate** button is offered —
-that's a local `activate_plugin()` call with no download, so it stays compliant; it network-
-activates when this plugin is network-active. The plugin never fatals when the adapter is absent —
-abilities still register, only the MCP server is skipped.
+shows an admin notice, but never installs anything automatically. The MCP Adapter is on
+wordpress.org (slug `mcp-adapter`), so when it's not installed the notice links to core's
+`plugin-install.php` screen for that listing (network admin when this plugin is network-active)
+and core does the download. When installed-but-inactive, a one-click **Activate** button is
+offered (a local `activate_plugin()` call); it network-activates when this plugin is
+network-active. The plugin never fatals when the adapter is absent: abilities still register,
+only the MCP server is skipped. No `Requires Plugins` header, on purpose: the plugin is useful
+without the adapter via core's Abilities REST API.
 
 ### Class loading
 
@@ -146,6 +147,12 @@ bootstrap (`hlb-ability-registry-mcp.php`) is **not** namespaced; all namespaced
   or `show_in_rest`, so a coarse `read` can't reach a plugin's private CPT; opt in via the
   `hlb_mcp_allowed_post_types` filter). Any new handler that takes a `status` or a `post_type`
   from input, or resolves a post by id, must route through them.
+- **Gravity Forms admins only get `gform_full_access`.** Without the Members plugin, GF grants
+  administrators that one cap via `user_has_cap`, not `gravityforms_view_entries` etc. A
+  registry `capability` may be an any-of array, so GF entries use
+  `[ 'gform_full_access', 'gravityforms_<cap>' ]`; a plain GF cap string denies every admin.
+  In network mode, `GravityForms::active_here()` re-checks activation on the switched blog
+  because the GF classes stay loaded on subsites that lack its tables.
 - **Hook timing:** abilities register on `wp_abilities_api_init` (fired lazily on first registry
   access after `init`); the server is created on `mcp_adapter_init`. The resolver is read at both
   points — abilities must be registered before the server resolves its tool ids.

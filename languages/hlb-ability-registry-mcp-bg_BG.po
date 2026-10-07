@@ -2,11 +2,11 @@
 # This file is distributed under the GPL-2.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: HLB Ability Registry for MCP 1.6.1\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/hlb-ability-"
-"registry-mcp\n"
-"POT-Creation-Date: 2026-08-07T11:39:14+00:00\n"
-"PO-Revision-Date: 2026-07-30 12:00+0000\n"
+"Project-Id-Version: HLB Ability Registry for MCP 1.7.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/hlb-mcp-"
+"abilities\n"
+"POT-Creation-Date: 2026-10-07T07:47:28+00:00\n"
+"PO-Revision-Date: 2026-10-07 10:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: Bulgarian\n"
 "Language: bg_BG\n"
@@ -19,15 +19,16 @@ msgstr ""
 #. Plugin Name of the plugin
 #: hlb-ability-registry-mcp.php inc/class-admin.php:88 inc/class-admin.php:89
 #: inc/class-admin.php:104 inc/class-admin.php:105 inc/class-admin.php:256
-#: inc/class-dependency.php:130 inc/class-dependency.php:140
-#: inc/class-dependency.php:154 inc/class-dependency.php:171
+#: inc/class-dependency.php:192 inc/class-dependency.php:202
+#: inc/class-dependency.php:213 inc/class-dependency.php:232
+#: inc/class-dependency.php:261 inc/class-dependency.php:289
 msgid "HLB Ability Registry for MCP"
-msgstr ""
+msgstr "HLB Ability Registry for MCP"
 
 #. Plugin URI of the plugin
 #: hlb-ability-registry-mcp.php
 msgid "https://github.com/jdbg/hlb-ability-registry-mcp"
-msgstr ""
+msgstr "https://github.com/jdbg/hlb-ability-registry-mcp"
 
 #. Description of the plugin
 #: hlb-ability-registry-mcp.php
@@ -46,13 +47,12 @@ msgstr ""
 #. Author of the plugin
 #: hlb-ability-registry-mcp.php
 msgid "Jordan Hlebarov"
-msgstr ""
+msgstr "Йордан Хлебаров"
 
 #. Author URI of the plugin
 #: hlb-ability-registry-mcp.php
-#, fuzzy
 msgid "https://jdbg.com/"
-msgstr "https://hlebarov.com/"
+msgstr "https://jdbg.com/"
 
 #. translators: %s: category label.
 #: inc/class-abilities.php:72
@@ -61,11 +61,11 @@ msgid "%s abilities exposed to MCP clients by HLB Ability Registry for MCP."
 msgstr ""
 "%s възможности, предоставени на MCP клиенти от HLB Ability Registry for MCP."
 
-#: inc/class-abilities.php:119
+#: inc/class-abilities.php:134
 msgid "Unknown target site."
 msgstr "Неизвестен целеви сайт."
 
-#: inc/class-abilities.php:174
+#: inc/class-abilities.php:192
 msgid ""
 "Target subsite: blog ID, path slug, or domain. Omit to act on the main site."
 msgstr ""
@@ -177,30 +177,38 @@ msgstr "само за четене"
 msgid "writes"
 msgstr "запис"
 
+#: inc/class-admin.php:448
+msgid ""
+"The MCP Adapter plugin is active but failed to load its bundled "
+"dependencies, so this endpoint is not live yet."
+msgstr ""
+"Приставката MCP Adapter е активна, но не успя да зареди включените си "
+"зависимости, затова тази крайна точка все още не работи."
+
 #: inc/class-admin.php:449
-msgid "MCP connection"
-msgstr "MCP връзка"
-
-#: inc/class-admin.php:452
-msgid "Server name"
-msgstr "Име на сървъра"
-
-#: inc/class-admin.php:456
-msgid "Endpoint"
-msgstr "Крайна точка"
-
-#: inc/class-admin.php:461
 msgid "The MCP Adapter plugin is not active, so this endpoint is not live yet."
 msgstr ""
 "Приставката MCP Adapter не е активна, затова тази крайна точка все още не е "
 "активна."
 
-#: inc/class-admin.php:467
+#: inc/class-admin.php:452
+msgid "MCP connection"
+msgstr "MCP връзка"
+
+#: inc/class-admin.php:455
+msgid "Server name"
+msgstr "Име на сървъра"
+
+#: inc/class-admin.php:459
+msgid "Endpoint"
+msgstr "Крайна точка"
+
+#: inc/class-admin.php:470
 msgid "Authentication"
 msgstr "Удостоверяване"
 
 #. translators: %s: link to the Application Passwords profile section.
-#: inc/class-admin.php:473
+#: inc/class-admin.php:476
 #, php-format
 msgid ""
 "Third-party agents authenticate as a WordPress user. Create an %s and use it "
@@ -211,15 +219,15 @@ msgstr ""
 "Създайте %s и я използвайте с HTTP Basic удостоверяване. Всяка възможност "
 "допълнително се ограничава от правата на този потребител."
 
-#: inc/class-admin.php:474
+#: inc/class-admin.php:477
 msgid "Application Password"
 msgstr "Парола за приложение"
 
-#: inc/class-admin.php:482
+#: inc/class-admin.php:485
 msgid "Frontend Gatekeeper"
 msgstr "Frontend Gatekeeper"
 
-#: inc/class-admin.php:485
+#: inc/class-admin.php:488
 msgid ""
 "Detected. If its gate is enabled, permalinks and site URLs returned by "
 "abilities are automatically tagged with its access parameter so agents can "
@@ -230,361 +238,434 @@ msgstr ""
 "за достъп, така че агентите да могат да ги следват, без да срещат нейната "
 "404 бариера."
 
-#: inc/class-admin.php:507
+#: inc/class-admin.php:510
 msgid "Settings saved."
 msgstr "Настройките са запазени."
 
-#: inc/class-admin.php:521
+#: inc/class-admin.php:524
 msgid "Permission denied."
 msgstr "Отказан достъп."
 
-#: inc/class-dependency.php:131
-#, fuzzy
+#: inc/class-dependency.php:193
 msgid ""
 "the MCP Adapter plugin is installed but not active. Ask a site administrator "
 "to activate it."
 msgstr ""
-"изисква приставката WordPress MCP Adapter. Помолете администратор на сайта "
-"да я инсталира и активира."
+"приставката MCP Adapter е инсталирана, но не е активна. Помолете "
+"администратор на сайта да я активира."
 
-#: inc/class-dependency.php:141
+#: inc/class-dependency.php:203
 msgid ""
 "the MCP Adapter plugin is not installed, so no MCP endpoint is exposed yet. "
 "Abilities still register normally and are available via the core Abilities "
 "REST API."
 msgstr ""
+"приставката MCP Adapter не е инсталирана, затова все още няма MCP крайна "
+"точка. Възможностите се регистрират нормално и са достъпни чрез REST API на "
+"Abilities в ядрото."
 
-#. translators: %s: link to the MCP Adapter GitHub releases page.
-#: inc/class-dependency.php:144
-#, php-format
-msgid ""
-"Download the latest release from %s, then install it from Plugins → Add New "
-"→ Upload Plugin."
-msgstr ""
+#: inc/class-dependency.php:205
+msgid "Install MCP Adapter"
+msgstr "Инсталиране на MCP Adapter"
 
-#: inc/class-dependency.php:145
-msgid "the MCP Adapter GitHub releases page"
-msgstr ""
-
-#: inc/class-dependency.php:155
-#, fuzzy
+#: inc/class-dependency.php:214
 msgid ""
 "the MCP Adapter plugin is not installed. Ask a site administrator to install "
 "and activate it."
 msgstr ""
-"изисква приставката WordPress MCP Adapter. Помолете администратор на сайта "
-"да я инсталира и активира."
+"приставката MCP Adapter не е инсталирана. Помолете администратор на сайта да "
+"я инсталира и активира."
 
-#: inc/class-dependency.php:172
-#, fuzzy
-msgid "the MCP Adapter plugin is installed but not active."
+#: inc/class-dependency.php:233
+msgid ""
+"the MCP Adapter plugin is active but failed to load, so no MCP endpoint is "
+"exposed. Ask a site administrator to reinstall it."
 msgstr ""
-"изисква приставката WordPress MCP Adapter, която е инсталирана, но не е "
-"активна."
+"приставката MCP Adapter е активна, но не успя да се зареди, затова няма MCP "
+"крайна точка. Помолете администратор на сайта да я преинсталира."
 
-#: inc/class-dependency.php:179
+#: inc/class-dependency.php:238
+msgid "WordPress.org"
+msgstr "WordPress.org"
+
+#: inc/class-dependency.php:241
+msgid ""
+"the MCP Adapter plugin is active but registered no classes, so no MCP "
+"endpoint is exposed. Its bundled autoloader is switched off by the "
+"WP_MCP_AUTOLOAD constant, and nothing else loaded the adapter in its place."
+msgstr ""
+"приставката MCP Adapter е активна, но не регистрира класове, затова няма MCP "
+"крайна точка. Вграденият ѝ autoloader е изключен от константата "
+"WP_MCP_AUTOLOAD и нищо друго не е заредило адаптера вместо него."
+
+#: inc/class-dependency.php:242
+msgid ""
+"Check that the autoloader meant to supply the WP\\MCP\\ namespace — usually "
+"a project-level Composer autoloader — is actually loaded at runtime, or "
+"remove the WP_MCP_AUTOLOAD constant so the adapter loads its own."
+msgstr ""
+"Проверете дали autoloader-ът, който трябва да осигури пространството от "
+"имена WP\\MCP\\ (обикновено Composer autoloader на ниво проект), наистина се "
+"зарежда, или премахнете константата WP_MCP_AUTOLOAD, за да може адаптерът да "
+"зареди собствения си."
+
+#: inc/class-dependency.php:244
+msgid ""
+"the MCP Adapter plugin is active but could not load — its bundled "
+"dependencies are missing, so no MCP endpoint is exposed. This happens when "
+"the adapter is installed from a source checkout instead of a packaged "
+"release."
+msgstr ""
+"приставката MCP Adapter е активна, но не можа да се зареди, защото липсват "
+"включените ѝ зависимости, затова няма MCP крайна точка. Това се случва, "
+"когато адаптерът е инсталиран от изходния код вместо от пакетирано издание."
+
+#. translators: %s: link to the MCP Adapter page on WordPress.org.
+#: inc/class-dependency.php:247
+#, php-format
+msgid ""
+"Install the latest release from %s over the current copy, or run \"composer "
+"install\" in the adapter's plugin folder."
+msgstr ""
+"Инсталирайте последното издание от %s върху текущото копие или изпълнете "
+"\"composer install\" в папката на адаптера."
+
+#: inc/class-dependency.php:251
+msgid ""
+"the MCP Adapter plugin is active but did not load its classes, so no MCP "
+"endpoint is exposed."
+msgstr ""
+"приставката MCP Adapter е активна, но не зареди класовете си, затова няма "
+"MCP крайна точка."
+
+#. translators: %s: link to the MCP Adapter page on WordPress.org.
+#: inc/class-dependency.php:254
+#, php-format
+msgid ""
+"Check the site error log for a fatal in the adapter, then reinstall it from "
+"%s."
+msgstr ""
+"Проверете журнала за грешки на сайта за фатална грешка в адаптера, след "
+"което го преинсталирайте от %s."
+
+#: inc/class-dependency.php:290
+msgid "the MCP Adapter plugin is installed but not active."
+msgstr "приставката MCP Adapter е инсталирана, но не е активна."
+
+#: inc/class-dependency.php:297
 msgid "Activate MCP Adapter"
 msgstr "Активиране на MCP Adapter"
 
-#: inc/class-dependency.php:180
+#: inc/class-dependency.php:298
 msgid "View plugin"
 msgstr "Преглед на приставката"
 
-#: inc/class-dependency.php:199
+#: inc/class-dependency.php:321
 msgid "MCP Adapter activated. Your MCP endpoint is now live."
 msgstr "MCP Adapter е активирана. Вашата MCP крайна точка вече е активна."
 
-#: inc/class-dependency.php:202
-#, fuzzy
+#: inc/class-dependency.php:325
 msgid "Could not activate the MCP Adapter."
-msgstr "MCP Adapter не можа да бъде инсталирана или активирана."
+msgstr "MCP Adapter не можа да бъде активирана."
 
-#: inc/class-dependency.php:217
+#: inc/class-dependency.php:340
 msgid "HLB Ability Registry for MCP:"
-msgstr ""
+msgstr "HLB Ability Registry for MCP:"
 
-#: inc/class-dependency.php:231
+#: inc/class-dependency.php:354
 msgid "You do not have permission to activate plugins."
 msgstr "Нямате права за активиране на приставки."
 
-#: inc/class-dependency.php:239
+#: inc/class-dependency.php:362
 msgid "The MCP Adapter is no longer installed."
 msgstr "MCP Adapter вече не е инсталирана."
 
-#: inc/class-registry.php:44
+#: inc/class-dependency.php:366
+msgid ""
+"The MCP Adapter is already active but failed to load its bundled "
+"dependencies. Reinstall it from a packaged release."
+msgstr ""
+"MCP Adapter вече е активна, но не успя да зареди включените си зависимости. "
+"Преинсталирайте я от пакетирано издание."
+
+#: inc/class-registry.php:45
 msgid "Content — read"
 msgstr "Съдържание — четене"
 
-#: inc/class-registry.php:45
+#: inc/class-registry.php:46
 msgid "Content — write"
 msgstr "Съдържание — запис"
 
-#: inc/class-registry.php:46
+#: inc/class-registry.php:47
 msgid "Media"
 msgstr "Медия"
 
-#: inc/class-registry.php:47
+#: inc/class-registry.php:48
 msgid "Comments"
 msgstr "Коментари"
 
-#: inc/class-registry.php:48
+#: inc/class-registry.php:49
 msgid "Users"
 msgstr "Потребители"
 
-#: inc/class-registry.php:49
+#: inc/class-registry.php:50
 msgid "Site Editor"
 msgstr "Редактор на сайта"
 
-#: inc/class-registry.php:50
+#: inc/class-registry.php:51
 msgid "Site & diagnostics"
 msgstr "Сайт и диагностика"
 
-#: inc/class-registry.php:51
+#: inc/class-registry.php:52
 msgid "WooCommerce"
 msgstr "WooCommerce"
 
-#: inc/class-registry.php:52
+#: inc/class-registry.php:53
 msgid "SEOPress"
 msgstr "SEOPress"
 
-#: inc/class-registry.php:75
+#: inc/class-registry.php:54
+msgid "Gravity Forms"
+msgstr "Gravity Forms"
+
+#: inc/class-registry.php:77
 msgid "Get post"
 msgstr "Получаване на публикация"
 
-#: inc/class-registry.php:76
+#: inc/class-registry.php:78
 msgid "Retrieve a single post or page by ID or slug."
 msgstr "Извличане на единична публикация или страница по ID или слъг."
 
-#: inc/class-registry.php:89 inc/class-registry.php:928
-#: inc/class-registry.php:949
+#: inc/class-registry.php:91 inc/class-registry.php:934
+#: inc/class-registry.php:955
 msgid "Post ID."
 msgstr "ID на публикацията."
 
-#: inc/class-registry.php:90
+#: inc/class-registry.php:92
 msgid "Post slug (used if ID omitted)."
 msgstr "Слъг на публикацията (използва се, ако ID е пропуснато)."
 
-#: inc/class-registry.php:97
+#: inc/class-registry.php:99
 msgid "List posts"
 msgstr "Списък с публикации"
 
-#: inc/class-registry.php:98
+#: inc/class-registry.php:100
 msgid "Query posts by type, status, author, and date with pagination."
 msgstr "Заявка за публикации по тип, статус, автор и дата с странициране."
 
-#: inc/class-registry.php:129
+#: inc/class-registry.php:131
 msgid "Search content"
 msgstr "Търсене в съдържанието"
 
-#: inc/class-registry.php:130
+#: inc/class-registry.php:132
 msgid "Full-text search across public post types."
 msgstr "Пълнотекстово търсене в публичните типове публикации."
 
-#: inc/class-registry.php:144
+#: inc/class-registry.php:146
 msgid "Search terms."
 msgstr "Термини за търсене."
 
-#: inc/class-registry.php:159
+#: inc/class-registry.php:161
 msgid "Get taxonomies & terms"
 msgstr "Получаване на таксономии и термини"
 
-#: inc/class-registry.php:160
+#: inc/class-registry.php:162
 msgid "List categories, tags, and custom taxonomy terms."
 msgstr "Списък с категории, етикети и термини от персонализирани таксономии."
 
-#: inc/class-registry.php:173
+#: inc/class-registry.php:175
 msgid "Limit to a taxonomy (e.g. category, post_tag)."
 msgstr "Ограничаване до таксономия (напр. category, post_tag)."
 
-#: inc/class-registry.php:181
+#: inc/class-registry.php:183
 msgid "Create post"
 msgstr "Създаване на публикация"
 
-#: inc/class-registry.php:182
+#: inc/class-registry.php:184
 msgid "Create a new post or page (draft by default)."
 msgstr "Създаване на нова публикация или страница (чернова по подразбиране)."
 
-#: inc/class-registry.php:209
+#: inc/class-registry.php:211
 msgid "Update post"
 msgstr "Актуализиране на публикация"
 
-#: inc/class-registry.php:210
+#: inc/class-registry.php:212
 msgid "Update the title, content, excerpt, or status of an existing post."
 msgstr ""
 "Актуализиране на заглавието, съдържанието, откъса или статуса на "
 "съществуваща публикация."
 
-#: inc/class-registry.php:234
+#: inc/class-registry.php:236
 msgid "Set post status"
 msgstr "Задаване на статус на публикация"
 
-#: inc/class-registry.php:235
+#: inc/class-registry.php:237
 msgid "Transition a post between draft, pending, publish, private, or trash."
 msgstr ""
 "Преминаване на публикация между чернова, чакаща, публикувана, лична или "
 "кошче."
 
-#: inc/class-registry.php:256
+#: inc/class-registry.php:258
 msgid "Delete post"
 msgstr "Изтриване на публикация"
 
-#: inc/class-registry.php:257
+#: inc/class-registry.php:259
 msgid "Trash a post, or permanently delete it when force is true."
 msgstr ""
 "Преместване на публикация в кошчето или окончателно изтриване, когато force "
 "е true."
 
-#: inc/class-registry.php:274 inc/class-registry.php:756
+#: inc/class-registry.php:276 inc/class-registry.php:758
 msgid "Permanently delete instead of trashing."
 msgstr "Окончателно изтриване вместо преместване в кошчето."
 
-#: inc/class-registry.php:281
+#: inc/class-registry.php:283
 msgid "Assign terms"
 msgstr "Присвояване на термини"
 
-#: inc/class-registry.php:282
+#: inc/class-registry.php:284
 msgid "Set categories, tags, or custom terms on a post."
 msgstr ""
 "Задаване на категории, етикети или персонализирани термини на публикация."
 
-#: inc/class-registry.php:301
+#: inc/class-registry.php:303
 msgid "Term slugs, names, or IDs."
 msgstr "Слъгове, имена или ID-та на термини."
 
-#: inc/class-registry.php:309
+#: inc/class-registry.php:311
 msgid "Create term"
 msgstr "Създаване на термин"
 
-#: inc/class-registry.php:310
+#: inc/class-registry.php:312
 msgid "Create a category, tag, or custom taxonomy term."
 msgstr ""
 "Създаване на категория, етикет или термин от персонализирана таксономия."
 
-#: inc/class-registry.php:336
+#: inc/class-registry.php:338
 msgid "List media"
 msgstr "Списък с медия"
 
-#: inc/class-registry.php:337
+#: inc/class-registry.php:339
 msgid "Query the media library with pagination."
 msgstr "Заявка към медийната библиотека със странициране."
 
-#: inc/class-registry.php:350
+#: inc/class-registry.php:352
 msgid "Filter by MIME type, e.g. image."
 msgstr "Филтриране по MIME тип, напр. image."
 
-#: inc/class-registry.php:365
+#: inc/class-registry.php:367
 msgid "Upload media"
 msgstr "Качване на медия"
 
-#: inc/class-registry.php:366
+#: inc/class-registry.php:368
 msgid "Upload an image or file to the media library from a URL."
 msgstr "Качване на изображение или файл в медийната библиотека от URL адрес."
 
-#: inc/class-registry.php:382
+#: inc/class-registry.php:384
 msgid "Source URL to sideload."
 msgstr "Изходен URL адрес за странично зареждане."
 
-#: inc/class-registry.php:386
+#: inc/class-registry.php:388
 msgid "Attach to this post."
 msgstr "Прикачване към тази публикация."
 
-#: inc/class-registry.php:394
+#: inc/class-registry.php:396
 msgid "List comments"
 msgstr "Списък с коментари"
 
-#: inc/class-registry.php:395
+#: inc/class-registry.php:397
 msgid "List comments, optionally filtered by post or status."
 msgstr "Списък с коментари, по избор филтрирани по публикация или статус."
 
-#: inc/class-registry.php:427
+#: inc/class-registry.php:429
 msgid "Moderate comment"
 msgstr "Модериране на коментар"
 
-#: inc/class-registry.php:428
+#: inc/class-registry.php:430
 msgid "Approve, unapprove, spam, or trash a comment."
 msgstr ""
 "Одобряване, отмяна на одобрение, маркиране като спам или преместване в "
 "кошчето на коментар."
 
-#: inc/class-registry.php:451
+#: inc/class-registry.php:453
 msgid "Get current user"
 msgstr "Получаване на текущия потребител"
 
-#: inc/class-registry.php:452
+#: inc/class-registry.php:454
 msgid "Identity and capabilities of the authenticated MCP caller."
 msgstr "Самоличност и права на удостоверения MCP извикващ."
 
-#: inc/class-registry.php:469
+#: inc/class-registry.php:471
 msgid "List users"
 msgstr "Списък с потребители"
 
-#: inc/class-registry.php:470
+#: inc/class-registry.php:472
 msgid "List site users (contains personal data — off by default)."
 msgstr ""
 "Списък с потребители на сайта (съдържа лични данни — изключено по "
 "подразбиране)."
 
-#: inc/class-registry.php:501
+#: inc/class-registry.php:503
 msgid "List templates"
 msgstr "Списък с шаблони"
 
-#: inc/class-registry.php:502
+#: inc/class-registry.php:504
 msgid "List block templates or template parts for the active theme."
 msgstr "Списък с блокови шаблони или части от шаблони за активната тема."
 
-#: inc/class-registry.php:520
+#: inc/class-registry.php:522
 msgid "Filter template parts by area, e.g. header, footer."
 msgstr "Филтриране на частите от шаблони по област, напр. header, footer."
 
-#: inc/class-registry.php:526
+#: inc/class-registry.php:528
 msgid "Get template"
 msgstr "Получаване на шаблон"
 
-#: inc/class-registry.php:527
+#: inc/class-registry.php:529
 msgid ""
 "Retrieve a single template or template part, including its block markup."
 msgstr ""
 "Извличане на единичен шаблон или част от шаблон, включително неговия блоков "
 "код."
 
-#: inc/class-registry.php:542 inc/class-registry.php:598
-#: inc/class-registry.php:627
+#: inc/class-registry.php:544 inc/class-registry.php:600
+#: inc/class-registry.php:629
 msgid "Template id, e.g. themeslug//slug."
 msgstr "ID на шаблона, напр. themeslug//slug."
 
-#: inc/class-registry.php:552
+#: inc/class-registry.php:554
 msgid "Create template"
 msgstr "Създаване на шаблон"
 
-#: inc/class-registry.php:553
+#: inc/class-registry.php:555
 msgid "Create a new custom template or template part."
 msgstr "Създаване на нов персонализиран шаблон или част от шаблон."
 
-#: inc/class-registry.php:570 inc/class-registry.php:604
-#: inc/class-registry.php:702 inc/class-registry.php:730
+#: inc/class-registry.php:572 inc/class-registry.php:606
+#: inc/class-registry.php:704 inc/class-registry.php:732
 msgid "Block markup."
 msgstr "Блоков код."
 
-#: inc/class-registry.php:576
+#: inc/class-registry.php:578
 msgid "Template-part area, e.g. header, footer."
 msgstr "Област на частта от шаблона, напр. header, footer."
 
-#: inc/class-registry.php:582
+#: inc/class-registry.php:584
 msgid "Update template"
 msgstr "Актуализиране на шаблон"
 
-#: inc/class-registry.php:583
+#: inc/class-registry.php:585
 msgid ""
 "Update the title, content, or description of a template or template part."
 msgstr ""
 "Актуализиране на заглавието, съдържанието или описанието на шаблон или част "
 "от шаблон."
 
-#: inc/class-registry.php:611
+#: inc/class-registry.php:613
 msgid "Delete template"
 msgstr "Изтриване на шаблон"
 
-#: inc/class-registry.php:612
+#: inc/class-registry.php:614
 msgid ""
 "Delete a custom template, or revert a customized theme template back to its "
 "theme file."
@@ -592,71 +673,71 @@ msgstr ""
 "Изтриване на персонализиран шаблон или връщане на персонализиран шаблон на "
 "темата към неговия файл в темата."
 
-#: inc/class-registry.php:637
+#: inc/class-registry.php:639
 msgid "List patterns"
 msgstr "Списък с шарки"
 
-#: inc/class-registry.php:638
+#: inc/class-registry.php:640
 msgid "List user-created patterns (reusable blocks)."
 msgstr "Списък с потребителски шарки (използваеми блокове)."
 
-#: inc/class-registry.php:652 inc/class-registry.php:777
+#: inc/class-registry.php:654 inc/class-registry.php:779
 msgid "Filter by pattern category slug."
 msgstr "Филтриране по слъг на категория шарки."
 
-#: inc/class-registry.php:667
+#: inc/class-registry.php:669
 msgid "Get pattern"
 msgstr "Получаване на шарка"
 
-#: inc/class-registry.php:668
+#: inc/class-registry.php:670
 msgid "Retrieve a single user-created pattern, including its block markup."
 msgstr ""
 "Извличане на единична потребителска шарка, включително нейния блоков код."
 
-#: inc/class-registry.php:686
+#: inc/class-registry.php:688
 msgid "Create pattern"
 msgstr "Създаване на шарка"
 
-#: inc/class-registry.php:687
+#: inc/class-registry.php:689
 msgid "Create a new user pattern (reusable block)."
 msgstr "Създаване на нова потребителска шарка (използваем блок)."
 
-#: inc/class-registry.php:703 inc/class-registry.php:731
+#: inc/class-registry.php:705 inc/class-registry.php:733
 msgid "Pattern category name or slug."
 msgstr "Име или слъг на категория шарки."
 
-#: inc/class-registry.php:706
+#: inc/class-registry.php:708
 msgid ""
 "False creates an unsynced pattern (edits in one place do not propagate)."
 msgstr ""
 "False създава несинхронизирана шарка (редакциите на едно място не се "
 "разпространяват)."
 
-#: inc/class-registry.php:713
+#: inc/class-registry.php:715
 msgid "Update pattern"
 msgstr "Актуализиране на шарка"
 
-#: inc/class-registry.php:714
+#: inc/class-registry.php:716
 msgid "Update the title, content, category, or sync status of a user pattern."
 msgstr ""
 "Актуализиране на заглавието, съдържанието, категорията или статуса на "
 "синхронизация на потребителска шарка."
 
-#: inc/class-registry.php:738
+#: inc/class-registry.php:740
 msgid "Delete pattern"
 msgstr "Изтриване на шарка"
 
-#: inc/class-registry.php:739
+#: inc/class-registry.php:741
 msgid "Trash a user pattern, or permanently delete it when force is true."
 msgstr ""
 "Преместване на потребителска шарка в кошчето или окончателно изтриване, "
 "когато force е true."
 
-#: inc/class-registry.php:763
+#: inc/class-registry.php:765
 msgid "List registered patterns"
 msgstr "Списък с регистрирани шарки"
 
-#: inc/class-registry.php:764
+#: inc/class-registry.php:766
 msgid ""
 "List code-registered theme/plugin block patterns (read-only; not user-"
 "editable posts)."
@@ -664,35 +745,35 @@ msgstr ""
 "Списък с регистрирани в кода блокови шарки на тема/приставка (само за "
 "четене; не са публикации, редактируеми от потребителя)."
 
-#: inc/class-registry.php:785
+#: inc/class-registry.php:787
 msgid "Get site info"
 msgstr "Получаване на информация за сайта"
 
-#: inc/class-registry.php:786
+#: inc/class-registry.php:788
 msgid "Site name, URL, WordPress version, language, and timezone."
 msgstr "Име на сайта, URL адрес, версия на WordPress, език и часова зона."
 
-#: inc/class-registry.php:803
+#: inc/class-registry.php:805
 msgid "Get active theme"
 msgstr "Получаване на активната тема"
 
-#: inc/class-registry.php:804
+#: inc/class-registry.php:806
 msgid "The active theme, its version, and whether it is a block theme."
 msgstr "Активната тема, нейната версия и дали е блокова тема."
 
-#: inc/class-registry.php:821
+#: inc/class-registry.php:823
 msgid "List active plugins"
 msgstr "Списък с активни приставки"
 
-#: inc/class-registry.php:822
+#: inc/class-registry.php:824
 msgid "Active plugins with name and version (admin diagnostics)."
 msgstr "Активни приставки с име и версия (администраторска диагностика)."
 
-#: inc/class-registry.php:839
+#: inc/class-registry.php:841
 msgid "List network sites"
 msgstr "Списък с мрежови сайтове"
 
-#: inc/class-registry.php:840
+#: inc/class-registry.php:842
 msgid ""
 "List the subsites in the multisite network so a `site` argument can target "
 "them (network mode)."
@@ -700,30 +781,38 @@ msgstr ""
 "Списък с подсайтовете в мрежата от сайтове, за да могат да бъдат насочвани "
 "чрез аргумент `site` (мрежов режим)."
 
-#: inc/class-registry.php:860
+#: inc/class-registry.php:862
 msgid "List products (WooCommerce)"
 msgstr "Списък с продукти (WooCommerce)"
 
-#: inc/class-registry.php:861
+#: inc/class-registry.php:863
 msgid "Query WooCommerce products with pagination."
 msgstr "Заявка за продукти на WooCommerce със странициране."
 
-#: inc/class-registry.php:891
+#: inc/class-registry.php:881
+msgid ""
+"Product status. Non-published statuses are only honoured for callers who can "
+"edit products."
+msgstr ""
+"Статус на продукта. Непубликувани статуси се вземат предвид само за "
+"потребители, които могат да редактират продукти."
+
+#: inc/class-registry.php:897
 msgid "Get order (WooCommerce)"
 msgstr "Получаване на поръчка (WooCommerce)"
 
-#: inc/class-registry.php:892
+#: inc/class-registry.php:898
 msgid ""
 "Fetch a WooCommerce order by ID (contains personal data — off by default)."
 msgstr ""
 "Извличане на поръчка на WooCommerce по ID (съдържа лични данни — изключено "
 "по подразбиране)."
 
-#: inc/class-registry.php:913
+#: inc/class-registry.php:919
 msgid "Get SEO meta (SEOPress)"
 msgstr "Получаване на SEO мета данни (SEOPress)"
 
-#: inc/class-registry.php:914
+#: inc/class-registry.php:920
 msgid ""
 "Retrieve a post's SEOPress title, description, robots, and social preview "
 "meta."
@@ -731,64 +820,162 @@ msgstr ""
 "Извличане на SEOPress заглавие, описание, robots и мета данни за преглед в "
 "социални мрежи на публикация."
 
-#: inc/class-registry.php:933
+#: inc/class-registry.php:939
 msgid "Update SEO meta (SEOPress)"
 msgstr "Актуализиране на SEO мета данни (SEOPress)"
 
-#: inc/class-registry.php:934
+#: inc/class-registry.php:940
 msgid ""
 "Update a post's SEOPress title, description, robots, and social preview meta."
 msgstr ""
 "Актуализиране на SEOPress заглавие, описание, robots и мета данни за преглед "
 "в социални мрежи на публикация."
 
-#: inc/class-registry.php:950
+#: inc/class-registry.php:956
 msgid "SEO title (Titles & Metas tab)."
 msgstr "SEO заглавие (раздел Titles & Metas)."
 
-#: inc/class-registry.php:951
+#: inc/class-registry.php:957
 msgid "Meta description (Titles & Metas tab)."
 msgstr "Мета описание (раздел Titles & Metas)."
 
-#: inc/class-registry.php:954
+#: inc/class-registry.php:960
 msgid "Custom canonical URL."
 msgstr "Персонализиран канонизиран URL адрес."
 
-#: inc/class-registry.php:956
+#: inc/class-registry.php:962
 msgid "Exclude this post from search engine indexing."
 msgstr "Изключване на тази публикация от индексиране от търсачките."
 
-#: inc/class-registry.php:957
+#: inc/class-registry.php:963
 msgid "Tell search engines not to follow links on this post."
 msgstr "Указване на търсачките да не следват връзките в тази публикация."
 
-#: inc/class-registry.php:958
+#: inc/class-registry.php:964
 msgid "Primary target keyword for content analysis."
 msgstr "Основна целева ключова дума за анализ на съдържанието."
 
-#: inc/class-registry.php:959
+#: inc/class-registry.php:965
 msgid "Facebook/Open Graph title."
 msgstr "Facebook/Open Graph заглавие."
 
-#: inc/class-registry.php:960
+#: inc/class-registry.php:966
 msgid "Facebook/Open Graph description."
 msgstr "Facebook/Open Graph описание."
 
-#: inc/class-registry.php:963
+#: inc/class-registry.php:969
 msgid "Facebook/Open Graph image URL."
 msgstr "URL адрес на изображение за Facebook/Open Graph."
 
-#: inc/class-registry.php:965
+#: inc/class-registry.php:971
 msgid "Twitter card title."
 msgstr "Заглавие на Twitter карта."
 
-#: inc/class-registry.php:966
+#: inc/class-registry.php:972
 msgid "Twitter card description."
 msgstr "Описание на Twitter карта."
 
-#: inc/class-registry.php:969
+#: inc/class-registry.php:975
 msgid "Twitter card image URL."
 msgstr "URL адрес на изображение за Twitter карта."
+
+#: inc/class-registry.php:984
+msgid "List forms (Gravity Forms)"
+msgstr "Списък с формуляри (Gravity Forms)"
+
+#: inc/class-registry.php:985
+msgid "List Gravity Forms forms with their entry counts."
+msgstr "Списък с формулярите на Gravity Forms и броя на записите им."
+
+#: inc/class-registry.php:1008
+msgid "Get form (Gravity Forms)"
+msgstr "Получаване на формуляр (Gravity Forms)"
+
+#: inc/class-registry.php:1009
+msgid ""
+"Retrieve a form's fields, choices and inputs. Notifications, confirmations "
+"and feeds are not included."
+msgstr ""
+"Извличане на полетата, опциите и входовете на формуляр. Известията, "
+"потвържденията и емисиите не са включени."
+
+#: inc/class-registry.php:1023
+msgid "Form ID."
+msgstr "ID на формуляра."
+
+#: inc/class-registry.php:1028
+msgid "List entries (Gravity Forms)"
+msgstr "Списък със записи (Gravity Forms)"
+
+#: inc/class-registry.php:1029
+msgid ""
+"Query form entries with pagination (contains personal data, off by default)."
+msgstr ""
+"Заявка за записи от формуляри със странициране (съдържа лични данни, "
+"изключено по подразбиране)."
+
+#: inc/class-registry.php:1043
+msgid "Limit to one form. Omit for all forms."
+msgstr "Ограничаване до един формуляр. Пропуснете за всички формуляри."
+
+#: inc/class-registry.php:1048
+msgid "Match any field value."
+msgstr "Съвпадение с която и да е стойност на поле."
+
+#: inc/class-registry.php:1049
+msgid "Earliest submission date (Y-m-d), site timezone."
+msgstr "Най-ранна дата на подаване (Y-m-d), в часовата зона на сайта."
+
+#: inc/class-registry.php:1050
+msgid "Latest submission date (Y-m-d), site timezone."
+msgstr "Най-късна дата на подаване (Y-m-d), в часовата зона на сайта."
+
+#: inc/class-registry.php:1065
+msgid "Get entry (Gravity Forms)"
+msgstr "Получаване на запис (Gravity Forms)"
+
+#: inc/class-registry.php:1066
+msgid "Fetch a form entry by ID (contains personal data, off by default)."
+msgstr ""
+"Извличане на запис от формуляр по ID (съдържа лични данни, изключено по "
+"подразбиране)."
+
+#: inc/class-registry.php:1080 inc/class-registry.php:1101
+#: inc/class-registry.php:1126 inc/class-registry.php:1148
+msgid "Entry ID."
+msgstr "ID на записа."
+
+#: inc/class-registry.php:1085
+msgid "Update entry status (Gravity Forms)"
+msgstr "Актуализиране на статуса на запис (Gravity Forms)"
+
+#: inc/class-registry.php:1086
+msgid ""
+"Mark an entry as spam, trash or active, or set its read and starred flags."
+msgstr ""
+"Маркиране на запис като спам, кошче или активен, или задаване на флаговете "
+"прочетен и със звезда."
+
+#: inc/class-registry.php:1110
+msgid "Add entry note (Gravity Forms)"
+msgstr "Добавяне на бележка към запис (Gravity Forms)"
+
+#: inc/class-registry.php:1111
+msgid "Add a note to a form entry, authored by the current user."
+msgstr ""
+"Добавяне на бележка към запис от формуляр от името на текущия потребител."
+
+#: inc/class-registry.php:1133
+msgid "Delete entry (Gravity Forms)"
+msgstr "Изтриване на запис (Gravity Forms)"
+
+#: inc/class-registry.php:1134
+msgid ""
+"Permanently delete a form entry. Use the status ability to move it to trash "
+"instead."
+msgstr ""
+"Окончателно изтриване на запис от формуляр. За преместване в кошчето "
+"използвайте възможността за статус."
 
 #: inc/class-server.php:79
 msgid ""
@@ -802,7 +989,7 @@ msgstr ""
 #: inc/class-settings.php:282
 #, php-format
 msgid "HLB Ability Registry — %s"
-msgstr ""
+msgstr "HLB Ability Registry: %s"
 
 #: inc/handlers/class-comments.php:70
 msgid "Comment not found."
@@ -820,66 +1007,106 @@ msgstr "Неизвестно действие."
 msgid "Moderation action failed."
 msgstr "Действието по модериране е неуспешно."
 
-#: inc/handlers/class-content.php:67
+#: inc/handlers/class-content.php:72
 msgid "Provide an id or slug."
 msgstr "Посочете ID или слъг."
 
-#: inc/handlers/class-content.php:71 inc/handlers/class-content.php:77
-#: inc/handlers/class-content.php:242 inc/handlers/class-content.php:287
-#: inc/handlers/class-content.php:329 inc/handlers/class-content.php:359
-#: inc/handlers/class-seopress.php:60 inc/handlers/class-seopress.php:66
-#: inc/handlers/class-seopress.php:86
+#: inc/handlers/class-content.php:76 inc/handlers/class-content.php:82
+#: inc/handlers/class-content.php:250 inc/handlers/class-content.php:295
+#: inc/handlers/class-content.php:337 inc/handlers/class-content.php:367
+#: inc/handlers/class-seopress.php:61 inc/handlers/class-seopress.php:67
+#: inc/handlers/class-seopress.php:87
 msgid "Post not found."
 msgstr "Публикацията не е намерена."
 
-#: inc/handlers/class-content.php:206
+#: inc/handlers/class-content.php:211
 msgid "Unknown post type."
 msgstr "Неизвестен тип публикация."
 
-#: inc/handlers/class-content.php:209
+#: inc/handlers/class-content.php:217
 msgid "You cannot create this type of content."
 msgstr "Нямате право да създавате този тип съдържание."
 
-#: inc/handlers/class-content.php:214
+#: inc/handlers/class-content.php:222
 msgid "You cannot publish this type of content."
 msgstr "Нямате право да публикувате този тип съдържание."
 
-#: inc/handlers/class-content.php:245 inc/handlers/class-content.php:290
-#: inc/handlers/class-content.php:365 inc/handlers/class-seopress.php:89
+#: inc/handlers/class-content.php:253 inc/handlers/class-content.php:298
+#: inc/handlers/class-content.php:373 inc/handlers/class-seopress.php:90
 msgid "You cannot edit this post."
 msgstr "Нямате право да редактирате тази публикация."
 
-#: inc/handlers/class-content.php:263 inc/handlers/class-content.php:295
+#: inc/handlers/class-content.php:271 inc/handlers/class-content.php:303
 msgid "You cannot publish this post."
 msgstr "Нямате право да публикувате тази публикация."
 
-#: inc/handlers/class-content.php:299
+#: inc/handlers/class-content.php:307
 msgid "You cannot trash this post."
 msgstr "Нямате право да премествате тази публикация в кошчето."
 
-#: inc/handlers/class-content.php:305
+#: inc/handlers/class-content.php:313
 msgid "Could not trash the post."
 msgstr "Публикацията не можа да бъде преместена в кошчето."
 
-#: inc/handlers/class-content.php:332
+#: inc/handlers/class-content.php:340
 msgid "You cannot delete this post."
 msgstr "Нямате право да изтривате тази публикация."
 
-#: inc/handlers/class-content.php:337
+#: inc/handlers/class-content.php:345
 msgid "Could not delete the post."
 msgstr "Публикацията не можа да бъде изтрита."
 
-#: inc/handlers/class-content.php:362 inc/handlers/class-content.php:393
+#: inc/handlers/class-content.php:370 inc/handlers/class-content.php:401
 msgid "Unknown taxonomy."
 msgstr "Неизвестна таксономия."
 
-#: inc/handlers/class-content.php:369
+#: inc/handlers/class-content.php:377
 msgid "You cannot assign terms in this taxonomy."
 msgstr "Нямате право да присвоявате термини в тази таксономия."
 
-#: inc/handlers/class-content.php:397
+#: inc/handlers/class-content.php:405
 msgid "You cannot manage terms in this taxonomy."
 msgstr "Нямате право да управлявате термини в тази таксономия."
+
+#: inc/handlers/class-content.php:437
+msgid ""
+"This post type is not available: only post types that are public or exposed "
+"in the REST API can be addressed."
+msgstr ""
+"Този тип публикация не е достъпен: могат да се използват само типове "
+"публикации, които са публични или достъпни в REST API."
+
+#: inc/handlers/class-gravityforms.php:113
+#: inc/handlers/class-gravityforms.php:149
+msgid "Form not found."
+msgstr "Формулярът не е намерен."
+
+#: inc/handlers/class-gravityforms.php:217
+#: inc/handlers/class-gravityforms.php:237
+#: inc/handlers/class-gravityforms.php:280
+#: inc/handlers/class-gravityforms.php:315
+msgid "Entry not found."
+msgstr "Записът не е намерен."
+
+#: inc/handlers/class-gravityforms.php:243
+msgid "Invalid entry status."
+msgstr "Невалиден статус на запис."
+
+#: inc/handlers/class-gravityforms.php:253
+msgid "Nothing to update."
+msgstr "Няма какво да се актуализира."
+
+#: inc/handlers/class-gravityforms.php:258
+msgid "Could not update the entry."
+msgstr "Записът не можа да бъде актуализиран."
+
+#: inc/handlers/class-gravityforms.php:285
+msgid "Note text is required."
+msgstr "Текстът на бележката е задължителен."
+
+#: inc/handlers/class-gravityforms.php:338
+msgid "Gravity Forms is not active."
+msgstr "Gravity Forms не е активна."
 
 #: inc/handlers/class-media.php:71
 msgid "A valid URL is required."
@@ -926,7 +1153,7 @@ msgstr "Нямате право да изтривате тази шарка."
 msgid "Could not delete the pattern."
 msgstr "Шарката не можа да бъде изтрита."
 
-#: inc/handlers/class-seopress.php:54 inc/handlers/class-seopress.php:80
+#: inc/handlers/class-seopress.php:55 inc/handlers/class-seopress.php:81
 msgid "SEOPress is not active."
 msgstr "SEOPress не е активна."
 
@@ -964,10 +1191,10 @@ msgstr "Този шаблон не е персонализиран; няма к�
 msgid "Could not delete the template."
 msgstr "Шаблонът не можа да бъде изтрит."
 
-#: inc/handlers/class-woocommerce.php:37 inc/handlers/class-woocommerce.php:84
+#: inc/handlers/class-woocommerce.php:38 inc/handlers/class-woocommerce.php:90
 msgid "WooCommerce is not active."
 msgstr "WooCommerce не е активна."
 
-#: inc/handlers/class-woocommerce.php:90
+#: inc/handlers/class-woocommerce.php:96
 msgid "Order not found."
 msgstr "Поръчката не е намерена."

@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-2.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: HLB Ability Registry for MCP 1.6.1\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/hlb-ability-registry-mcp\n"
+"Project-Id-Version: HLB Ability Registry for MCP 1.7.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/hlb-mcp-abilities\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-08-07T11:39:14+00:00\n"
+"POT-Creation-Date: 2026-10-07T07:47:28+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: hlb-ability-registry-mcp\n"
@@ -21,10 +21,12 @@ msgstr ""
 #: inc/class-admin.php:104
 #: inc/class-admin.php:105
 #: inc/class-admin.php:256
-#: inc/class-dependency.php:130
-#: inc/class-dependency.php:140
-#: inc/class-dependency.php:154
-#: inc/class-dependency.php:171
+#: inc/class-dependency.php:192
+#: inc/class-dependency.php:202
+#: inc/class-dependency.php:213
+#: inc/class-dependency.php:232
+#: inc/class-dependency.php:261
+#: inc/class-dependency.php:289
 msgid "HLB Ability Registry for MCP"
 msgstr ""
 
@@ -54,11 +56,11 @@ msgstr ""
 msgid "%s abilities exposed to MCP clients by HLB Ability Registry for MCP."
 msgstr ""
 
-#: inc/class-abilities.php:119
+#: inc/class-abilities.php:134
 msgid "Unknown target site."
 msgstr ""
 
-#: inc/class-abilities.php:174
+#: inc/class-abilities.php:192
 msgid "Target subsite: blog ID, path slug, or domain. Omit to act on the main site."
 msgstr ""
 
@@ -148,542 +150,671 @@ msgstr ""
 msgid "writes"
 msgstr ""
 
+#: inc/class-admin.php:448
+msgid "The MCP Adapter plugin is active but failed to load its bundled dependencies, so this endpoint is not live yet."
+msgstr ""
+
 #: inc/class-admin.php:449
-msgid "MCP connection"
-msgstr ""
-
-#: inc/class-admin.php:452
-msgid "Server name"
-msgstr ""
-
-#: inc/class-admin.php:456
-msgid "Endpoint"
-msgstr ""
-
-#: inc/class-admin.php:461
 msgid "The MCP Adapter plugin is not active, so this endpoint is not live yet."
 msgstr ""
 
-#: inc/class-admin.php:467
+#: inc/class-admin.php:452
+msgid "MCP connection"
+msgstr ""
+
+#: inc/class-admin.php:455
+msgid "Server name"
+msgstr ""
+
+#: inc/class-admin.php:459
+msgid "Endpoint"
+msgstr ""
+
+#: inc/class-admin.php:470
 msgid "Authentication"
 msgstr ""
 
 #. translators: %s: link to the Application Passwords profile section.
-#: inc/class-admin.php:473
+#: inc/class-admin.php:476
 #, php-format
 msgid "Third-party agents authenticate as a WordPress user. Create an %s and use it with HTTP Basic auth. Each ability is additionally gated by that user's capabilities."
 msgstr ""
 
-#: inc/class-admin.php:474
+#: inc/class-admin.php:477
 msgid "Application Password"
 msgstr ""
 
-#: inc/class-admin.php:482
+#: inc/class-admin.php:485
 msgid "Frontend Gatekeeper"
 msgstr ""
 
-#: inc/class-admin.php:485
+#: inc/class-admin.php:488
 msgid "Detected. If its gate is enabled, permalinks and site URLs returned by abilities are automatically tagged with its access parameter so agents can follow them without hitting its 404 gate."
 msgstr ""
 
-#: inc/class-admin.php:507
+#: inc/class-admin.php:510
 msgid "Settings saved."
 msgstr ""
 
-#: inc/class-admin.php:521
+#: inc/class-admin.php:524
 msgid "Permission denied."
 msgstr ""
 
-#: inc/class-dependency.php:131
+#: inc/class-dependency.php:193
 msgid "the MCP Adapter plugin is installed but not active. Ask a site administrator to activate it."
 msgstr ""
 
-#: inc/class-dependency.php:141
+#: inc/class-dependency.php:203
 msgid "the MCP Adapter plugin is not installed, so no MCP endpoint is exposed yet. Abilities still register normally and are available via the core Abilities REST API."
 msgstr ""
 
-#. translators: %s: link to the MCP Adapter GitHub releases page.
-#: inc/class-dependency.php:144
-#, php-format
-msgid "Download the latest release from %s, then install it from Plugins → Add New → Upload Plugin."
+#: inc/class-dependency.php:205
+msgid "Install MCP Adapter"
 msgstr ""
 
-#: inc/class-dependency.php:145
-msgid "the MCP Adapter GitHub releases page"
-msgstr ""
-
-#: inc/class-dependency.php:155
+#: inc/class-dependency.php:214
 msgid "the MCP Adapter plugin is not installed. Ask a site administrator to install and activate it."
 msgstr ""
 
-#: inc/class-dependency.php:172
+#: inc/class-dependency.php:233
+msgid "the MCP Adapter plugin is active but failed to load, so no MCP endpoint is exposed. Ask a site administrator to reinstall it."
+msgstr ""
+
+#: inc/class-dependency.php:238
+msgid "WordPress.org"
+msgstr ""
+
+#: inc/class-dependency.php:241
+msgid "the MCP Adapter plugin is active but registered no classes, so no MCP endpoint is exposed. Its bundled autoloader is switched off by the WP_MCP_AUTOLOAD constant, and nothing else loaded the adapter in its place."
+msgstr ""
+
+#: inc/class-dependency.php:242
+msgid "Check that the autoloader meant to supply the WP\\MCP\\ namespace — usually a project-level Composer autoloader — is actually loaded at runtime, or remove the WP_MCP_AUTOLOAD constant so the adapter loads its own."
+msgstr ""
+
+#: inc/class-dependency.php:244
+msgid "the MCP Adapter plugin is active but could not load — its bundled dependencies are missing, so no MCP endpoint is exposed. This happens when the adapter is installed from a source checkout instead of a packaged release."
+msgstr ""
+
+#. translators: %s: link to the MCP Adapter page on WordPress.org.
+#: inc/class-dependency.php:247
+#, php-format
+msgid "Install the latest release from %s over the current copy, or run \"composer install\" in the adapter's plugin folder."
+msgstr ""
+
+#: inc/class-dependency.php:251
+msgid "the MCP Adapter plugin is active but did not load its classes, so no MCP endpoint is exposed."
+msgstr ""
+
+#. translators: %s: link to the MCP Adapter page on WordPress.org.
+#: inc/class-dependency.php:254
+#, php-format
+msgid "Check the site error log for a fatal in the adapter, then reinstall it from %s."
+msgstr ""
+
+#: inc/class-dependency.php:290
 msgid "the MCP Adapter plugin is installed but not active."
 msgstr ""
 
-#: inc/class-dependency.php:179
+#: inc/class-dependency.php:297
 msgid "Activate MCP Adapter"
 msgstr ""
 
-#: inc/class-dependency.php:180
+#: inc/class-dependency.php:298
 msgid "View plugin"
 msgstr ""
 
-#: inc/class-dependency.php:199
+#: inc/class-dependency.php:321
 msgid "MCP Adapter activated. Your MCP endpoint is now live."
 msgstr ""
 
-#: inc/class-dependency.php:202
+#: inc/class-dependency.php:325
 msgid "Could not activate the MCP Adapter."
 msgstr ""
 
-#: inc/class-dependency.php:217
+#: inc/class-dependency.php:340
 msgid "HLB Ability Registry for MCP:"
 msgstr ""
 
-#: inc/class-dependency.php:231
+#: inc/class-dependency.php:354
 msgid "You do not have permission to activate plugins."
 msgstr ""
 
-#: inc/class-dependency.php:239
+#: inc/class-dependency.php:362
 msgid "The MCP Adapter is no longer installed."
 msgstr ""
 
-#: inc/class-registry.php:44
-msgid "Content — read"
+#: inc/class-dependency.php:366
+msgid "The MCP Adapter is already active but failed to load its bundled dependencies. Reinstall it from a packaged release."
 msgstr ""
 
 #: inc/class-registry.php:45
-msgid "Content — write"
+msgid "Content — read"
 msgstr ""
 
 #: inc/class-registry.php:46
-msgid "Media"
+msgid "Content — write"
 msgstr ""
 
 #: inc/class-registry.php:47
-msgid "Comments"
+msgid "Media"
 msgstr ""
 
 #: inc/class-registry.php:48
-msgid "Users"
+msgid "Comments"
 msgstr ""
 
 #: inc/class-registry.php:49
-msgid "Site Editor"
+msgid "Users"
 msgstr ""
 
 #: inc/class-registry.php:50
-msgid "Site & diagnostics"
+msgid "Site Editor"
 msgstr ""
 
 #: inc/class-registry.php:51
-msgid "WooCommerce"
+msgid "Site & diagnostics"
 msgstr ""
 
 #: inc/class-registry.php:52
+msgid "WooCommerce"
+msgstr ""
+
+#: inc/class-registry.php:53
 msgid "SEOPress"
 msgstr ""
 
-#: inc/class-registry.php:75
+#: inc/class-registry.php:54
+msgid "Gravity Forms"
+msgstr ""
+
+#: inc/class-registry.php:77
 msgid "Get post"
 msgstr ""
 
-#: inc/class-registry.php:76
+#: inc/class-registry.php:78
 msgid "Retrieve a single post or page by ID or slug."
 msgstr ""
 
-#: inc/class-registry.php:89
-#: inc/class-registry.php:928
-#: inc/class-registry.php:949
+#: inc/class-registry.php:91
+#: inc/class-registry.php:934
+#: inc/class-registry.php:955
 msgid "Post ID."
 msgstr ""
 
-#: inc/class-registry.php:90
+#: inc/class-registry.php:92
 msgid "Post slug (used if ID omitted)."
 msgstr ""
 
-#: inc/class-registry.php:97
+#: inc/class-registry.php:99
 msgid "List posts"
 msgstr ""
 
-#: inc/class-registry.php:98
+#: inc/class-registry.php:100
 msgid "Query posts by type, status, author, and date with pagination."
 msgstr ""
 
-#: inc/class-registry.php:129
+#: inc/class-registry.php:131
 msgid "Search content"
 msgstr ""
 
-#: inc/class-registry.php:130
+#: inc/class-registry.php:132
 msgid "Full-text search across public post types."
 msgstr ""
 
-#: inc/class-registry.php:144
+#: inc/class-registry.php:146
 msgid "Search terms."
 msgstr ""
 
-#: inc/class-registry.php:159
+#: inc/class-registry.php:161
 msgid "Get taxonomies & terms"
 msgstr ""
 
-#: inc/class-registry.php:160
+#: inc/class-registry.php:162
 msgid "List categories, tags, and custom taxonomy terms."
 msgstr ""
 
-#: inc/class-registry.php:173
+#: inc/class-registry.php:175
 msgid "Limit to a taxonomy (e.g. category, post_tag)."
 msgstr ""
 
-#: inc/class-registry.php:181
+#: inc/class-registry.php:183
 msgid "Create post"
 msgstr ""
 
-#: inc/class-registry.php:182
+#: inc/class-registry.php:184
 msgid "Create a new post or page (draft by default)."
 msgstr ""
 
-#: inc/class-registry.php:209
+#: inc/class-registry.php:211
 msgid "Update post"
 msgstr ""
 
-#: inc/class-registry.php:210
+#: inc/class-registry.php:212
 msgid "Update the title, content, excerpt, or status of an existing post."
 msgstr ""
 
-#: inc/class-registry.php:234
+#: inc/class-registry.php:236
 msgid "Set post status"
 msgstr ""
 
-#: inc/class-registry.php:235
+#: inc/class-registry.php:237
 msgid "Transition a post between draft, pending, publish, private, or trash."
 msgstr ""
 
-#: inc/class-registry.php:256
+#: inc/class-registry.php:258
 msgid "Delete post"
 msgstr ""
 
-#: inc/class-registry.php:257
+#: inc/class-registry.php:259
 msgid "Trash a post, or permanently delete it when force is true."
 msgstr ""
 
-#: inc/class-registry.php:274
-#: inc/class-registry.php:756
+#: inc/class-registry.php:276
+#: inc/class-registry.php:758
 msgid "Permanently delete instead of trashing."
 msgstr ""
 
-#: inc/class-registry.php:281
+#: inc/class-registry.php:283
 msgid "Assign terms"
 msgstr ""
 
-#: inc/class-registry.php:282
+#: inc/class-registry.php:284
 msgid "Set categories, tags, or custom terms on a post."
 msgstr ""
 
-#: inc/class-registry.php:301
+#: inc/class-registry.php:303
 msgid "Term slugs, names, or IDs."
 msgstr ""
 
-#: inc/class-registry.php:309
+#: inc/class-registry.php:311
 msgid "Create term"
 msgstr ""
 
-#: inc/class-registry.php:310
+#: inc/class-registry.php:312
 msgid "Create a category, tag, or custom taxonomy term."
 msgstr ""
 
-#: inc/class-registry.php:336
+#: inc/class-registry.php:338
 msgid "List media"
 msgstr ""
 
-#: inc/class-registry.php:337
+#: inc/class-registry.php:339
 msgid "Query the media library with pagination."
 msgstr ""
 
-#: inc/class-registry.php:350
+#: inc/class-registry.php:352
 msgid "Filter by MIME type, e.g. image."
 msgstr ""
 
-#: inc/class-registry.php:365
+#: inc/class-registry.php:367
 msgid "Upload media"
 msgstr ""
 
-#: inc/class-registry.php:366
+#: inc/class-registry.php:368
 msgid "Upload an image or file to the media library from a URL."
 msgstr ""
 
-#: inc/class-registry.php:382
+#: inc/class-registry.php:384
 msgid "Source URL to sideload."
 msgstr ""
 
-#: inc/class-registry.php:386
+#: inc/class-registry.php:388
 msgid "Attach to this post."
 msgstr ""
 
-#: inc/class-registry.php:394
+#: inc/class-registry.php:396
 msgid "List comments"
 msgstr ""
 
-#: inc/class-registry.php:395
+#: inc/class-registry.php:397
 msgid "List comments, optionally filtered by post or status."
 msgstr ""
 
-#: inc/class-registry.php:427
+#: inc/class-registry.php:429
 msgid "Moderate comment"
 msgstr ""
 
-#: inc/class-registry.php:428
+#: inc/class-registry.php:430
 msgid "Approve, unapprove, spam, or trash a comment."
 msgstr ""
 
-#: inc/class-registry.php:451
+#: inc/class-registry.php:453
 msgid "Get current user"
 msgstr ""
 
-#: inc/class-registry.php:452
+#: inc/class-registry.php:454
 msgid "Identity and capabilities of the authenticated MCP caller."
 msgstr ""
 
-#: inc/class-registry.php:469
+#: inc/class-registry.php:471
 msgid "List users"
 msgstr ""
 
-#: inc/class-registry.php:470
+#: inc/class-registry.php:472
 msgid "List site users (contains personal data — off by default)."
 msgstr ""
 
-#: inc/class-registry.php:501
+#: inc/class-registry.php:503
 msgid "List templates"
 msgstr ""
 
-#: inc/class-registry.php:502
+#: inc/class-registry.php:504
 msgid "List block templates or template parts for the active theme."
 msgstr ""
 
-#: inc/class-registry.php:520
+#: inc/class-registry.php:522
 msgid "Filter template parts by area, e.g. header, footer."
 msgstr ""
 
-#: inc/class-registry.php:526
+#: inc/class-registry.php:528
 msgid "Get template"
 msgstr ""
 
-#: inc/class-registry.php:527
+#: inc/class-registry.php:529
 msgid "Retrieve a single template or template part, including its block markup."
 msgstr ""
 
-#: inc/class-registry.php:542
-#: inc/class-registry.php:598
-#: inc/class-registry.php:627
+#: inc/class-registry.php:544
+#: inc/class-registry.php:600
+#: inc/class-registry.php:629
 msgid "Template id, e.g. themeslug//slug."
 msgstr ""
 
-#: inc/class-registry.php:552
+#: inc/class-registry.php:554
 msgid "Create template"
 msgstr ""
 
-#: inc/class-registry.php:553
+#: inc/class-registry.php:555
 msgid "Create a new custom template or template part."
 msgstr ""
 
-#: inc/class-registry.php:570
-#: inc/class-registry.php:604
-#: inc/class-registry.php:702
-#: inc/class-registry.php:730
+#: inc/class-registry.php:572
+#: inc/class-registry.php:606
+#: inc/class-registry.php:704
+#: inc/class-registry.php:732
 msgid "Block markup."
 msgstr ""
 
-#: inc/class-registry.php:576
+#: inc/class-registry.php:578
 msgid "Template-part area, e.g. header, footer."
 msgstr ""
 
-#: inc/class-registry.php:582
+#: inc/class-registry.php:584
 msgid "Update template"
 msgstr ""
 
-#: inc/class-registry.php:583
+#: inc/class-registry.php:585
 msgid "Update the title, content, or description of a template or template part."
 msgstr ""
 
-#: inc/class-registry.php:611
+#: inc/class-registry.php:613
 msgid "Delete template"
 msgstr ""
 
-#: inc/class-registry.php:612
+#: inc/class-registry.php:614
 msgid "Delete a custom template, or revert a customized theme template back to its theme file."
 msgstr ""
 
-#: inc/class-registry.php:637
+#: inc/class-registry.php:639
 msgid "List patterns"
 msgstr ""
 
-#: inc/class-registry.php:638
+#: inc/class-registry.php:640
 msgid "List user-created patterns (reusable blocks)."
 msgstr ""
 
-#: inc/class-registry.php:652
-#: inc/class-registry.php:777
+#: inc/class-registry.php:654
+#: inc/class-registry.php:779
 msgid "Filter by pattern category slug."
 msgstr ""
 
-#: inc/class-registry.php:667
+#: inc/class-registry.php:669
 msgid "Get pattern"
 msgstr ""
 
-#: inc/class-registry.php:668
+#: inc/class-registry.php:670
 msgid "Retrieve a single user-created pattern, including its block markup."
 msgstr ""
 
-#: inc/class-registry.php:686
+#: inc/class-registry.php:688
 msgid "Create pattern"
 msgstr ""
 
-#: inc/class-registry.php:687
+#: inc/class-registry.php:689
 msgid "Create a new user pattern (reusable block)."
 msgstr ""
 
-#: inc/class-registry.php:703
-#: inc/class-registry.php:731
+#: inc/class-registry.php:705
+#: inc/class-registry.php:733
 msgid "Pattern category name or slug."
 msgstr ""
 
-#: inc/class-registry.php:706
+#: inc/class-registry.php:708
 msgid "False creates an unsynced pattern (edits in one place do not propagate)."
 msgstr ""
 
-#: inc/class-registry.php:713
+#: inc/class-registry.php:715
 msgid "Update pattern"
 msgstr ""
 
-#: inc/class-registry.php:714
+#: inc/class-registry.php:716
 msgid "Update the title, content, category, or sync status of a user pattern."
 msgstr ""
 
-#: inc/class-registry.php:738
+#: inc/class-registry.php:740
 msgid "Delete pattern"
 msgstr ""
 
-#: inc/class-registry.php:739
+#: inc/class-registry.php:741
 msgid "Trash a user pattern, or permanently delete it when force is true."
 msgstr ""
 
-#: inc/class-registry.php:763
+#: inc/class-registry.php:765
 msgid "List registered patterns"
 msgstr ""
 
-#: inc/class-registry.php:764
+#: inc/class-registry.php:766
 msgid "List code-registered theme/plugin block patterns (read-only; not user-editable posts)."
 msgstr ""
 
-#: inc/class-registry.php:785
+#: inc/class-registry.php:787
 msgid "Get site info"
 msgstr ""
 
-#: inc/class-registry.php:786
+#: inc/class-registry.php:788
 msgid "Site name, URL, WordPress version, language, and timezone."
 msgstr ""
 
-#: inc/class-registry.php:803
+#: inc/class-registry.php:805
 msgid "Get active theme"
 msgstr ""
 
-#: inc/class-registry.php:804
+#: inc/class-registry.php:806
 msgid "The active theme, its version, and whether it is a block theme."
 msgstr ""
 
-#: inc/class-registry.php:821
+#: inc/class-registry.php:823
 msgid "List active plugins"
 msgstr ""
 
-#: inc/class-registry.php:822
+#: inc/class-registry.php:824
 msgid "Active plugins with name and version (admin diagnostics)."
 msgstr ""
 
-#: inc/class-registry.php:839
+#: inc/class-registry.php:841
 msgid "List network sites"
 msgstr ""
 
-#: inc/class-registry.php:840
+#: inc/class-registry.php:842
 msgid "List the subsites in the multisite network so a `site` argument can target them (network mode)."
 msgstr ""
 
-#: inc/class-registry.php:860
+#: inc/class-registry.php:862
 msgid "List products (WooCommerce)"
 msgstr ""
 
-#: inc/class-registry.php:861
+#: inc/class-registry.php:863
 msgid "Query WooCommerce products with pagination."
 msgstr ""
 
-#: inc/class-registry.php:891
+#: inc/class-registry.php:881
+msgid "Product status. Non-published statuses are only honoured for callers who can edit products."
+msgstr ""
+
+#: inc/class-registry.php:897
 msgid "Get order (WooCommerce)"
 msgstr ""
 
-#: inc/class-registry.php:892
+#: inc/class-registry.php:898
 msgid "Fetch a WooCommerce order by ID (contains personal data — off by default)."
 msgstr ""
 
-#: inc/class-registry.php:913
+#: inc/class-registry.php:919
 msgid "Get SEO meta (SEOPress)"
 msgstr ""
 
-#: inc/class-registry.php:914
+#: inc/class-registry.php:920
 msgid "Retrieve a post's SEOPress title, description, robots, and social preview meta."
 msgstr ""
 
-#: inc/class-registry.php:933
+#: inc/class-registry.php:939
 msgid "Update SEO meta (SEOPress)"
 msgstr ""
 
-#: inc/class-registry.php:934
+#: inc/class-registry.php:940
 msgid "Update a post's SEOPress title, description, robots, and social preview meta."
 msgstr ""
 
-#: inc/class-registry.php:950
+#: inc/class-registry.php:956
 msgid "SEO title (Titles & Metas tab)."
 msgstr ""
 
-#: inc/class-registry.php:951
+#: inc/class-registry.php:957
 msgid "Meta description (Titles & Metas tab)."
 msgstr ""
 
-#: inc/class-registry.php:954
+#: inc/class-registry.php:960
 msgid "Custom canonical URL."
 msgstr ""
 
-#: inc/class-registry.php:956
+#: inc/class-registry.php:962
 msgid "Exclude this post from search engine indexing."
 msgstr ""
 
-#: inc/class-registry.php:957
+#: inc/class-registry.php:963
 msgid "Tell search engines not to follow links on this post."
 msgstr ""
 
-#: inc/class-registry.php:958
+#: inc/class-registry.php:964
 msgid "Primary target keyword for content analysis."
 msgstr ""
 
-#: inc/class-registry.php:959
+#: inc/class-registry.php:965
 msgid "Facebook/Open Graph title."
 msgstr ""
 
-#: inc/class-registry.php:960
+#: inc/class-registry.php:966
 msgid "Facebook/Open Graph description."
 msgstr ""
 
-#: inc/class-registry.php:963
+#: inc/class-registry.php:969
 msgid "Facebook/Open Graph image URL."
 msgstr ""
 
-#: inc/class-registry.php:965
+#: inc/class-registry.php:971
 msgid "Twitter card title."
 msgstr ""
 
-#: inc/class-registry.php:966
+#: inc/class-registry.php:972
 msgid "Twitter card description."
 msgstr ""
 
-#: inc/class-registry.php:969
+#: inc/class-registry.php:975
 msgid "Twitter card image URL."
+msgstr ""
+
+#: inc/class-registry.php:984
+msgid "List forms (Gravity Forms)"
+msgstr ""
+
+#: inc/class-registry.php:985
+msgid "List Gravity Forms forms with their entry counts."
+msgstr ""
+
+#: inc/class-registry.php:1008
+msgid "Get form (Gravity Forms)"
+msgstr ""
+
+#: inc/class-registry.php:1009
+msgid "Retrieve a form's fields, choices and inputs. Notifications, confirmations and feeds are not included."
+msgstr ""
+
+#: inc/class-registry.php:1023
+msgid "Form ID."
+msgstr ""
+
+#: inc/class-registry.php:1028
+msgid "List entries (Gravity Forms)"
+msgstr ""
+
+#: inc/class-registry.php:1029
+msgid "Query form entries with pagination (contains personal data, off by default)."
+msgstr ""
+
+#: inc/class-registry.php:1043
+msgid "Limit to one form. Omit for all forms."
+msgstr ""
+
+#: inc/class-registry.php:1048
+msgid "Match any field value."
+msgstr ""
+
+#: inc/class-registry.php:1049
+msgid "Earliest submission date (Y-m-d), site timezone."
+msgstr ""
+
+#: inc/class-registry.php:1050
+msgid "Latest submission date (Y-m-d), site timezone."
+msgstr ""
+
+#: inc/class-registry.php:1065
+msgid "Get entry (Gravity Forms)"
+msgstr ""
+
+#: inc/class-registry.php:1066
+msgid "Fetch a form entry by ID (contains personal data, off by default)."
+msgstr ""
+
+#: inc/class-registry.php:1080
+#: inc/class-registry.php:1101
+#: inc/class-registry.php:1126
+#: inc/class-registry.php:1148
+msgid "Entry ID."
+msgstr ""
+
+#: inc/class-registry.php:1085
+msgid "Update entry status (Gravity Forms)"
+msgstr ""
+
+#: inc/class-registry.php:1086
+msgid "Mark an entry as spam, trash or active, or set its read and starred flags."
+msgstr ""
+
+#: inc/class-registry.php:1110
+msgid "Add entry note (Gravity Forms)"
+msgstr ""
+
+#: inc/class-registry.php:1111
+msgid "Add a note to a form entry, authored by the current user."
+msgstr ""
+
+#: inc/class-registry.php:1133
+msgid "Delete entry (Gravity Forms)"
+msgstr ""
+
+#: inc/class-registry.php:1134
+msgid "Permanently delete a form entry. Use the status ability to move it to trash instead."
 msgstr ""
 
 #: inc/class-server.php:79
@@ -712,73 +843,109 @@ msgstr ""
 msgid "Moderation action failed."
 msgstr ""
 
-#: inc/handlers/class-content.php:67
+#: inc/handlers/class-content.php:72
 msgid "Provide an id or slug."
 msgstr ""
 
-#: inc/handlers/class-content.php:71
-#: inc/handlers/class-content.php:77
-#: inc/handlers/class-content.php:242
-#: inc/handlers/class-content.php:287
-#: inc/handlers/class-content.php:329
-#: inc/handlers/class-content.php:359
-#: inc/handlers/class-seopress.php:60
-#: inc/handlers/class-seopress.php:66
-#: inc/handlers/class-seopress.php:86
+#: inc/handlers/class-content.php:76
+#: inc/handlers/class-content.php:82
+#: inc/handlers/class-content.php:250
+#: inc/handlers/class-content.php:295
+#: inc/handlers/class-content.php:337
+#: inc/handlers/class-content.php:367
+#: inc/handlers/class-seopress.php:61
+#: inc/handlers/class-seopress.php:67
+#: inc/handlers/class-seopress.php:87
 msgid "Post not found."
 msgstr ""
 
-#: inc/handlers/class-content.php:206
+#: inc/handlers/class-content.php:211
 msgid "Unknown post type."
 msgstr ""
 
-#: inc/handlers/class-content.php:209
+#: inc/handlers/class-content.php:217
 msgid "You cannot create this type of content."
 msgstr ""
 
-#: inc/handlers/class-content.php:214
+#: inc/handlers/class-content.php:222
 msgid "You cannot publish this type of content."
 msgstr ""
 
-#: inc/handlers/class-content.php:245
-#: inc/handlers/class-content.php:290
-#: inc/handlers/class-content.php:365
-#: inc/handlers/class-seopress.php:89
+#: inc/handlers/class-content.php:253
+#: inc/handlers/class-content.php:298
+#: inc/handlers/class-content.php:373
+#: inc/handlers/class-seopress.php:90
 msgid "You cannot edit this post."
 msgstr ""
 
-#: inc/handlers/class-content.php:263
-#: inc/handlers/class-content.php:295
+#: inc/handlers/class-content.php:271
+#: inc/handlers/class-content.php:303
 msgid "You cannot publish this post."
 msgstr ""
 
-#: inc/handlers/class-content.php:299
+#: inc/handlers/class-content.php:307
 msgid "You cannot trash this post."
 msgstr ""
 
-#: inc/handlers/class-content.php:305
+#: inc/handlers/class-content.php:313
 msgid "Could not trash the post."
 msgstr ""
 
-#: inc/handlers/class-content.php:332
+#: inc/handlers/class-content.php:340
 msgid "You cannot delete this post."
 msgstr ""
 
-#: inc/handlers/class-content.php:337
+#: inc/handlers/class-content.php:345
 msgid "Could not delete the post."
 msgstr ""
 
-#: inc/handlers/class-content.php:362
-#: inc/handlers/class-content.php:393
+#: inc/handlers/class-content.php:370
+#: inc/handlers/class-content.php:401
 msgid "Unknown taxonomy."
 msgstr ""
 
-#: inc/handlers/class-content.php:369
+#: inc/handlers/class-content.php:377
 msgid "You cannot assign terms in this taxonomy."
 msgstr ""
 
-#: inc/handlers/class-content.php:397
+#: inc/handlers/class-content.php:405
 msgid "You cannot manage terms in this taxonomy."
+msgstr ""
+
+#: inc/handlers/class-content.php:437
+msgid "This post type is not available: only post types that are public or exposed in the REST API can be addressed."
+msgstr ""
+
+#: inc/handlers/class-gravityforms.php:113
+#: inc/handlers/class-gravityforms.php:149
+msgid "Form not found."
+msgstr ""
+
+#: inc/handlers/class-gravityforms.php:217
+#: inc/handlers/class-gravityforms.php:237
+#: inc/handlers/class-gravityforms.php:280
+#: inc/handlers/class-gravityforms.php:315
+msgid "Entry not found."
+msgstr ""
+
+#: inc/handlers/class-gravityforms.php:243
+msgid "Invalid entry status."
+msgstr ""
+
+#: inc/handlers/class-gravityforms.php:253
+msgid "Nothing to update."
+msgstr ""
+
+#: inc/handlers/class-gravityforms.php:258
+msgid "Could not update the entry."
+msgstr ""
+
+#: inc/handlers/class-gravityforms.php:285
+msgid "Note text is required."
+msgstr ""
+
+#: inc/handlers/class-gravityforms.php:338
+msgid "Gravity Forms is not active."
 msgstr ""
 
 #: inc/handlers/class-media.php:71
@@ -828,8 +995,8 @@ msgstr ""
 msgid "Could not delete the pattern."
 msgstr ""
 
-#: inc/handlers/class-seopress.php:54
-#: inc/handlers/class-seopress.php:80
+#: inc/handlers/class-seopress.php:55
+#: inc/handlers/class-seopress.php:81
 msgid "SEOPress is not active."
 msgstr ""
 
@@ -869,11 +1036,11 @@ msgstr ""
 msgid "Could not delete the template."
 msgstr ""
 
-#: inc/handlers/class-woocommerce.php:37
-#: inc/handlers/class-woocommerce.php:84
+#: inc/handlers/class-woocommerce.php:38
+#: inc/handlers/class-woocommerce.php:90
 msgid "WooCommerce is not active."
 msgstr ""
 
-#: inc/handlers/class-woocommerce.php:90
+#: inc/handlers/class-woocommerce.php:96
 msgid "Order not found."
 msgstr ""
