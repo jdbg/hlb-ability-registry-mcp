@@ -4,7 +4,7 @@ Tags: abilities-api, mcp, ai, multisite, rest-api
 Requires at least: 6.9
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.7.0
+Stable tag: 1.7.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -20,7 +20,7 @@ Most "connect AI to WordPress" tools expose either everything or nothing: a sing
 * Every ability has its own admin toggle in **Settings → HLB Ability Registry for MCP**, searchable and grouped by category. Read-only abilities default on; write and destructive abilities default off.
 * Read handlers do per-object capability checks (not just a blanket `current_user_can`), so a low-privilege caller can't read drafts or private posts by ID just because a coarse capability check passed. Listing abilities force unprivileged callers back to published content, and abilities only ever address post types the site already exposes publicly or over the REST API.
 * On **multisite**, each subsite gets its own on/off set, inherited from a network default unless a subsite administrator explicitly overrides it. An optional **network mode** lets the main site's server target any subsite by id, with every permission and capability check re-run inside that subsite's own context — nothing is granted network-wide by default.
-* If the [MCP Adapter](https://wordpress.org/plugins/mcp-adapter/) plugin is active, the enabled abilities are projected onto a standard MCP server at `/wp-json/{server-slug}/mcp`, so any MCP-speaking client or agent can call them. Without the MCP Adapter, the abilities you enable are still fully registered and reachable through core's own `/wp-json/wp-abilities/v1/` REST routes — this plugin has value on a bare WordPress 6.9 install, the MCP Adapter is an optional extra hop for MCP clients specifically, not a hard requirement.
+* Requires the [MCP Adapter](https://wordpress.org/plugins/mcp-adapter/) plugin, which projects the enabled abilities onto a standard MCP server at `/wp-json/{server-slug}/mcp`, so any MCP-speaking client or agent can call them. The enabled abilities are also reachable through core's own `/wp-json/wp-abilities/v1/` REST routes.
 
 = Source code =
 
@@ -32,16 +32,16 @@ This plugin ships a [WordPress Playground](https://playground.wordpress.net/) bl
 
 == Installation ==
 
-1. Install and activate the plugin as usual (upload the zip, or `wp plugin install`).
-2. Visit **Settings → HLB Ability Registry for MCP** to review and toggle the abilities available on this site.
-3. (Optional) Install the [MCP Adapter plugin](https://wordpress.org/plugins/mcp-adapter/) from **Plugins → Add New**, or use the **Install MCP Adapter** button in this plugin's admin notice. Once it's active, the notice clears and your MCP endpoint goes live automatically; no extra configuration needed.
+1. Install and activate the [MCP Adapter plugin](https://wordpress.org/plugins/mcp-adapter/) (required). WordPress offers to install it for you from the plugin's card in **Plugins → Add New**.
+2. Install and activate this plugin as usual (upload the zip, or `wp plugin install`).
+3. Visit **Settings → HLB Ability Registry for MCP** to review and toggle the abilities available on this site.
 4. On multisite, network-activate to set a network default; individual subsites can override it from their own settings screen unless network mode is enabled.
 
 == Frequently Asked Questions ==
 
-= Does this plugin require the MCP Adapter to do anything? =
+= Does this plugin require the MCP Adapter? =
 
-No. Abilities register with WordPress core's Abilities API regardless, and are reachable via `/wp-json/wp-abilities/v1/`. The MCP Adapter is only needed if you want the dedicated MCP protocol endpoint. This plugin never installs the MCP Adapter automatically. It detects whether it's present and, if not, links to the adapter's wordpress.org listing in the plugin installer.
+Yes. It declares the MCP Adapter as a required plugin, so WordPress won't activate it until the adapter is installed and active, and won't let you deactivate the adapter while this plugin is active. On multisite, network-activate the adapter before network-activating this plugin.
 
 = Which abilities are enabled by default? =
 
@@ -61,6 +61,9 @@ Yes. Per-subsite settings are always intersected with the currently-available ab
 2. Live search narrows the list by name, id, or description across every category at once.
 
 == Changelog ==
+
+= 1.7.1 =
+* The MCP Adapter is now a required plugin (`Requires Plugins: mcp-adapter`). WordPress will not activate this plugin until the adapter is installed and active, and offers to install it from wordpress.org. Existing installs with the adapter active are unaffected.
 
 = 1.7.0 =
 * Add Gravity Forms ability integration: list and inspect forms, query and read entries, update entry status, add entry notes and delete entries. Entry abilities contain personal data and are off by default.

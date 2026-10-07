@@ -7,7 +7,7 @@ This file provides guidance to Codex (Codex.ai/code) when working with code in t
 A WordPress plugin (**HLB Ability Registry for MCP**) that exposes a curated, admin-controlled set of
 WordPress **Abilities** to the [MCP Adapter](https://wordpress.org/plugins/mcp-adapter/) so
 third-party tools/agents can drive the site over MCP. Multisite-ready and network-activatable.
-Requires WordPress 6.9+ (Abilities API in core), PHP 7.4+, and the MCP Adapter plugin.
+Requires WordPress 6.9+ (Abilities API in core), PHP 7.4+, and the MCP Adapter plugin (`Requires Plugins: mcp-adapter`).
 
 ## Commands
 
@@ -35,7 +35,7 @@ inside a real WordPress with the Abilities API **and** the MCP Adapter active. T
 1. Spin up a disposable MariaDB + a named volume, download WP core on the host (wp-cli's
    extractor OOMs), copy it into the volume **mounted at `/var/www/html`** (a fresh volume
    mounted anywhere else is root-owned and copies fail), `wp config create` + `wp core install`.
-2. Copy this plugin + the MCP Adapter (`wp plugin install mcp-adapter`) into `wp-content/plugins`, `wp plugin activate` both.
+2. Copy this plugin + the MCP Adapter (`wp plugin install mcp-adapter`) into `wp-content/plugins`, `wp plugin activate mcp-adapter` first, then this plugin.
 3. Drive assertions with `wp eval-file` against a probe script that fires `init` +
    `rest_api_init`, then checks: abilities register (`wp_get_ability(...)` non-null), a
    default-off write ability stays unregistered, an ability `execute()`s, and
@@ -116,8 +116,9 @@ wordpress.org (slug `mcp-adapter`), so when it's not installed the notice links 
 and core does the download. When installed-but-inactive, a one-click **Activate** button is
 offered (a local `activate_plugin()` call); it network-activates when this plugin is
 network-active. The plugin never fatals when the adapter is absent: abilities still register,
-only the MCP server is skipped. No `Requires Plugins` header, on purpose: the plugin is useful
-without the adapter via core's Abilities REST API.
+only the MCP server is skipped. The bootstrap declares `Requires Plugins: mcp-adapter`, so core
+blocks activation until the adapter is active; the notice remains for a deleted or broken adapter.
+Activate the adapter **before** this plugin (also in wp-cli and Playground blueprints).
 
 ### Class loading
 

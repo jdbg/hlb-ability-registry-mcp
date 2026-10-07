@@ -4,7 +4,9 @@
 		"php": "8.2",
 		"wp": "latest"
 	},
-	"phpExtensionBundles": [ "kitchen-sink" ],
+	"phpExtensionBundles": [
+		"kitchen-sink"
+	],
 	"features": {
 		"networking": true
 	},
@@ -18,21 +20,23 @@
 		{
 			"step": "installPlugin",
 			"pluginData": {
-				"resource": "url",
-				"url": "https://github.com/jdbg/hlb-ability-registry-mcp/releases/latest/download/hlb-ability-registry-mcp.zip"
+				"resource": "wordpress.org/plugins",
+				"slug": "mcp-adapter"
 			},
 			"options": {
-				"activate": true
+				"activate": true,
+				"targetFolderName": "mcp-adapter"
 			}
 		},
 		{
 			"step": "installPlugin",
 			"pluginData": {
-				"resource": "wordpress.org/plugins",
-				"slug": "mcp-adapter"
+				"resource": "url",
+				"url": "https://github.com/jdbg/hlb-ability-registry-mcp/releases/latest/download/hlb-ability-registry-mcp.zip"
 			},
 			"options": {
-				"activate": true
+				"activate": true,
+				"targetFolderName": "hlb-ability-registry-mcp"
 			}
 		}
 	]

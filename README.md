@@ -33,24 +33,23 @@ Every ability maps to a real WordPress capability, checked per request.
 
 - WordPress **6.9+** (Abilities API in core)
 - PHP **7.4+**
-- The **MCP Adapter** plugin, active (network-wide if this plugin is network-activated)
+- The [MCP Adapter](https://wordpress.org/plugins/mcp-adapter/) plugin, active (network-wide if this plugin is network-activated)
 
-The MCP Adapter is available from the [wordpress.org plugin directory](https://wordpress.org/plugins/mcp-adapter/).
-This plugin never installs it automatically. If the adapter is missing, an admin notice offers an
-**Install MCP Adapter** button that opens core's plugin installer for that listing; if it's
-already installed but inactive, the notice offers a one-click **Activate** button. Until the
-adapter is active, the plugin still registers its abilities against core's Abilities API. Only
-the MCP endpoint is skipped, never a fatal error.
+The adapter is declared with a `Requires Plugins: mcp-adapter` header, so WordPress refuses to
+activate this plugin until the adapter is active and offers to install it from wordpress.org.
+If the adapter still goes missing or fails to load (deleted from disk, broken install), the admin
+notice explains why and offers an **Install MCP Adapter** or **Activate** button. Abilities keep
+registering against core's Abilities API in that state; only the MCP endpoint is skipped, never a
+fatal error.
 
 ## Installation
 
 1. Copy the plugin folder to `wp-content/plugins/hlb-ability-registry-mcp` (the distributed files
    are `hlb-ability-registry-mcp.php`, `uninstall.php`, and `inc/` — no Composer dependencies are
    needed at runtime).
-2. Activate it (single site or **Network Activate** on multisite).
-3. (Optional) Install the [MCP Adapter](https://wordpress.org/plugins/mcp-adapter/) from
-   **Plugins → Add New** (or `wp plugin install mcp-adapter --activate`), or use the
-   **Install MCP Adapter** / **Activate** button in the admin notice.
+2. Install and activate the [MCP Adapter](https://wordpress.org/plugins/mcp-adapter/) first
+   (`wp plugin install mcp-adapter --activate`, add `--activate-network` on multisite).
+3. Activate this plugin (single site or **Network Activate** on multisite).
 4. Configure which abilities are exposed under the settings page (see below).
 
 ## MCP endpoint & authentication
