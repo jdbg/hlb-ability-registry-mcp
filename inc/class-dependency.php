@@ -2,13 +2,9 @@
 /**
  * MCP Adapter dependency detection.
  *
- * The MCP Adapter is distributed via GitHub, not the wordpress.org directory. This
- * plugin never fetches or installs it automatically — that would mean downloading and
- * running executable code from a third-party source, which wordpress.org's guidelines
- * disallow. Instead this class only detects the adapter's state and, if it's missing,
- * shows an admin notice linking to the adapter's GitHub releases page for manual
- * install. If the adapter is already installed but inactive, activating it is a local
- * operation (no code is downloaded), so that action is still offered directly.
+ * The MCP Adapter is listed in the wordpress.org directory. This plugin never installs
+ * it automatically: when it's missing, the notice links to core's plugin installer for
+ * that listing. If it's installed but inactive, activation is offered directly.
  *
  * @package HLB\MCP
  */
@@ -18,13 +14,14 @@ namespace HLB\MCP;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Detects the MCP Adapter dependency and offers to activate it if already installed.
+ * Detects the MCP Adapter dependency and offers to install or activate it.
  */
 class Dependency {
 
 	const ADAPTER_CLASS    = '\\WP\\MCP\\Core\\McpAdapter';
 	const ADAPTER_BASENAME = 'mcp-adapter/mcp-adapter.php';
-	const ADAPTER_REPO_URL = 'https://github.com/WordPress/mcp-adapter';
+	const ADAPTER_SLUG     = 'mcp-adapter';
+	const ADAPTER_WPORG    = 'https://wordpress.org/plugins/mcp-adapter/';
 
 	const ACTION_ACTIVATE = 'hlb_mcp_activate_adapter';
 
@@ -198,17 +195,14 @@ class Dependency {
 			return;
 		}
 
-		// Not installed — never fetched automatically; point to manual install.
+		// Not installed: never fetched automatically; link to core's installer for the wordpress.org listing.
 		if ( current_user_can( 'install_plugins' ) ) {
 			printf(
-				'<div class="notice notice-warning"><p><strong>%1$s</strong> %2$s</p><p>%3$s</p></div>',
+				'<div class="notice notice-warning"><p><strong>%1$s</strong> %2$s</p><p><a href="%3$s" class="button button-primary">%4$s</a></p></div>',
 				esc_html__( 'HLB Ability Registry for MCP', 'hlb-ability-registry-mcp' ),
 				esc_html__( 'the MCP Adapter plugin is not installed, so no MCP endpoint is exposed yet. Abilities still register normally and are available via the core Abilities REST API.', 'hlb-ability-registry-mcp' ),
-				sprintf(
-					/* translators: %s: link to the MCP Adapter GitHub releases page. */
-					esc_html__( 'Download the latest release from %s, then install it from Plugins → Add New → Upload Plugin.', 'hlb-ability-registry-mcp' ),
-					'<a href="' . esc_url( self::ADAPTER_REPO_URL . '/releases/latest' ) . '" target="_blank" rel="noopener">' . esc_html__( 'the MCP Adapter GitHub releases page', 'hlb-ability-registry-mcp' ) . '</a>'
-				)
+				esc_url( $this->install_url() ),
+				esc_html__( 'Install MCP Adapter', 'hlb-ability-registry-mcp' )
 			);
 			return;
 		}
@@ -241,7 +235,7 @@ class Dependency {
 			return;
 		}
 
-		$releases = '<a href="' . esc_url( self::ADAPTER_REPO_URL . '/releases/latest' ) . '" target="_blank" rel="noopener">' . esc_html__( 'the MCP Adapter GitHub releases page', 'hlb-ability-registry-mcp' ) . '</a>';
+		$releases = '<a href="' . esc_url( self::ADAPTER_WPORG ) . '" target="_blank" rel="noopener">' . esc_html__( 'WordPress.org', 'hlb-ability-registry-mcp' ) . '</a>';
 
 		if ( $this->autoload_suppressed() ) {
 			$cause  = esc_html__( 'the MCP Adapter plugin is active but registered no classes, so no MCP endpoint is exposed. Its bundled autoloader is switched off by the WP_MCP_AUTOLOAD constant, and nothing else loaded the adapter in its place.', 'hlb-ability-registry-mcp' );
@@ -249,14 +243,14 @@ class Dependency {
 		} elseif ( $this->missing_dependencies() ) {
 			$cause  = esc_html__( 'the MCP Adapter plugin is active but could not load — its bundled dependencies are missing, so no MCP endpoint is exposed. This happens when the adapter is installed from a source checkout instead of a packaged release.', 'hlb-ability-registry-mcp' );
 			$remedy = sprintf(
-				/* translators: %s: link to the MCP Adapter GitHub releases page. */
+				/* translators: %s: link to the MCP Adapter page on WordPress.org. */
 				esc_html__( 'Install the latest release from %s over the current copy, or run "composer install" in the adapter\'s plugin folder.', 'hlb-ability-registry-mcp' ),
 				$releases
 			);
 		} else {
 			$cause  = esc_html__( 'the MCP Adapter plugin is active but did not load its classes, so no MCP endpoint is exposed.', 'hlb-ability-registry-mcp' );
 			$remedy = sprintf(
-				/* translators: %s: link to the MCP Adapter GitHub releases page. */
+				/* translators: %s: link to the MCP Adapter page on WordPress.org. */
 				esc_html__( 'Check the site error log for a fatal in the adapter, then reinstall it from %s.', 'hlb-ability-registry-mcp' ),
 				$releases
 			);
@@ -268,6 +262,16 @@ class Dependency {
 			$cause, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped above.
 			$remedy // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped above.
 		);
+	}
+
+	/**
+	 * Core's plugin-install screen for the adapter's wordpress.org listing.
+	 *
+	 * @return string
+	 */
+	private function install_url() {
+		$path = 'plugin-install.php?tab=plugin-information&plugin=' . self::ADAPTER_SLUG;
+		return $this->is_network_context() ? network_admin_url( $path ) : self_admin_url( $path );
 	}
 
 	/**
@@ -291,7 +295,7 @@ class Dependency {
 					<input type="hidden" name="redirect_to" value="<?php echo esc_attr( esc_url_raw( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) ) ); ?>" />
 					<?php wp_nonce_field( self::ACTION_ACTIVATE ); ?>
 					<button type="submit" class="button button-primary"><?php esc_html_e( 'Activate MCP Adapter', 'hlb-ability-registry-mcp' ); ?></button>
-					<a href="<?php echo esc_url( self::ADAPTER_REPO_URL ); ?>" target="_blank" rel="noopener" class="button-link" style="margin-left:.5em;"><?php esc_html_e( 'View plugin', 'hlb-ability-registry-mcp' ); ?></a>
+					<a href="<?php echo esc_url( self::ADAPTER_WPORG ); ?>" target="_blank" rel="noopener" class="button-link" style="margin-left:.5em;"><?php esc_html_e( 'View plugin', 'hlb-ability-registry-mcp' ); ?></a>
 				</form>
 			</p>
 		</div>
